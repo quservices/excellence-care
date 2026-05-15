@@ -459,18 +459,27 @@ html,body{overflow-x:hidden;max-width:100vw}
       </div>
 
       <!-- mini stats -->
-      <div class="fadeUp grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-gold/15 max-w-lg" style="animation-delay:.85s">
+      <div class="fadeUp grid grid-cols-3 gap-4 sm:gap-6 mt-12 pt-8 border-t border-gold/15 max-w-xl" style="animation-delay:.85s">
         <div>
-          <div class="font-serif text-3xl gold-text mb-1"><span class="counter" data-target="8" data-suffix="+">0</span></div>
-          <div class="text-[10px] tracking-[0.2em] uppercase text-ink/50">Let péče</div>
+          <div class="font-serif text-3xl md:text-4xl gold-text leading-none mb-2"><span class="counter" data-target="8" data-suffix="+">0</span></div>
+          <div class="text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.22em] uppercase text-ink/55 font-medium">Let péče</div>
         </div>
         <div>
-          <div class="font-serif text-3xl gold-text mb-1"><span class="counter" data-target="2000" data-suffix="+">0</span></div>
-          <div class="text-[10px] tracking-[0.2em] uppercase text-ink/50">Klientek</div>
+          <div class="font-serif text-3xl md:text-4xl gold-text leading-none mb-2"><span class="counter" data-target="2000" data-suffix="+">0</span></div>
+          <div class="text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.22em] uppercase text-ink/55 font-medium">Klientek</div>
         </div>
         <div>
-          <div class="font-serif text-3xl gold-text mb-1">★ <span class="counter" data-target="4.9" data-decimals="1">0</span></div>
-          <div class="text-[10px] tracking-[0.2em] uppercase text-ink/50">Google</div>
+          <div class="flex items-baseline gap-1.5 mb-2">
+            <span class="font-serif text-3xl md:text-4xl gold-text leading-none"><span class="counter" data-target="4.9" data-decimals="1">0</span></span>
+          </div>
+          <div class="flex gap-0.5 text-gold mb-1.5" aria-label="4.9 z 5 hvězdiček">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
+          </div>
+          <div class="text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.22em] uppercase text-ink/55 font-medium">Google hodnocení</div>
         </div>
       </div>
     </div>
@@ -1212,8 +1221,16 @@ const counterIO = new IntersectionObserver((entries) => {
       counterIO.unobserve(e.target);
     }
   });
-}, {threshold: .4, rootMargin: '0px 0px -10% 0px'});
+}, {threshold: .1});
 document.querySelectorAll('.counter[data-target]').forEach(el => counterIO.observe(el));
+
+/* Force-trigger counters that are visible on load (e.g. hero stats) — drobné zpoždění po fadeUp */
+setTimeout(() => {
+  document.querySelectorAll('.counter[data-target]:not([data-animated])').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < innerHeight && r.bottom > 0) animateCounter(el);
+  });
+}, 1100);
 
 /* ═══ Leaflet interactive map ═══ */
 function initMap() {
