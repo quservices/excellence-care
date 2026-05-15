@@ -17,6 +17,18 @@ Mezi verzemi se přepíná tlačítkem v navigaci (slunce / měsíc).
 
 Otevřete `index.html` v prohlížeči. Žádné `npm install` ani build.
 
+## Live URLs
+
+| Prostředí | URL |
+|---|---|
+| Vercel produkce (clean alias) | https://excellence-care.vercel.app |
+| Vercel (česká varianta) | https://excelence-care.vercel.app |
+| Vercel (legacy alias) | https://maison-luxe-three.vercel.app |
+| GitHub Pages | https://quservices.github.io/excellence-care/ |
+| GitHub repo | https://github.com/quservices/excellence-care |
+
+Každý `git push` na `main` automaticky nasadí novou verzi na Vercel během ~10 s.
+
 ## Nasazení na GitHub Pages
 
 1. Pushněte tento repozitář na GitHub.
