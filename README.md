@@ -1,6 +1,6 @@
-# Maison Luxe — Luxusní nehtový salon
+# Excellence Care — Luxusní nehtový salon
 
-Prémiový jednostránkový web pro nehtový salon **Maison Luxe** v Kopřivnici.
+Prémiový jednostránkový web pro nehtový salon **Excellence Care** v Kopřivnici.
 Postaven na čistém HTML + Tailwind (CDN), bez build kroku — stačí otevřít v prohlížeči.
 
 ## Verze
@@ -52,4 +52,4 @@ nastavte `CNAME` na `<vase-jmeno>.github.io.`.
 
 ## Licence
 
-© Maison Luxe — všechna práva vyhrazena.
+© Excellence Care — všechna práva vyhrazena.
