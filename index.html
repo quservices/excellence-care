@@ -223,14 +223,16 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
   /* section headings */
   h2.font-serif{font-size:clamp(34px,8.5vw,44px)!important;line-height:1.08!important}
 
-  /* about + service cards */
+  /* service cards: extra top padding only for "Nejoblíbenější" card (has badge) */
   .srv-card{padding:28px 22px!important}
+  .srv-card.bg-gradient-to-br{padding-top:54px!important}
   .srv-card h3{font-size:22px!important}
-  .num-mark{font-size:48px!important}
+  .num-mark{font-size:36px!important}
 
-  /* review */
-  .rev-card{padding:28px 22px!important}
+  /* review cards: smaller decorative quote, opacity reduced — vejde se dovnitř */
+  .rev-card{padding:30px 22px 26px!important}
   .rev-card p.font-serif{font-size:16px!important;line-height:1.6!important}
+  .rev-card::before{font-size:70px!important;top:4px!important;left:14px!important;opacity:.12!important}
 
   /* stats band */
   .stat-tile{padding:22px 12px!important}
@@ -288,9 +290,10 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 @media (max-width:380px){
   .logo-lockup .lockup-name .sub{display:none}
   h1.fadeUp{font-size:clamp(40px,11vw,56px)!important}
-  .fadeUp .font-serif.text-3xl{font-size:20px!important}
+  .hero-stats .font-serif{font-size:24px!important}
   .map-info{max-width:170px;padding:10px 12px}
   .map-info p.font-serif.text-2xl{font-size:16px!important}
+  .srv-card.bg-gradient-to-br{padding-top:50px!important}
 }
 
 /* tap targets: ensure 44px min for accessibility on mobile */
