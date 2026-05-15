@@ -1220,7 +1220,7 @@ function animateCounter(el) {
   const suffix = el.dataset.suffix || '';
   const prefix = el.dataset.prefix || '';
   const decimals = parseInt(el.dataset.decimals || '0', 10);
-  const duration = 2200 + Math.min(Math.log10(Math.max(target, 1)) * 200, 800);
+  const duration = 1100 + Math.min(Math.log10(Math.max(target, 1)) * 110, 350);
   const start = performance.now();
   el.classList.add('counting');
 
@@ -1277,13 +1277,15 @@ const counterIO = new IntersectionObserver((entries) => {
 }, {threshold: .1});
 document.querySelectorAll('.counter[data-target]').forEach(el => counterIO.observe(el));
 
-/* Force-trigger counters visible on load (hero stats) — drobné zpoždění po fadeUp */
-setTimeout(() => {
+/* Force-trigger counters visible on load (hero stats) — start ASAP */
+function triggerVisibleCounters() {
   document.querySelectorAll('.counter[data-target]:not([data-animated])').forEach(el => {
     const r = el.getBoundingClientRect();
     if (r.top < innerHeight && r.bottom > 0) animateCounter(el);
   });
-}, 1100);
+}
+triggerVisibleCounters();
+setTimeout(triggerVisibleCounters, 250);
 
 /* ═══ Leaflet interactive map (dark) ═══ */
 function initMap() {
