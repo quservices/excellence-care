@@ -237,9 +237,8 @@ nav.stuck{background:rgba(10,8,6,.88);backdrop-filter:blur(20px) saturate(180%);
   section{padding-top:64px!important;padding-bottom:64px!important}
   section.relative.min-h-screen{padding-top:108px!important;min-height:auto!important;padding-bottom:48px!important}
 
-  /* hero stats compact */
-  .fadeUp.grid.grid-cols-3{gap:18px!important;margin-top:36px!important;padding-top:24px!important}
-  .fadeUp .font-serif.text-3xl{font-size:22px!important}
+  /* hero stats compact spacing on mobile (font sizes handled by inline classes) */
+  .fadeUp.grid.grid-cols-3{margin-top:36px!important;padding-top:24px!important}
 
   /* section headings */
   h2.font-serif{font-size:clamp(34px,8.5vw,44px)!important;line-height:1.08!important}
@@ -499,27 +498,25 @@ html,body{overflow-x:hidden;max-width:100vw}
       </div>
 
       <!-- mini stats -->
-      <div class="fadeUp grid grid-cols-3 gap-4 sm:gap-6 mt-12 pt-8 border-t border-gold/15 max-w-xl" style="animation-delay:.85s">
-        <div>
-          <div class="font-serif text-3xl md:text-4xl gold-text leading-none mb-2"><span class="counter" data-target="8" data-suffix="+">0</span></div>
-          <div class="text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.22em] uppercase text-cream/55 font-medium">Let péče</div>
+      <div class="fadeUp grid grid-cols-3 gap-3 sm:gap-6 mt-12 pt-8 border-t border-gold/15 max-w-xl" style="animation-delay:.85s">
+        <div class="flex flex-col">
+          <div class="font-serif text-[28px] sm:text-3xl md:text-4xl gold-text leading-none mb-3 whitespace-nowrap"><span class="counter" data-target="8" data-suffix="+">0</span></div>
+          <div class="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.22em] uppercase text-cream/55 font-medium mt-auto">Let péče</div>
         </div>
-        <div>
-          <div class="font-serif text-3xl md:text-4xl gold-text leading-none mb-2"><span class="counter" data-target="2000" data-suffix="+">0</span></div>
-          <div class="text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.22em] uppercase text-cream/55 font-medium">Klientek</div>
+        <div class="flex flex-col">
+          <div class="font-serif text-[28px] sm:text-3xl md:text-4xl gold-text leading-none mb-3 whitespace-nowrap"><span class="counter" data-target="2000" data-suffix="+">0</span></div>
+          <div class="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.22em] uppercase text-cream/55 font-medium mt-auto">Klientek</div>
         </div>
-        <div>
-          <div class="flex items-baseline gap-1.5 mb-2">
-            <span class="font-serif text-3xl md:text-4xl gold-text leading-none"><span class="counter" data-target="4.9" data-decimals="1">0</span></span>
+        <div class="flex flex-col">
+          <div class="font-serif text-[28px] sm:text-3xl md:text-4xl gold-text leading-none mb-2 whitespace-nowrap"><span class="counter" data-target="4.9" data-decimals="1">0</span></div>
+          <div class="flex gap-0.5 text-gold mb-2" aria-label="4.9 z 5 hvězdiček">
+            <svg class="w-[7px] h-[7px] sm:w-2.5 sm:h-2.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
+            <svg class="w-[7px] h-[7px] sm:w-2.5 sm:h-2.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
+            <svg class="w-[7px] h-[7px] sm:w-2.5 sm:h-2.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
+            <svg class="w-[7px] h-[7px] sm:w-2.5 sm:h-2.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
+            <svg class="w-[7px] h-[7px] sm:w-2.5 sm:h-2.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
           </div>
-          <div class="flex gap-0.5 text-gold mb-1.5" aria-label="4.9 z 5 hvězdiček">
-            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
-            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
-            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
-            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
-            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
-          </div>
-          <div class="text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.22em] uppercase text-cream/55 font-medium">Google hodnocení</div>
+          <div class="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.22em] uppercase text-cream/55 font-medium mt-auto">Google</div>
         </div>
       </div>
     </div>
@@ -1214,7 +1211,7 @@ window.addEventListener('scroll', () => {
   });
 }, {passive: true});
 
-/* ═══ Slot-machine counter ═══ */
+/* ═══ Slot-machine counter — digits roll & lock left→right ═══ */
 const fmt = new Intl.NumberFormat('cs-CZ');
 function animateCounter(el) {
   if (el.dataset.animated) return;
@@ -1223,32 +1220,51 @@ function animateCounter(el) {
   const suffix = el.dataset.suffix || '';
   const prefix = el.dataset.prefix || '';
   const decimals = parseInt(el.dataset.decimals || '0', 10);
-  const duration = 1800 + Math.min(target / 5, 600);
+  const duration = 2200 + Math.min(Math.log10(Math.max(target, 1)) * 200, 800);
   const start = performance.now();
   el.classList.add('counting');
 
-  function render(v, final) {
-    let s;
-    if (decimals > 0) s = v.toFixed(decimals).replace('.', ',');
-    else s = fmt.format(Math.floor(v));
-    el.textContent = prefix + s + suffix;
-    if (final) {
+  const finalStr = decimals > 0
+    ? target.toFixed(decimals).replace('.', ',')
+    : fmt.format(Math.floor(target));
+  const chars = [...finalStr];
+  const digitPositions = [];
+  chars.forEach((c, i) => { if (/\d/.test(c)) digitPositions.push(i); });
+  const numDigits = digitPositions.length;
+
+  let lastRoll = 0;
+  function tick(now) {
+    const t = Math.min((now - start) / duration, 1);
+    if (t >= 1) {
+      el.textContent = prefix + finalStr + suffix;
       el.classList.remove('counting');
       el.classList.add('done');
       setTimeout(() => el.classList.remove('done'), 600);
+      return;
     }
-  }
-  function tick(now) {
-    const t = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - t, 3);
-    if (t < 1) {
-      const flicker = (Math.random() - .5) * target * .05 * (1 - eased);
-      render(Math.max(0, target * eased + flicker), false);
-      requestAnimationFrame(tick);
-    } else {
-      render(target, true);
+    const eased = 1 - Math.pow(1 - t, 2.6);
+    const lockedCount = Math.floor(eased * numDigits);
+
+    if (now - lastRoll > 55) {
+      lastRoll = now;
+      const out = [...chars];
+      digitPositions.forEach((pos, idx) => {
+        if (idx < lockedCount) {
+          out[pos] = chars[pos];
+        } else {
+          out[pos] = Math.floor(Math.random() * 10).toString();
+        }
+      });
+      el.textContent = prefix + out.join('') + suffix;
     }
+    requestAnimationFrame(tick);
   }
+  /* Reserve final width to prevent layout shift while rolling */
+  el.textContent = prefix + finalStr + suffix;
+  const lockedWidth = el.getBoundingClientRect().width;
+  if (lockedWidth) el.style.minWidth = lockedWidth + 'px';
+  /* Initial state: 0s with formatting preserved (spaces, commas) */
+  el.textContent = prefix + chars.map(c => /\d/.test(c) ? '0' : c).join('') + suffix;
   requestAnimationFrame(tick);
 }
 const counterIO = new IntersectionObserver((entries) => {
