@@ -20,3 +20,5 @@ node_modules/
 
 # Záloha s parens v názvu — když ji smažete, znovu se nevrátí
 maison-luxe-light (1).html
+
+.vercel
