@@ -1,17 +1,14 @@
-# Excelence Care — Luxusní nehtový salon
+# Excelence Care — Prémiový salon krásy
 
-Prémiový jednostránkový web pro nehtový salon **Excelence Care** v Kopřivnici.
+Jednostránkový web pro salon **Excelence Care** v Kopřivnici (depilace, péče o tělo).
 Postaven na čistém HTML + Tailwind (CDN), bez build kroku — stačí otevřít v prohlížeči.
 
-## Verze
+## Soubory
 
 | Soubor | Popis |
 |---|---|
-| `index.html` | Světlá verze (výchozí) |
-| `maison-luxe-light (1).html` | Záloha světlé verze (lze smazat) |
-| `excellence-care-dark.html` | Tmavá verze (luxury black) |
-
-Mezi verzemi se přepíná tlačítkem v navigaci (slunce / měsíc).
+| `index.html` | Hlavní stránka |
+| `maison-luxe-light (1).html` | Stará záloha (lze smazat) |
 
 ## Lokální spuštění
 
