@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Excelence Care — Profesionální depilace | Kopřivnice</title>
-<meta name="description" content="Excelence Care — profesionální depilace v Kopřivnici. Bezpáskový vosk a cukrová pasta. Hladká pokožka na 3–4 týdny. Rezervujte si termín online.">
-<meta name="keywords" content="depilace, depilace voskem, cukrová pasta, sugaring, depilace Kopřivnice, depilace podpaží, depilace nohou, depilace zad, Excelence Care">
-<meta property="og:title" content="Excelence Care — Profesionální depilace">
+<title>Exelance Care — Profesionální depilace | Kopřivnice</title>
+<meta name="description" content="Exelance Care — profesionální depilace v Kopřivnici. Bezpáskový vosk a cukrová pasta. Hladká pokožka na 3–4 týdny. Rezervujte si termín online.">
+<meta name="keywords" content="depilace, depilace voskem, cukrová pasta, sugaring, depilace Kopřivnice, depilace podpaží, depilace nohou, depilace zad, Exelance Care">
+<meta property="og:title" content="Exelance Care — Profesionální depilace">
 <meta property="og:description" content="Profesionální depilace v Kopřivnici — bezpáskový vosk a cukrová pasta pro hladkou pokožku, která vydrží.">
 <meta property="og:type" content="website">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='100' y2='100'%3E%3Cstop offset='0' stop-color='%23d4af37'/%3E%3Cstop offset='1' stop-color='%238a6c1f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3Crect x='8' y='8' width='84' height='84' fill='none' stroke='url(%23g)' stroke-width='2'/%3E%3Ctext x='50' y='72' font-family='Georgia,serif' font-style='italic' font-size='62' fill='url(%23g)' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='100' y2='100'%3E%3Cstop offset='0' stop-color='%23f0d488'/%3E%3Cstop offset='1' stop-color='%238a6c1f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3Ctext x='50' y='44' font-family='Georgia,serif' font-size='34' letter-spacing='3' fill='url(%23g)' text-anchor='middle'%3EEC%3C/text%3E%3Cline x1='28' y1='56' x2='72' y2='56' stroke='url(%23g)' stroke-width='1.5'/%3E%3Ctext x='50' y='80' font-family='Georgia,serif' font-size='14' letter-spacing='3' fill='url(%23g)' text-anchor='middle'%3ECARE%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&family=Italiana&family=Pinyon+Script&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
@@ -178,15 +178,49 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .marquee-track{display:flex;animation:marquee 30s linear infinite;gap:60px;width:max-content}
 
-/* ═══ LOGO MONOGRAM ═══ */
-.logo-mono{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;flex-shrink:0}
-.logo-mono svg{width:100%;height:100%}
+/* ═══ BRAND LOGO (EXELANCE CARE — Italiana, gold metallic, thin) ═══ */
+.brand-logo{display:inline-flex;flex-direction:column;text-decoration:none;line-height:.95}
+.brand-logo .brand-line{font-family:'Italiana','Cormorant Garamond',serif;font-weight:400;background:linear-gradient(140deg,#f0d488 0%,#d4af37 28%,#b8932f 55%,#8a6c1f 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 1px 0 rgba(184,147,47,.18))}
+.brand-logo .brand-line-1{font-size:24px;letter-spacing:.16em}
+.brand-logo .brand-line-2{font-size:17px;letter-spacing:.32em;align-self:flex-end;margin-top:3px}
+.brand-logo-lg .brand-line-1{font-size:38px;letter-spacing:.14em}
+.brand-logo-lg .brand-line-2{font-size:26px;letter-spacing:.3em;margin-top:5px}
+
+/* legacy support (booking modal etc. may still reference) */
 .logo-lockup{display:inline-flex;align-items:center;gap:12px;text-decoration:none}
-.logo-lockup .lockup-name{display:flex;flex-direction:column;line-height:1}
-.logo-lockup .lockup-name .top{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;letter-spacing:.04em;color:#0a0a0a}
-.logo-lockup .lockup-name .sub{font-family:'Inter',sans-serif;font-size:9px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:#b8932f;margin-top:4px}
-.logo-mono-lg{width:80px;height:80px}
-.logo-mono-xl{width:120px;height:120px}
+
+/* ═══ SERVICE CATEGORY BLOCKS ═══ */
+.cat-block{margin-bottom:56px}
+@media (min-width:768px){.cat-block{margin-bottom:72px}}
+.cat-header{display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:24px}
+@media (min-width:768px){.cat-header{grid-template-columns:5fr 7fr;gap:36px;align-items:stretch}}
+.cat-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:#f9f8f5}
+.cat-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+.cat-block:hover .cat-img img{transform:scale(1.04)}
+.cat-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.25) 0%,transparent 55%);pointer-events:none}
+.cat-num{position:absolute;top:18px;left:22px;font-family:'Italiana','Cormorant Garamond',serif;font-size:34px;color:rgba(255,255,255,.9);letter-spacing:.1em;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+.cat-info{display:flex;flex-direction:column;justify-content:center}
+.cat-tag{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:#b8932f;font-weight:600;margin-bottom:10px}
+.cat-info h3{font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1.05;font-weight:300;margin-bottom:12px;letter-spacing:-.005em;color:#0a0a0a}
+@media (min-width:768px){.cat-info h3{font-size:38px}}
+.cat-info > p{color:rgba(10,10,10,.65);line-height:1.6;font-size:14px;margin-bottom:16px;max-width:560px}
+.cat-benefits{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12px;list-style:none;padding:0;margin:0}
+.cat-benefits li{display:flex;align-items:center;gap:8px;color:rgba(10,10,10,.72)}
+.cat-benefits li::before{content:'';width:5px;height:5px;background:#b8932f;border-radius:50%;flex-shrink:0}
+
+/* Service items grid within category */
+.cat-services{display:grid;gap:8px;grid-template-columns:1fr}
+@media (min-width:640px){.cat-services{grid-template-columns:1fr 1fr}}
+@media (min-width:1024px){.cat-services{grid-template-columns:1fr 1fr 1fr}}
+.srv-item{position:relative;padding:18px 22px;background:#fff;border:1px solid rgba(184,147,47,.18);transition:all .3s ease;display:flex;flex-direction:column}
+.srv-item:hover{border-color:rgba(184,147,47,.45);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.05)}
+.srv-item h4{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;color:#0a0a0a;margin:0 0 4px;line-height:1.2}
+.srv-item .srv-desc{font-size:12px;color:rgba(10,10,10,.55);line-height:1.45;margin-bottom:auto}
+.srv-item .srv-item-meta{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:14px;padding-top:10px;border-top:1px solid rgba(184,147,47,.15)}
+.srv-item .srv-item-meta .dur{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(10,10,10,.5)}
+.srv-item .srv-item-meta .price{font-family:'Cormorant Garamond',serif;font-size:19px;background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);-webkit-background-clip:text;background-clip:text;color:transparent}
+.srv-item.featured{background:linear-gradient(135deg,#f9f8f5,#fff);border-color:rgba(184,147,47,.4)}
+.srv-item.featured::after{content:'Nejoblíbenější';position:absolute;top:-9px;right:14px;font-size:8px;letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(135deg,#d4af37,#b8932f);color:#fff;padding:3px 9px;font-weight:600}
 
 /* gold corner frame for map */
 .gold-corners{position:relative}
@@ -226,10 +260,8 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 @media (max-width:768px){
   /* nav: tighter padding, smaller logo */
   nav{padding-left:18px!important;padding-right:18px!important;padding-top:14px!important;padding-bottom:14px!important}
-  .logo-lockup{gap:10px}
-  .logo-mono{width:38px;height:38px}
-  .logo-lockup .lockup-name .top{font-size:18px}
-  .logo-lockup .lockup-name .sub{font-size:8px;letter-spacing:.35em;margin-top:3px}
+  .brand-logo .brand-line-1{font-size:18px;letter-spacing:.14em}
+  .brand-logo .brand-line-2{font-size:13px;letter-spacing:.28em}
 
   /* hero typography */
   h1.fadeUp{font-size:clamp(46px,11vw,68px)!important;line-height:.96!important;margin-bottom:18px!important}
@@ -310,7 +342,8 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 
 /* ultra-small phones */
 @media (max-width:380px){
-  .logo-lockup .lockup-name .sub{display:none}
+  .brand-logo .brand-line-1{font-size:16px}
+  .brand-logo .brand-line-2{font-size:11px}
   h1.fadeUp{font-size:clamp(40px,11vw,56px)!important}
   .hero-stats .font-serif{font-size:24px!important}
   .map-info{max-width:170px;padding:10px 12px}
@@ -478,25 +511,9 @@ html,body{overflow-x:hidden;max-width:100vw}
 <!-- ═══════ NAV ═══════ -->
 <nav id="nav" class="fixed top-0 left-0 right-0 z-50 px-6 md:px-16 py-5">
   <div class="flex items-center justify-between max-w-7xl mx-auto">
-    <a href="#" class="logo-lockup" aria-label="Excelence Care — domovská stránka">
-      <span class="logo-mono">
-        <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="logoGradLight" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#d4af37"/>
-              <stop offset="50%" stop-color="#b8932f"/>
-              <stop offset="100%" stop-color="#8a6c1f"/>
-            </linearGradient>
-          </defs>
-          <rect x="2" y="2" width="56" height="56" fill="none" stroke="url(#logoGradLight)" stroke-width="1.4"/>
-          <rect x="6" y="6" width="48" height="48" fill="none" stroke="url(#logoGradLight)" stroke-width=".5" opacity=".4"/>
-          <text x="30" y="44" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-weight="500" font-size="34" fill="url(#logoGradLight)" text-anchor="middle">L</text>
-        </svg>
-      </span>
-      <span class="lockup-name">
-        <span class="top">Excelence <span class="italic gold-text">Care</span></span>
-        <span class="sub">Beauty Atelier · est. 2017</span>
-      </span>
+    <a href="#" class="brand-logo" aria-label="Exelance Care — domovská stránka">
+      <span class="brand-line brand-line-1">EXELANCE</span>
+      <span class="brand-line brand-line-2">CARE</span>
     </a>
     <ul class="hidden lg:flex gap-10 items-center">
       <li><a href="#o-salonu" class="text-[10px] tracking-[0.22em] uppercase text-ink/70 hover:text-gold transition-colors">O salonu</a></li>
@@ -554,10 +571,10 @@ html,body{overflow-x:hidden;max-width:100vw}
         detailu.
       </h1>
 
-      <p class="fadeUp font-script text-4xl md:text-5xl gold-text mb-8" style="animation-delay:.4s">Excelence Care</p>
+      <p class="fadeUp font-script text-4xl md:text-5xl gold-text mb-8" style="animation-delay:.4s">Exelance Care</p>
 
       <p class="fadeUp text-base md:text-lg text-ink/65 max-w-xl mb-10 leading-relaxed" style="animation-delay:.55s">
-        Profesionální depilace v centru Kopřivnice. Bezpáskový vosk a cukrová pasta — hladká pokožka mnohem déle než po holení.
+        Prémiový salon krásy v centru Kopřivnice. Přístrojová maderoterapie, neinvazivní liposukce, spa pedikúra a profesionální depilace pod jednou střechou.
       </p>
 
       <div class="fadeUp flex flex-col sm:flex-row gap-4 items-start sm:items-center" style="animation-delay:.7s">
@@ -658,7 +675,7 @@ html,body{overflow-x:hidden;max-width:100vw}
         <div class="gold-divider mb-8"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
 
         <p class="text-ink/70 leading-relaxed mb-5 text-base">
-          Excelence Care je intimní prémiový salon v centru Kopřivnice, kde se každá návštěva mění v rituál. Spojujeme moderní přístrojové ošetření s relaxačními procedurami a každé klientce věnujeme plnou pozornost.
+          Exelance Care je intimní prémiový salon v centru Kopřivnice, kde se každá návštěva mění v rituál. Spojujeme moderní přístrojové ošetření s relaxačními procedurami a každé klientce věnujeme plnou pozornost.
         </p>
         <p class="text-ink/70 leading-relaxed mb-10 text-base">
           Specializujeme se na <strong class="text-ink">profesionální depilaci</strong> celého těla. Používáme <strong class="text-ink">bezpáskový vosk</strong> nebo <strong class="text-ink">cukrovou pastu</strong> podle ošetřované oblasti — pro hladkou pokožku, která vydrží.
@@ -715,171 +732,171 @@ html,body{overflow-x:hidden;max-width:100vw}
           Služby &amp; Poukazy
         </p>
         <h2 class="rv font-serif text-5xl md:text-6xl font-light leading-tight tracking-tight">
-          Profesionální <span class="italic gold-text">depilace</span>
+          Naše <span class="italic gold-text">péče</span>
         </h2>
       </div>
       <div class="lg:col-span-5 rv">
         <p class="text-ink/65 leading-relaxed">
-          Těšte se z hladké pokožky mnohem déle než po běžném holení. Pro ještě lepší efekt doporučujeme den nebo dva před ošetřením provést peeling solí nebo cukrem v dané oblasti — odstraní odumřelé buňky, pomůže uvolnit chloupky a zajistí hladší výsledek.
+          Specializujeme se na <strong class="text-ink font-medium">přístrojovou maderoterapii</strong>, <strong class="text-ink font-medium">neinvazivní liposukci</strong>, <strong class="text-ink font-medium">spa pedikúru</strong> a profesionální <strong class="text-ink font-medium">depilaci</strong>. Vyberte si kategorii a objednejte se na termín.
         </p>
       </div>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- 1 Depilace podpaží -->
-      <article class="srv-card rv overflow-hidden flex flex-col group">
-        <div class="srv-img-wrap">
-          <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=700&q=80" alt="Depilace podpaží" class="srv-img" loading="lazy"/>
-          <div class="srv-img-overlay"></div>
-          <span class="srv-num">01</span>
+    <!-- ═══ KATEGORIE 01: PŘÍSTROJOVÁ MADEROTERAPIE ═══ -->
+    <div class="cat-block rv">
+      <div class="cat-header">
+        <div class="cat-img">
+          <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80" alt="Přístrojová maderoterapie — dřevěné nástroje" loading="lazy"/>
+          <span class="cat-num">01</span>
         </div>
-        <div class="srv-body">
-          <h3 class="font-serif text-2xl md:text-3xl font-light mb-3 leading-tight">Depilace podpaží</h3>
-          <p class="text-ink/65 text-sm leading-relaxed mb-5">Šetrná depilace citlivé oblasti podpaží. Hladká pokožka bez podráždění.</p>
-          <ul class="srv-benefits">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Diskrétní a šetrné provedení</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Bezpáskový vosk nebo cukrová pasta</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Hladkost na 3–4 týdny</span></li>
+        <div class="cat-info">
+          <p class="cat-tag">Kategorie 01 · Tvarování postavy</p>
+          <h3>Přístrojová maderoterapie</h3>
+          <p>Manuální masáž speciálními dřevěnými nástroji. Účinná přírodní metoda pro tvarování postavy, lifting obličeje a redukci celulitidy bez přístrojů a injekcí.</p>
+          <ul class="cat-benefits">
+            <li>100% přírodní</li>
+            <li>Stimuluje lymfu</li>
+            <li>Redukuje celulitidu</li>
+            <li>Zpevňuje pleť</li>
           </ul>
-          <div class="srv-price">
-            <span class="text-[10px] tracking-[0.18em] uppercase text-ink/50">20 min</span>
-            <span class="font-serif text-2xl gold-text">400 Kč</span>
-          </div>
         </div>
-      </article>
+      </div>
+      <div class="cat-services">
+        <article class="srv-item">
+          <h4>Maderoterapie tělo</h4>
+          <p class="srv-desc">Tvarování postavy, lymfodrenáž, hluboká masáž problematických partií.</p>
+          <div class="srv-item-meta"><span class="dur">75 min</span><span class="price">1 290 Kč</span></div>
+        </article>
+        <article class="srv-item">
+          <h4>Maderoterapie obličej</h4>
+          <p class="srv-desc">Přírodní lifting bez skalpelu — stimulace kolagenu, zpevnění kontur.</p>
+          <div class="srv-item-meta"><span class="dur">45 min</span><span class="price">990 Kč</span></div>
+        </article>
+      </div>
+    </div>
 
-      <!-- 2 Depilace nadloktí -->
-      <article class="srv-card rv overflow-hidden flex flex-col group">
-        <div class="srv-img-wrap">
-          <img src="https://images.unsplash.com/photo-1604654894611-6973b376cbde?w=700&q=80" alt="Depilace nadloktí" class="srv-img" loading="lazy"/>
-          <div class="srv-img-overlay"></div>
-          <span class="srv-num">02</span>
+    <!-- ═══ KATEGORIE 02: NEINVAZIVNÍ LIPOSUKCE ═══ -->
+    <div class="cat-block rv">
+      <div class="cat-header">
+        <div class="cat-img">
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80" alt="Neinvazivní liposukce — moderní procedura" loading="lazy"/>
+          <span class="cat-num">02</span>
         </div>
-        <div class="srv-body">
-          <h3 class="font-serif text-2xl md:text-3xl font-light mb-3 leading-tight">Depilace nadloktí</h3>
-          <p class="text-ink/65 text-sm leading-relaxed mb-5">Odstranění chloupků z&nbsp;horní části paží — vždy upravené ruce.</p>
-          <ul class="srv-benefits">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Šetrné na jemné chloupky</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Vhodné i&nbsp;pro citlivou pleť</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Trvanlivý efekt 3–4 týdny</span></li>
+        <div class="cat-info">
+          <p class="cat-tag">Kategorie 02 · Redukce tukových buněk</p>
+          <h3>Neinvazivní liposukce</h3>
+          <p>Ultrazvuková kavitace v kombinaci s radiofrekvencí. Redukce tukových buněk bez skalpelu, bez bolesti a bez rekonvalescence — vrátíte se ihned do běžného života.</p>
+          <ul class="cat-benefits">
+            <li>Bez bolesti</li>
+            <li>Bez rekonvalescence</li>
+            <li>Viditelné výsledky</li>
+            <li>Cílená redukce</li>
           </ul>
-          <div class="srv-price">
-            <span class="text-[10px] tracking-[0.18em] uppercase text-ink/50">30 min</span>
-            <span class="font-serif text-2xl gold-text">450 Kč</span>
-          </div>
         </div>
-      </article>
+      </div>
+      <div class="cat-services">
+        <article class="srv-item">
+          <h4>Jedno sezení</h4>
+          <p class="srv-desc">Ultrazvuková kavitace + radiofrekvence v jedné vybrané oblasti.</p>
+          <div class="srv-item-meta"><span class="dur">60 min</span><span class="price">1 490 Kč</span></div>
+        </article>
+        <article class="srv-item featured">
+          <h4>Balíček 5×</h4>
+          <p class="srv-desc">Komplexní program pěti sezení pro maximální měřitelný výsledek.</p>
+          <div class="srv-item-meta"><span class="dur">5× 60 min</span><span class="price">6 490 Kč</span></div>
+        </article>
+      </div>
+    </div>
 
-      <!-- 3 Depilace předloktí -->
-      <article class="srv-card rv overflow-hidden flex flex-col group">
-        <div class="srv-img-wrap">
-          <img src="https://images.unsplash.com/photo-1599948128020-9a44505b0d1b?w=700&q=80" alt="Depilace předloktí" class="srv-img" loading="lazy"/>
-          <div class="srv-img-overlay"></div>
-          <span class="srv-num">03</span>
+    <!-- ═══ KATEGORIE 03: SPA PEDIKÚRA ═══ -->
+    <div class="cat-block rv">
+      <div class="cat-header">
+        <div class="cat-img">
+          <img src="https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=900&q=80" alt="Spa pedikúra — relaxace pro chodidla" loading="lazy"/>
+          <span class="cat-num">03</span>
         </div>
-        <div class="srv-body">
-          <h3 class="font-serif text-2xl md:text-3xl font-light mb-3 leading-tight">Depilace předloktí</h3>
-          <p class="text-ink/65 text-sm leading-relaxed mb-5">Depilace spodní části paží. Hladké ruce pro každou příležitost.</p>
-          <ul class="srv-benefits">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Hladká pokožka rukou</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Méně zarůstání chloupků</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Pomalu se vracející růst</span></li>
+        <div class="cat-info">
+          <p class="cat-tag">Kategorie 03 · Péče o chodidla</p>
+          <h3>Spa pedikúra</h3>
+          <p>Relaxační rituál pro unavená chodidla — od aromatické koupele přes peeling až po regenerační masáž. Hebká, zdravá a krásně tvarovaná chodidla.</p>
+          <ul class="cat-benefits">
+            <li>Regenerace chodidel</li>
+            <li>Hluboký peeling</li>
+            <li>Aromatická masáž</li>
+            <li>Hydratace</li>
           </ul>
-          <div class="srv-price">
-            <span class="text-[10px] tracking-[0.18em] uppercase text-ink/50">25 min</span>
-            <span class="font-serif text-2xl gold-text">400 Kč</span>
-          </div>
         </div>
-      </article>
+      </div>
+      <div class="cat-services">
+        <article class="srv-item">
+          <h4>Klasická</h4>
+          <p class="srv-desc">Koupel, peeling, úprava nehtů a kutikul, masáž a hydratační zábal.</p>
+          <div class="srv-item-meta"><span class="dur">60 min</span><span class="price">690 Kč</span></div>
+        </article>
+        <article class="srv-item">
+          <h4>Luxusní</h4>
+          <p class="srv-desc">Vše z klasiky plus parafínový zábal, prodloužená masáž a finální lak.</p>
+          <div class="srv-item-meta"><span class="dur">90 min</span><span class="price">990 Kč</span></div>
+        </article>
+      </div>
+    </div>
 
-      <!-- 4 Depilace zad -->
-      <article class="srv-card rv overflow-hidden flex flex-col group">
-        <div class="srv-img-wrap">
-          <img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=700&q=80" alt="Depilace zad" class="srv-img" loading="lazy"/>
-          <div class="srv-img-overlay"></div>
-          <span class="srv-num">04</span>
+    <!-- ═══ KATEGORIE 04: DEPILACE ═══ -->
+    <div class="cat-block rv">
+      <div class="cat-header">
+        <div class="cat-img">
+          <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=900&q=80" alt="Profesionální depilace voskem a cukrovou pastou" loading="lazy"/>
+          <span class="cat-num">04</span>
         </div>
-        <div class="srv-body">
-          <h3 class="font-serif text-2xl md:text-3xl font-light mb-3 leading-tight">Depilace zad</h3>
-          <p class="text-ink/65 text-sm leading-relaxed mb-5">Komplexní depilace celých zad — žádné chloupky a hebká kůže.</p>
-          <ul class="srv-benefits">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Důkladné odstranění chloupků</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Pohodlí během celé procedury</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Hladká záda na týdny dopředu</span></li>
+        <div class="cat-info">
+          <p class="cat-tag">Kategorie 04 · Hladká pokožka 3–4 týdny</p>
+          <h3>Profesionální depilace</h3>
+          <p>Depilace bezpáskovým voskem nebo cukrovou pastou — metodu volíme podle ošetřované oblasti pro maximální šetrnost. Hladká pokožka, méně zarůstání a trvanlivý výsledek.</p>
+          <ul class="cat-benefits">
+            <li>Bezpáskový vosk</li>
+            <li>Cukrová pasta / sugaring</li>
+            <li>Šetrné k pokožce</li>
+            <li>Méně zarůstání</li>
           </ul>
-          <div class="srv-price">
-            <span class="text-[10px] tracking-[0.18em] uppercase text-ink/50">60 min</span>
-            <span class="font-serif text-2xl gold-text">1 100 Kč</span>
-          </div>
         </div>
-      </article>
-
-      <!-- 5 Depilace stehna bez třísel -->
-      <article class="srv-card rv overflow-hidden flex flex-col group">
-        <div class="srv-img-wrap">
-          <img src="https://images.unsplash.com/photo-1632344004184-c41699c97a98?w=700&q=80" alt="Depilace stehen bez třísel" class="srv-img" loading="lazy"/>
-          <div class="srv-img-overlay"></div>
-          <span class="srv-num">05</span>
-        </div>
-        <div class="srv-body">
-          <h3 class="font-serif text-2xl md:text-3xl font-light mb-3 leading-tight">Stehna bez třísel</h3>
-          <p class="text-ink/65 text-sm leading-relaxed mb-5">Depilace stehen bez intimních partií. Hladké nohy pro plavky i šaty.</p>
-          <ul class="srv-benefits">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Pouze stehna, žádné citlivé partie</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Hluboké odstranění chloupků</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Hladké nohy do plavek</span></li>
-          </ul>
-          <div class="srv-price">
-            <span class="text-[10px] tracking-[0.18em] uppercase text-ink/50">40 min</span>
-            <span class="font-serif text-2xl gold-text">600 Kč</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 6 - Featured: Lýtka včetně kolen -->
-      <article class="srv-card srv-featured rv overflow-hidden flex flex-col group">
-        <div class="srv-img-wrap">
-          <img src="https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=700&q=80" alt="Depilace lýtek včetně kolen" class="srv-img" loading="lazy"/>
-          <div class="srv-img-overlay"></div>
-          <span class="absolute top-4 left-4 badge z-10">Nejoblíbenější</span>
-          <span class="srv-num">06</span>
-        </div>
-        <div class="srv-body">
-          <h3 class="font-serif text-2xl md:text-3xl font-light mb-3 leading-tight">Lýtka včetně kolen</h3>
-          <p class="text-ink/65 text-sm leading-relaxed mb-5">Hladká lýtka včetně kolen — bez tmavých pruhů a strniska.</p>
-          <ul class="srv-benefits">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Včetně kolen pro plynulý přechod</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Hladká kůže ze všech stran</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Ideální před dovolenou</span></li>
-          </ul>
-          <div class="srv-price">
-            <span class="text-[10px] tracking-[0.18em] uppercase text-ink/50">40 min</span>
-            <span class="font-serif text-2xl gold-text">650 Kč</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 7 Depilace nártu a prstů -->
-      <article class="srv-card rv overflow-hidden flex flex-col group">
-        <div class="srv-img-wrap">
-          <img src="https://images.unsplash.com/photo-1604902396830-aca29e19b067?w=700&q=80" alt="Depilace nártu a prstů" class="srv-img" loading="lazy"/>
-          <div class="srv-img-overlay"></div>
-          <span class="srv-num">07</span>
-        </div>
-        <div class="srv-body">
-          <h3 class="font-serif text-2xl md:text-3xl font-light mb-3 leading-tight">Nárt a prsty</h3>
-          <p class="text-ink/65 text-sm leading-relaxed mb-5">Detailní depilace nártu a&nbsp;prstů. Skvělý doplněk k&nbsp;pedikúře.</p>
-          <ul class="srv-benefits">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Dokonale upravené nohy</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Detail, který dělá rozdíl</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Krátký zákrok, velký efekt</span></li>
-          </ul>
-          <div class="srv-price">
-            <span class="text-[10px] tracking-[0.18em] uppercase text-ink/50">15 min</span>
-            <span class="font-serif text-2xl gold-text">300 Kč</span>
-          </div>
-        </div>
-      </article>
+      </div>
+      <div class="cat-services">
+        <article class="srv-item">
+          <h4>Podpaží</h4>
+          <p class="srv-desc">Šetrná depilace citlivé oblasti bez podráždění.</p>
+          <div class="srv-item-meta"><span class="dur">20 min</span><span class="price">400 Kč</span></div>
+        </article>
+        <article class="srv-item">
+          <h4>Nadloktí</h4>
+          <p class="srv-desc">Horní část paží — vždy upravené ruce.</p>
+          <div class="srv-item-meta"><span class="dur">30 min</span><span class="price">450 Kč</span></div>
+        </article>
+        <article class="srv-item">
+          <h4>Předloktí</h4>
+          <p class="srv-desc">Spodní část paží — hladké ruce pro každou příležitost.</p>
+          <div class="srv-item-meta"><span class="dur">25 min</span><span class="price">400 Kč</span></div>
+        </article>
+        <article class="srv-item">
+          <h4>Záda</h4>
+          <p class="srv-desc">Komplexní depilace celých zad pro hebkou kůži.</p>
+          <div class="srv-item-meta"><span class="dur">60 min</span><span class="price">1 100 Kč</span></div>
+        </article>
+        <article class="srv-item">
+          <h4>Stehna (bez třísel)</h4>
+          <p class="srv-desc">Depilace stehen bez intimních partií — pro plavky i šaty.</p>
+          <div class="srv-item-meta"><span class="dur">40 min</span><span class="price">600 Kč</span></div>
+        </article>
+        <article class="srv-item featured">
+          <h4>Lýtka včetně kolen</h4>
+          <p class="srv-desc">Hladká lýtka i kolena — ideální před dovolenou.</p>
+          <div class="srv-item-meta"><span class="dur">40 min</span><span class="price">650 Kč</span></div>
+        </article>
+        <article class="srv-item">
+          <h4>Nárt a prsty</h4>
+          <p class="srv-desc">Detailní depilace chodidla — skvělý doplněk k pedikúře.</p>
+          <div class="srv-item-meta"><span class="dur">15 min</span><span class="price">300 Kč</span></div>
+        </article>
+      </div>
     </div>
 
     <!-- ═══ Poukazy banner ═══ -->
@@ -911,8 +928,8 @@ html,body{overflow-x:hidden;max-width:100vw}
             <div class="absolute inset-0 bg-gradient-to-br from-gold2/30 via-gold/10 to-transparent blur-2xl"></div>
             <div class="relative bg-white border border-gold/30 p-8 soft-shadow text-center" style="transform:rotate(-3deg)">
               <p class="text-[9px] tracking-[0.3em] uppercase text-gold mb-3">Dárkový poukaz</p>
-              <p class="font-script text-3xl gold-text leading-none mb-2">Excelence</p>
-              <p class="font-serif text-base text-ink mb-4">Care</p>
+              <p class="brand-line leading-none mb-1" style="font-family:'Italiana',serif;font-size:26px;letter-spacing:.14em">EXELANCE</p>
+              <p class="brand-line mb-4" style="font-family:'Italiana',serif;font-size:18px;letter-spacing:.28em">CARE</p>
               <div class="gold-divider mb-4"><span class="line" style="width:32px"></span><span class="dot"></span><span class="line" style="width:32px"></span></div>
               <p class="font-serif text-4xl gold-text leading-none mb-2">500–5000</p>
               <p class="text-[9px] tracking-[0.25em] uppercase text-ink/60">Korun českých</p>
@@ -1092,7 +1109,7 @@ html,body{overflow-x:hidden;max-width:100vw}
         <div class="gold-corners">
           <span class="c-tl"></span><span class="c-br"></span>
           <div class="relative aspect-square overflow-hidden soft-shadow bg-cream2">
-            <div id="map" role="application" aria-label="Interaktivní mapa - Excelence Care, Štefánikova 1163, Kopřivnice"></div>
+            <div id="map" role="application" aria-label="Interaktivní mapa - Exelance Care, Štefánikova 1163, Kopřivnice"></div>
 
             <!-- Info card overlay -->
             <div class="map-info">
@@ -1100,7 +1117,7 @@ html,body{overflow-x:hidden;max-width:100vw}
                 <span class="live-dot"></span>
                 <span class="text-[9px] tracking-[0.22em] uppercase font-semibold text-ink/70">Otevřeno · do 20:00</span>
               </div>
-              <p class="font-serif text-2xl leading-none mb-1"><span class="italic gold-text">Excelence</span> Care</p>
+              <p class="font-serif text-2xl leading-none mb-1"><span class="italic gold-text">Exelance</span> Care</p>
               <p class="text-[10px] tracking-[0.2em] uppercase text-ink/70 mt-2">Štefánikova 1163</p>
               <p class="text-[10px] tracking-[0.2em] uppercase text-ink/60">742 21 Kopřivnice</p>
             </div>
@@ -1170,28 +1187,12 @@ html,body{overflow-x:hidden;max-width:100vw}
 
     <div class="grid md:grid-cols-4 gap-12 mb-16">
       <div class="md:col-span-2">
-        <div class="flex items-center gap-4 mb-6">
-          <span class="logo-mono" style="width:56px;height:56px">
-            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="logoGradFooter" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stop-color="#f0d488"/>
-                  <stop offset="50%" stop-color="#d4af37"/>
-                  <stop offset="100%" stop-color="#8a6c1f"/>
-                </linearGradient>
-              </defs>
-              <rect x="2" y="2" width="56" height="56" fill="none" stroke="url(#logoGradFooter)" stroke-width="1.4"/>
-              <rect x="6" y="6" width="48" height="48" fill="none" stroke="url(#logoGradFooter)" stroke-width=".5" opacity=".5"/>
-              <text x="30" y="44" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-weight="500" font-size="34" fill="url(#logoGradFooter)" text-anchor="middle">L</text>
-            </svg>
-          </span>
-          <div class="flex flex-col leading-none">
-            <span class="font-serif text-2xl text-cream">Excelence <span class="italic gold-text">Care</span></span>
-            <span class="text-[9px] tracking-[0.42em] uppercase text-gold/80 mt-1.5">Beauty Atelier · est. 2017</span>
-          </div>
-        </div>
+        <a href="#" class="brand-logo brand-logo-lg mb-6" aria-label="Exelance Care">
+          <span class="brand-line brand-line-1">EXELANCE</span>
+          <span class="brand-line brand-line-2">CARE</span>
+        </a>
         <p class="text-cream/60 text-sm leading-relaxed max-w-md mb-8">
-          Profesionální depilace v centru Kopřivnice — bezpáskový vosk a cukrová pasta pro hladkou pokožku, která vydrží. Salon od roku 2017.
+          Prémiový salon krásy v centru Kopřivnice — přístrojová maderoterapie, neinvazivní liposukce, spa pedikúra a depilace pod jednou střechou. Od roku 2017.
         </p>
         <div class="flex gap-3">
           <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="w-11 h-11 border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-ink transition-all">
@@ -1230,7 +1231,7 @@ html,body{overflow-x:hidden;max-width:100vw}
     </div>
 
     <div class="pt-8 border-t border-gold/10 flex flex-col md:flex-row justify-between items-center gap-4">
-      <p class="text-cream/40 text-xs tracking-wide">© <span id="yr">2026</span> Excelence Care · Všechna práva vyhrazena</p>
+      <p class="text-cream/40 text-xs tracking-wide">© <span id="yr">2026</span> Exelance Care · Všechna práva vyhrazena</p>
       <p class="text-cream/40 text-xs tracking-wide">Made with <span class="text-gold">♡</span> in Kopřivnice</p>
     </div>
   </div>
@@ -1399,8 +1400,8 @@ function initMap() {
 
   const goldIcon = L.divIcon({ className: 'gold-pin-wrap', html: pinSvg, iconSize: [50, 70], iconAnchor: [25, 65], popupAnchor: [0, -60] });
 
-  L.marker(SALON, { icon: goldIcon, title: 'Excelence Care' }).addTo(map)
-    .bindPopup('<div class="pop-title">Excelence Care</div><div>Štefánikova 1163, Kopřivnice</div><div class="pop-sub">Otevřeno · do 20:00</div>');
+  L.marker(SALON, { icon: goldIcon, title: 'Exelance Care' }).addTo(map)
+    .bindPopup('<div class="pop-title">Exelance Care</div><div>Štefánikova 1163, Kopřivnice</div><div class="pop-sub">Otevřeno · do 20:00</div>');
 
   /* Click to enable scroll-zoom; toast hint */
   const hint = document.getElementById('mapHint');
@@ -1468,8 +1469,8 @@ const shareBtn = document.getElementById('shareBtn');
 if (shareBtn) {
   shareBtn.addEventListener('click', async () => {
     const data = {
-      title: 'Excelence Care — Nehtový salon',
-      text: 'Excelence Care, Štefánikova 1163, Kopřivnice',
+      title: 'Exelance Care — Nehtový salon',
+      text: 'Exelance Care, Štefánikova 1163, Kopřivnice',
       url: 'https://maps.google.com/?q=%C5%A0tef%C3%A1nikova+1163+Kop%C5%99ivnice'
     };
     try {
@@ -1587,15 +1588,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// duration v minutách
+// duration v minutách — řazené podle kategorií
 const SERVICES = [
-  { id: 'podpazi',  name: 'Depilace podpaží',     duration: 20, dur: '20 min', price: '400 Kč' },
-  { id: 'nadlokti', name: 'Depilace nadloktí',    duration: 30, dur: '30 min', price: '450 Kč' },
-  { id: 'predlokti',name: 'Depilace předloktí',   duration: 25, dur: '25 min', price: '400 Kč' },
-  { id: 'zada',     name: 'Depilace zad',         duration: 60, dur: '60 min', price: '1 100 Kč' },
-  { id: 'stehna',   name: 'Stehna bez třísel',    duration: 40, dur: '40 min', price: '600 Kč' },
-  { id: 'lytka',    name: 'Lýtka včetně kolen',   duration: 40, dur: '40 min', price: '650 Kč', featured: true },
-  { id: 'nart',     name: 'Nárt a prsty',         duration: 15, dur: '15 min', price: '300 Kč' },
+  // Přístrojová maderoterapie
+  { id: 'madero-telo',     name: 'Maderoterapie tělo',       category: 'Maderoterapie',   duration: 75, dur: '75 min', price: '1 290 Kč' },
+  { id: 'madero-oblicej',  name: 'Maderoterapie obličej',    category: 'Maderoterapie',   duration: 45, dur: '45 min', price: '990 Kč' },
+  // Neinvazivní liposukce
+  { id: 'lipo-1',          name: 'Neinvazivní liposukce — 1 sezení', category: 'Liposukce', duration: 60, dur: '60 min', price: '1 490 Kč' },
+  { id: 'lipo-5',          name: 'Neinvazivní liposukce — balíček 5×', category: 'Liposukce', duration: 60, dur: '5× 60 min', price: '6 490 Kč', featured: true },
+  // Spa pedikúra
+  { id: 'pedi-klas',       name: 'Spa pedikúra klasická',    category: 'Spa pedikúra',    duration: 60, dur: '60 min', price: '690 Kč' },
+  { id: 'pedi-lux',        name: 'Spa pedikúra luxusní',     category: 'Spa pedikúra',    duration: 90, dur: '90 min', price: '990 Kč' },
+  // Depilace
+  { id: 'podpazi',  name: 'Depilace podpaží',     category: 'Depilace', duration: 20, dur: '20 min', price: '400 Kč' },
+  { id: 'nadlokti', name: 'Depilace nadloktí',    category: 'Depilace', duration: 30, dur: '30 min', price: '450 Kč' },
+  { id: 'predlokti',name: 'Depilace předloktí',   category: 'Depilace', duration: 25, dur: '25 min', price: '400 Kč' },
+  { id: 'zada',     name: 'Depilace zad',         category: 'Depilace', duration: 60, dur: '60 min', price: '1 100 Kč' },
+  { id: 'stehna',   name: 'Stehna bez třísel',    category: 'Depilace', duration: 40, dur: '40 min', price: '600 Kč' },
+  { id: 'lytka',    name: 'Lýtka včetně kolen',   category: 'Depilace', duration: 40, dur: '40 min', price: '650 Kč', featured: true },
+  { id: 'nart',     name: 'Nárt a prsty',         category: 'Depilace', duration: 15, dur: '15 min', price: '300 Kč' },
 ];
 
 // Otevírací doba (v minutách od půlnoci). 0=neděle, 1=pondělí…
