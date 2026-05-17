@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<title>Admin · Excelence Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Inter',sans-serif;background:#faf7f2;color:#0a0a0a;min-height:100vh;display:flex;flex-direction:column}
+.serif{font-family:'Cormorant Garamond',serif}
+.gold{color:#b8932f}
+.italic{font-style:italic}
+button{font-family:inherit}
+input,select,textarea{font-family:inherit}
+
+/* ═══ BOOT SPLASH ═══ */
+.boot-wrap{flex:1;display:flex;align-items:center;justify-content:center}
+.boot-spinner{width:34px;height:34px;border:2px solid rgba(184,147,47,.2);border-top-color:#b8932f;border-radius:50%;animation:bootSpin .8s linear infinite}
+@keyframes bootSpin{to{transform:rotate(360deg)}}
+
+/* ═══ LOGIN ═══ */
+.login-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.login-card{background:#fff;padding:48px 40px;max-width:380px;width:100%;box-shadow:0 18px 60px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04);border:1px solid rgba(184,147,47,.12)}
+.login-card h1{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;text-align:center;margin-bottom:6px}
+.login-card .sub{text-align:center;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#b8932f;margin-bottom:32px}
+.login-card label{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#b8932f;margin-bottom:8px}
+.login-card input[type=password]{display:block;width:100%;padding:14px 16px;background:#faf7f2;border:1px solid rgba(184,147,47,.25);font-size:14px;outline:none;transition:all .25s}
+.login-card input[type=password]:focus{border-color:#b8932f;background:#fff;box-shadow:0 0 0 3px rgba(184,147,47,.12)}
+.login-card button{display:block;width:100%;margin-top:20px;padding:14px;background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);color:#fff;border:none;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:opacity .25s}
+.login-card button:hover{opacity:.9}
+.login-card .err{color:#a04040;font-size:12px;text-align:center;margin-top:12px;min-height:1em}
+.login-card .back-link{display:block;text-align:center;margin-top:20px;color:rgba(10,10,10,.55);text-decoration:none;font-size:11px;letter-spacing:.18em;text-transform:uppercase;transition:color .25s}
+.login-card .back-link:hover{color:#b8932f}
+.btn.back-btn{text-decoration:none;display:inline-flex;align-items:center}
+
+/* ═══ HEADER ═══ */
+header.bar{background:#fff;border-bottom:1px solid rgba(184,147,47,.15);padding:18px 28px;display:flex;align-items:center;justify-content:space-between;gap:14px;position:sticky;top:0;z-index:30}
+header.bar h1{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400}
+header.bar h1 .pill{display:inline-block;margin-left:10px;color:rgba(10,10,10,.45);font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-family:'Inter',sans-serif;font-weight:500;vertical-align:middle}
+header.bar .meta{display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(10,10,10,.55);flex-shrink:0}
+.last-sync{margin-right:6px}
+.btn{background:#fff;border:1px solid rgba(184,147,47,.3);color:#8a6c1f;padding:9px 16px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .25s;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:#b8932f;color:#fff;border-color:#b8932f}
+.btn.primary{background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);color:#fff;border-color:transparent}
+.btn.primary:hover{opacity:.9;color:#fff}
+.btn.danger:hover{background:#a04040;border-color:#a04040;color:#fff}
+.btn.icon svg{width:14px;height:14px;flex-shrink:0}
+
+main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
+
+/* ═══ TABS ═══ */
+.tabs-wrap{margin-bottom:22px}
+.tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:4px;background:#fff;padding:6px;border:1px solid rgba(184,147,47,.15);box-shadow:0 2px 8px rgba(0,0,0,.02)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1;min-width:auto;background:transparent;border:none;padding:14px 18px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(10,10,10,.55);font-weight:600;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:'Inter',sans-serif;border-radius:0;white-space:nowrap}
+.tab:hover{color:#8a6c1f;background:rgba(184,147,47,.06)}
+.tab.active{background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);color:#fff;box-shadow:0 4px 14px rgba(184,147,47,.35)}
+.tab .count{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:15px;padding:1px 10px;border-radius:11px;min-width:26px;text-align:center;line-height:1.4;background:rgba(184,147,47,.12);color:#8a6c1f;letter-spacing:0;text-transform:none}
+.tab.active .count{background:rgba(255,255,255,.25);color:#fff}
+.tab-range{font-size:11px;color:rgba(10,10,10,.45);text-align:center;margin-top:8px;letter-spacing:.06em;font-style:italic}
+
+/* ═══ TOOLBAR ═══ */
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px;flex-wrap:wrap}
+.toolbar .src{font-size:11px;color:rgba(10,10,10,.5)}
+.toolbar .actions{display:flex;gap:8px;flex-wrap:wrap}
+.search{position:relative}
+.search input{padding:9px 14px 9px 36px;background:#fff;border:1px solid rgba(184,147,47,.25);font-size:13px;outline:none;width:240px;transition:all .25s}
+.search input:focus{border-color:#b8932f;box-shadow:0 0 0 3px rgba(184,147,47,.12)}
+.search::before{content:'';position:absolute;left:12px;top:50%;transform:translateY(-50%);width:14px;height:14px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b8932f' stroke-width='2'><circle cx='11' cy='11' r='7'/><path d='M21 21l-5-5'/></svg>") center/contain no-repeat}
+
+/* ═══ CARDS LIST ═══ */
+.list{display:grid;gap:12px}
+.card{background:#fff;border:1px solid rgba(184,147,47,.12);padding:20px 24px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;transition:all .2s}
+.card:hover{border-color:rgba(184,147,47,.3);box-shadow:0 4px 18px rgba(0,0,0,.04)}
+.card .when-box{text-align:center;min-width:64px;padding-right:18px;border-right:1px solid rgba(184,147,47,.15)}
+.card .when-box .d{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;line-height:1}
+.card .when-box .m{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#b8932f;margin-top:4px}
+.card .when-box .t{font-size:11px;color:rgba(10,10,10,.6);margin-top:4px}
+.card .main-info .name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:6px}
+.card .main-info .name .svc{font-size:12px;color:#b8932f;letter-spacing:.15em;text-transform:uppercase;margin-left:10px;font-family:'Inter',sans-serif;font-weight:500}
+.card .main-info .meta{display:flex;gap:18px;font-size:13px;color:rgba(10,10,10,.7);flex-wrap:wrap}
+.card .main-info .meta a{color:rgba(10,10,10,.7);text-decoration:none}
+.card .main-info .meta a:hover{color:#b8932f}
+.card .main-info .note{margin-top:8px;font-size:13px;color:rgba(10,10,10,.6);font-style:italic;line-height:1.5}
+.card .row-actions{display:flex;gap:6px}
+.icon-btn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(184,147,47,.25);background:#fff;color:#8a6c1f;cursor:pointer;transition:all .2s}
+.icon-btn:hover{background:#b8932f;color:#fff;border-color:#b8932f}
+.icon-btn.danger:hover{background:#a04040;border-color:#a04040}
+.icon-btn svg{width:14px;height:14px}
+
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.s-new{background:#b8932f}
+.s-confirmed{background:#3a7a3a}
+.s-done{background:#999}
+
+/* ═══ EMPTY ═══ */
+.empty{text-align:center;padding:80px 20px;color:rgba(10,10,10,.5);background:#fff;border:1px dashed rgba(184,147,47,.2)}
+.empty .icon{font-family:'Cormorant Garamond',serif;font-size:48px;color:#b8932f;margin-bottom:12px;font-style:italic}
+.empty p{margin-bottom:16px}
+
+/* ═══ MODAL ═══ */
+.modal-bg{position:fixed;inset:0;background:rgba(10,10,10,.55);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}
+.modal-bg.open{display:flex}
+.modal{background:#fff;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.25)}
+.modal-head{padding:24px 28px;border-bottom:1px solid rgba(184,147,47,.15);display:flex;justify-content:space-between;align-items:center}
+.modal-head h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400}
+.modal-head .x{background:none;border:none;cursor:pointer;color:rgba(10,10,10,.5);font-size:24px;width:32px;height:32px;line-height:1}
+.modal-head .x:hover{color:#a04040}
+.modal-body{padding:24px 28px}
+.modal-body .row{margin-bottom:16px}
+.modal-body .row.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.modal-body label{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#b8932f;margin-bottom:6px;font-weight:600}
+.modal-body input,.modal-body select,.modal-body textarea{display:block;width:100%;padding:11px 14px;background:#faf7f2;border:1px solid rgba(184,147,47,.25);font-size:14px;color:#0a0a0a;outline:none;transition:all .25s}
+.modal-body input:focus,.modal-body select:focus,.modal-body textarea:focus{border-color:#b8932f;background:#fff;box-shadow:0 0 0 3px rgba(184,147,47,.12)}
+.modal-body textarea{resize:vertical;min-height:80px}
+.modal-body select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b8932f' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.modal-foot{padding:18px 28px;border-top:1px solid rgba(184,147,47,.15);display:flex;justify-content:flex-end;gap:8px;background:#faf7f2}
+
+/* ═══ FLOATING ACTIONS ═══ */
+.fab-stack{position:fixed;bottom:32px;right:32px;display:flex;flex-direction:column;gap:14px;z-index:50;align-items:flex-end}
+.fab{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);color:#fff;border:none;font-size:28px;font-weight:300;cursor:pointer;box-shadow:0 12px 30px rgba(184,147,47,.4);transition:all .25s;display:flex;align-items:center;justify-content:center}
+.fab:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(184,147,47,.5)}
+.fab-pause{width:52px;height:52px;background:linear-gradient(135deg,#7a6b5a,#5a4d40);box-shadow:0 8px 22px rgba(90,77,64,.4)}
+.fab-pause svg{width:18px;height:18px}
+
+/* Pause card styling */
+.card.pause{background:linear-gradient(180deg,#f5efe1 0%,#ede4d0 100%);border-color:rgba(122,107,90,.3);border-left:3px solid #7a6b5a}
+.card.pause .when-box .d{color:#5a4d40}
+.card.pause .when-box .m{color:#7a6b5a}
+.card.pause .main-info .name{color:#5a4d40;font-style:italic}
+.card.pause .pause-badge{display:inline-flex;align-items:center;gap:4px;background:#5a4d40;color:#fff;font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:3px 8px;font-weight:600;margin-right:8px;font-family:'Inter',sans-serif;font-style:normal}
+.card.pause .duration-info{font-size:12px;color:rgba(90,77,64,.7);font-family:'Inter',sans-serif;font-style:normal}
+
+.hidden{display:none!important}
+
+@media(max-width:768px){
+  main{padding:16px 14px}
+  header.bar{padding:12px 14px;gap:8px}
+  header.bar h1{font-size:18px;line-height:1.15}
+  header.bar h1 .pill{display:block;margin-left:0;font-size:9px;letter-spacing:.18em;margin-top:2px}
+  header.bar .meta{gap:6px}
+  .last-sync{display:none}
+  .btn.icon{padding:9px 10px;min-width:38px;justify-content:center}
+  .btn.icon .btn-label{display:none}
+  .btn.icon svg{width:16px;height:16px}
+  .tabs-wrap{margin-bottom:14px}
+  .tabs{gap:2px;padding:4px;overflow-x:auto}
+  .tab{flex:0 0 auto;padding:10px 14px;font-size:10px;letter-spacing:.12em;gap:6px}
+  .tab .count{font-size:13px;min-width:22px;padding:0 8px}
+  .tab-range{font-size:10px;margin-top:6px}
+  .toolbar{margin-bottom:10px;gap:8px}
+  .toolbar .src{font-size:10px;width:100%;order:2}
+  .toolbar .actions{width:100%;order:1}
+  .search input{width:100%;padding:10px 12px 10px 34px}
+  .card{grid-template-columns:auto 1fr;gap:12px;padding:14px;position:relative}
+  .card .when-box{min-width:52px;padding-right:12px}
+  .card .when-box .d{font-size:24px}
+  .card .when-box .m{font-size:9px;margin-top:2px}
+  .card .when-box .t{font-size:11px}
+  .card .main-info .name{font-size:17px;margin-bottom:4px;display:flex;flex-wrap:wrap;align-items:center}
+  .card .main-info .name .svc{margin-left:0;margin-top:2px;width:100%;font-size:10px;letter-spacing:.12em}
+  .card .main-info .meta{gap:12px;font-size:12px}
+  .card .main-info .note{font-size:12px;margin-top:6px}
+  .card .row-actions{grid-column:1/-1;justify-content:flex-end;border-top:1px solid rgba(184,147,47,.08);padding-top:8px;margin-top:4px}
+  .icon-btn{width:38px;height:38px}
+  .fab-stack{bottom:18px;right:18px;gap:10px}
+  .fab{width:56px;height:56px;font-size:30px}
+  .fab-pause{width:46px;height:46px}
+  .fab-pause svg{width:16px;height:16px}
+  .modal-body .row.two{grid-template-columns:1fr}
+  .modal{max-height:100vh;width:100vw}
+  .modal-bg{padding:0;align-items:flex-end}
+  .modal-bg.open{align-items:flex-end}
+  .modal-head{padding:18px 20px}
+  .modal-head h2{font-size:20px}
+  .modal-body{padding:18px 20px}
+  .modal-foot{padding:14px 20px}
+  .empty{padding:50px 16px}
+}
+
+/* iOS safe area */
+@supports(padding:env(safe-area-inset-top)){
+  header.bar{padding-top:max(12px,env(safe-area-inset-top))}
+  .fab{bottom:max(18px,env(safe-area-inset-bottom))}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ BOOT (skrývá flicker dokud Firebase nezjistí auth stav) ═══ -->
+<div id="bootView" class="boot-wrap"><div class="boot-spinner"></div></div>
+
+<!-- ═══ LOGIN ═══ -->
+<div id="loginView" class="login-wrap hidden">
+  <form class="login-card" id="loginForm">
+    <h1><span class="italic gold">Excelence</span> Care</h1>
+    <p class="sub">Admin Panel</p>
+    <label for="pw">Heslo</label>
+    <input type="password" id="pw" required autocomplete="current-password"/>
+    <button type="submit">Přihlásit</button>
+    <p class="err" id="loginErr"></p>
+    <a href="index.html" class="back-link">← Zpět na stránku</a>
+  </form>
+</div>
+
+<!-- ═══ ADMIN ═══ -->
+<div id="adminView" class="hidden" style="flex:1;display:flex;flex-direction:column">
+  <header class="bar">
+    <h1><span class="italic gold">Excelence</span> Care <span class="pill">Rezervace</span></h1>
+    <div class="meta">
+      <span id="lastSync" class="last-sync"></span>
+      <a class="btn icon" href="index.html" title="Zpět na stránku" aria-label="Zpět na stránku">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span class="btn-label">Zpět</span>
+      </a>
+      <button class="btn icon" id="refreshBtn" type="button" title="Obnovit" aria-label="Obnovit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0115.4-6.4L21 8M21 3v5h-5"/><path d="M21 12a9 9 0 01-15.4 6.4L3 16M3 21v-5h5"/></svg>
+        <span class="btn-label">Obnovit</span>
+      </button>
+      <button class="btn icon" id="exportBtn" type="button" title="Export CSV" aria-label="Export CSV">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+        <span class="btn-label">Export</span>
+      </button>
+      <button class="btn icon danger" id="logoutBtn" type="button" title="Odhlásit" aria-label="Odhlásit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>
+        <span class="btn-label">Odhlásit</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="tabs-wrap">
+      <div class="tabs" id="tabs" role="tablist">
+        <button class="tab" data-tab="today" role="tab" aria-selected="false" type="button">Dnes <span class="count" id="cntToday">0</span></button>
+        <button class="tab" data-tab="week" role="tab" aria-selected="false" type="button">Týden <span class="count" id="cntWeek">0</span></button>
+        <button class="tab" data-tab="month" role="tab" aria-selected="false" type="button">Měsíc <span class="count" id="cntMonth">0</span></button>
+        <button class="tab" data-tab="history" role="tab" aria-selected="false" type="button">Historie <span class="count" id="cntHistory">0</span></button>
+        <button class="tab" data-tab="all" role="tab" aria-selected="false" type="button">Vše <span class="count" id="cntAll">0</span></button>
+      </div>
+      <p class="tab-range" id="tabRange"></p>
+    </div>
+
+    <div class="toolbar">
+      <div class="src" id="dataSrc"></div>
+      <div class="actions">
+        <div class="search"><input type="search" id="searchInput" placeholder="Hledat jméno, telefon, službu…"/></div>
+      </div>
+    </div>
+
+    <div id="listWrap" class="list"></div>
+  </main>
+
+  <div class="fab-stack">
+    <button class="fab fab-pause" id="fabPause" type="button" aria-label="Přidat pauzu" title="Přidat pauzu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+    </button>
+    <button class="fab" id="fabAdd" type="button" aria-label="Přidat rezervaci">+</button>
+  </div>
+</div>
+
+<!-- ═══ PAUSE MODAL ═══ -->
+<div class="modal-bg" id="pauseModalBg">
+  <div class="modal" role="dialog" aria-labelledby="pauseModalTitle">
+    <div class="modal-head">
+      <h2 id="pauseModalTitle">Nová pauza</h2>
+      <button class="x" type="button" id="pauseModalClose" aria-label="Zavřít">×</button>
+    </div>
+    <form id="pauseForm">
+      <div class="modal-body">
+        <p style="font-size:13px;color:rgba(10,10,10,.6);margin-bottom:18px;line-height:1.55">Pauza zablokuje rezervační sloty na webu — klienti se v daném čase nebudou moct objednat.</p>
+        <div class="row two">
+          <div>
+            <label for="p_termin">Začátek *</label>
+            <input id="p_termin" name="termin" type="datetime-local" required/>
+          </div>
+          <div>
+            <label for="p_duration">Trvání (min) *</label>
+            <input id="p_duration" name="duration" type="number" min="15" max="1440" step="15" value="60" required/>
+          </div>
+        </div>
+        <div class="row">
+          <label for="p_note">Důvod / poznámka</label>
+          <input id="p_note" name="note" type="text" maxlength="120" placeholder="např. Oběd, dovolená, školení…"/>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn" id="pauseModalCancel">Zrušit</button>
+        <button type="submit" class="btn primary" id="pauseModalSave">Uložit pauzu</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══ MODAL: ADD / EDIT ═══ -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal" role="dialog" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <h2 id="modalTitle">Nová rezervace</h2>
+      <button class="x" type="button" id="modalClose" aria-label="Zavřít">×</button>
+    </div>
+    <form id="resForm">
+      <div class="modal-body">
+        <input type="hidden" id="f_id"/>
+        <div class="row two">
+          <div>
+            <label for="f_jmeno">Jméno klientky *</label>
+            <input id="f_jmeno" name="jmeno" required/>
+          </div>
+          <div>
+            <label for="f_telefon">Telefon *</label>
+            <input id="f_telefon" name="telefon" type="tel" required/>
+          </div>
+        </div>
+        <div class="row two">
+          <div>
+            <label for="f_email">E-mail</label>
+            <input id="f_email" name="email" type="email"/>
+          </div>
+          <div>
+            <label for="f_status">Stav</label>
+            <select id="f_status" name="status">
+              <option value="new">Nová</option>
+              <option value="confirmed">Potvrzená</option>
+              <option value="done">Dokončená</option>
+            </select>
+          </div>
+        </div>
+        <div class="row two">
+          <div>
+            <label for="f_termin">Termín *</label>
+            <input id="f_termin" name="termin" type="datetime-local" required/>
+          </div>
+          <div>
+            <label for="f_sluzba">Služba</label>
+            <select id="f_sluzba" name="sluzba">
+              <option value="Depilace podpaží" data-duration="20">Depilace podpaží (20 min · 400 Kč)</option>
+              <option value="Depilace nadloktí" data-duration="30">Depilace nadloktí (30 min · 450 Kč)</option>
+              <option value="Depilace předloktí" data-duration="25">Depilace předloktí (25 min · 400 Kč)</option>
+              <option value="Depilace zad" data-duration="60">Depilace zad (60 min · 1 100 Kč)</option>
+              <option value="Stehna bez třísel" data-duration="40">Stehna bez třísel (40 min · 600 Kč)</option>
+              <option value="Lýtka včetně kolen" data-duration="40">Lýtka včetně kolen (40 min · 650 Kč)</option>
+              <option value="Nárt a prsty" data-duration="15">Nárt a prsty (15 min · 300 Kč)</option>
+              <option value="Konzultace" data-duration="20">Konzultace (20 min)</option>
+              <option value="Jiné" data-duration="30">Jiné</option>
+            </select>
+          </div>
+        </div>
+        <div class="row two">
+          <div>
+            <label for="f_duration">Trvání (min) *</label>
+            <input id="f_duration" name="duration" type="number" min="5" max="480" step="5" required/>
+          </div>
+          <div></div>
+        </div>
+        <div class="row">
+          <label for="f_zprava">Poznámka</label>
+          <textarea id="f_zprava" name="zprava" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn" id="modalCancel">Zrušit</button>
+        <button type="submit" class="btn primary" id="modalSave">Uložit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+/* ═══ FIREBASE KONFIGURACE ═══
+   Vlož hodnoty z Firebase Console → Project Settings → General →
+   Your apps → Web (</> tlačítko). Tyto hodnoty NEJSOU tajné, jsou určené
+   k publikování v klientském kódu. Bezpečnost zajišťují Firestore rules.
+   Setup viz FIREBASE_SETUP.md.                                          */
+const firebaseConfig = {
+  apiKey: "AIzaSyASTJH8cYPBIvqtSH3-Bz2lYfNTz7yHwf0",
+  authDomain: "excellence-care-cz.firebaseapp.com",
+  projectId: "excellence-care-cz",
+};
+const ADMIN_EMAIL = 'admin@excellencecare.cz';  // interní login email (vytvoř v Auth)
+
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js';
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+  from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js';
+import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, deleteDoc, writeBatch, serverTimestamp, query, orderBy }
+  from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js';
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+const RES_COL = 'reservations';
+
+const bootView  = document.getElementById('bootView');
+const loginView = document.getElementById('loginView');
+const adminView = document.getElementById('adminView');
+const loginErr  = document.getElementById('loginErr');
+
+const hideBoot = () => bootView && bootView.classList.add('hidden');
+const showAdmin = () => { hideBoot(); loginView.classList.add('hidden'); adminView.classList.remove('hidden'); loadData(); };
+const showLogin = () => { hideBoot(); adminView.classList.add('hidden'); loginView.classList.remove('hidden'); const pw = document.getElementById('pw'); pw.value=''; pw.focus(); };
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const pw = document.getElementById('pw').value;
+  const btn = e.target.querySelector('button[type=submit]');
+  btn.disabled = true; loginErr.textContent = '';
+  try {
+    await signInWithEmailAndPassword(auth, ADMIN_EMAIL, pw);
+    // onAuthStateChanged sám zobrazí admin
+  } catch (err) {
+    const code = err && err.code || '';
+    if (code === 'auth/wrong-password' || code === 'auth/invalid-credential' || code === 'auth/user-not-found') {
+      loginErr.textContent = 'Nesprávné heslo.';
+    } else if (code === 'auth/too-many-requests') {
+      loginErr.textContent = 'Příliš mnoho pokusů. Zkuste to později.';
+    } else if (code === 'auth/network-request-failed') {
+      loginErr.textContent = 'Chyba spojení.';
+    } else if (code === 'auth/invalid-api-key' || code === 'auth/configuration-not-found') {
+      loginErr.textContent = 'Firebase není nakonfigurován. Dopiš hodnoty do admin.html.';
+    } else {
+      loginErr.textContent = 'Přihlášení selhalo: ' + (err.message || code);
+    }
+  } finally { btn.disabled = false; }
+});
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  try { await signOut(auth); } catch {}
+});
+
+onAuthStateChanged(auth, (user) => {
+  if (user) { showAdmin(); } else { showLogin(); }
+});
+
+/* ═══ Firestore storage ═══ */
+let store = [];
+
+const SLOTS_COL = 'bookedSlots';
+const BREAKS_COL = 'breaks';
+
+async function fsList() {
+  const [resSnap, brSnap] = await Promise.all([
+    getDocs(query(collection(db, RES_COL), orderBy('termin', 'asc'))),
+    getDocs(query(collection(db, BREAKS_COL), orderBy('termin', 'asc'))),
+  ]);
+  const reservations = resSnap.docs.map(d => ({ id: d.id, type: 'reservation', ...d.data() }));
+  const breaks = brSnap.docs.map(d => ({ id: d.id, type: 'pause', ...d.data() }));
+  return [...reservations, ...breaks];
+}
+async function fsAdd(payload) {
+  // Create reservation + bookedSlot atomically se stejným ID
+  const ref = doc(collection(db, RES_COL));
+  const slotRef = doc(db, SLOTS_COL, ref.id);
+  const batch = writeBatch(db);
+  batch.set(ref, {
+    ...payload,
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  });
+  batch.set(slotRef, {
+    termin: payload.termin,
+    duration: payload.duration || 30,
+  });
+  await batch.commit();
+  return { id: ref.id, ...payload };
+}
+async function fsUpdate(id, payload) {
+  const batch = writeBatch(db);
+  batch.update(doc(db, RES_COL, id), { ...payload, updatedAt: serverTimestamp() });
+  batch.set(doc(db, SLOTS_COL, id), {
+    termin: payload.termin,
+    duration: payload.duration || 30,
+  });
+  await batch.commit();
+  return { id, ...payload };
+}
+async function fsRemove(id) {
+  const batch = writeBatch(db);
+  batch.delete(doc(db, RES_COL, id));
+  batch.delete(doc(db, SLOTS_COL, id));
+  await batch.commit();
+}
+
+async function loadData() {
+  document.getElementById('listWrap').innerHTML = '<div class="empty"><div class="icon">…</div><p>Načítám rezervace…</p></div>';
+  try {
+    store = await fsList();
+    document.getElementById('dataSrc').textContent = 'Firestore · ' + store.length + ' záznamů';
+    document.getElementById('lastSync').textContent = 'Aktualizováno: ' + new Date().toLocaleTimeString('cs-CZ');
+    render();
+  } catch (err) {
+    document.getElementById('listWrap').innerHTML = '<div class="empty"><div class="icon">!</div><p>Chyba načítání: ' + escHtml(err.message || String(err)) + '</p></div>';
+  }
+}
+
+/* ═══ Tabs ═══ */
+let activeTab = sessionStorage.getItem('ec_admin_tab') || 'today';
+const tabsEl = document.getElementById('tabs');
+tabsEl.addEventListener('click', e => {
+  const btn = e.target.closest('.tab');
+  if (!btn) return;
+  activeTab = btn.dataset.tab;
+  sessionStorage.setItem('ec_admin_tab', activeTab);
+  render();
+});
+
+/* ═══ Date helpers ═══
+   Den    = dnešní rezervace (00:00 dnes – 00:00 zítra)
+   Týden  = od dneška 7 dní dopředu
+   Měsíc  = od dneška 30 dní dopředu                          */
+function dayRanges() {
+  const now = new Date();
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  const endOfDay = startOfDay + 24*3600*1000;
+  const weekStart = startOfDay;
+  const weekEnd = startOfDay + 7 * 24*3600*1000;
+  const monthStart = startOfDay;
+  const monthEnd = startOfDay + 30 * 24*3600*1000;
+  return { now: now.getTime(), startOfDay, endOfDay, weekStart, weekEnd, monthStart, monthEnd };
+}
+
+function inTab(termin, tab, r) {
+  const t = new Date(termin || 0).getTime();
+  const { startOfDay, endOfDay, weekStart, weekEnd, monthStart, monthEnd } = r;
+  switch(tab) {
+    case 'today':   return t >= startOfDay && t < endOfDay;
+    case 'week':    return t >= weekStart && t < weekEnd;
+    case 'month':   return t >= monthStart && t < monthEnd;
+    case 'history': return t < startOfDay;
+    case 'all':     return true;
+    default:        return true;
+  }
+}
+
+/* ═══ Render ═══ */
+const escHtml = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function render() {
+  const ranges = dayRanges();
+
+  // Compute counts per tab
+  const counts = { today:0, week:0, month:0, history:0, all: store.length };
+  store.forEach(r => {
+    if (inTab(r.termin, 'today',   ranges)) counts.today++;
+    if (inTab(r.termin, 'week',    ranges)) counts.week++;
+    if (inTab(r.termin, 'month',   ranges)) counts.month++;
+    if (inTab(r.termin, 'history', ranges)) counts.history++;
+  });
+  document.getElementById('cntToday').textContent   = counts.today;
+  document.getElementById('cntWeek').textContent    = counts.week;
+  document.getElementById('cntMonth').textContent   = counts.month;
+  document.getElementById('cntHistory').textContent = counts.history;
+  document.getElementById('cntAll').textContent     = counts.all;
+
+  // Update active tab visuals
+  tabsEl.querySelectorAll('.tab').forEach(b => {
+    const on = b.dataset.tab === activeTab;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-selected', on ? 'true' : 'false');
+  });
+
+  // Date range label under tabs
+  const rangeEl = document.getElementById('tabRange');
+  const fmt = (ms) => new Date(ms).toLocaleDateString('cs-CZ', { day:'numeric', month:'long', year:'numeric' });
+  const fmtShort = (ms) => new Date(ms).toLocaleDateString('cs-CZ', { day:'numeric', month:'long' });
+  const labels = {
+    today:   `Dnes — ${fmt(ranges.startOfDay)}`,
+    week:    `Příštích 7 dní — ${fmtShort(ranges.weekStart)} až ${fmtShort(ranges.weekEnd - 24*3600*1000)}`,
+    month:   `Příštích 30 dní — ${fmtShort(ranges.monthStart)} až ${fmtShort(ranges.monthEnd - 24*3600*1000)}`,
+    history: 'Všechny minulé rezervace',
+    all:     'Všechny rezervace',
+  };
+  rangeEl.textContent = labels[activeTab] || '';
+
+  // Filter by active tab + search
+  const tabItems = store.filter(r => inTab(r.termin, activeTab, ranges));
+
+  // Sort: history descending (newest first), others ascending (soonest first)
+  const sorted = tabItems.slice().sort((a,b) => {
+    const ta = new Date(a.termin||0).getTime(), tb = new Date(b.termin||0).getTime();
+    return activeTab === 'history' ? tb - ta : ta - tb;
+  });
+
+  const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+  const filtered = q ? sorted.filter(r =>
+    (r.jmeno||'').toLowerCase().includes(q) ||
+    (r.telefon||'').toLowerCase().includes(q) ||
+    (r.email||'').toLowerCase().includes(q) ||
+    (r.sluzba||'').toLowerCase().includes(q) ||
+    (r.zprava||'').toLowerCase().includes(q)
+  ) : sorted;
+
+  const wrap = document.getElementById('listWrap');
+  if (!filtered.length) {
+    const emptyMsgs = {
+      today: 'Dnes žádné rezervace.',
+      week: 'Tento týden žádné rezervace.',
+      month: 'Tento měsíc žádné rezervace.',
+      history: 'Zatím žádná historie.',
+      all: 'Zatím žádné rezervace.',
+    };
+    wrap.innerHTML = `<div class="empty"><div class="icon">— —</div><p>${q ? 'Žádný výsledek pro „' + escHtml(q) + '".' : (emptyMsgs[activeTab] || 'Žádné záznamy.')}</p>${q || activeTab === 'history' ? '' : '<button class="btn primary" onclick="openModal()">+ Přidat rezervaci</button>'}</div>`;
+    return;
+  }
+
+  const months = ['Led','Úno','Bře','Dub','Kvě','Čer','Čvc','Srp','Zář','Říj','Lis','Pro'];
+  wrap.innerHTML = filtered.map(r => {
+    const t = r.termin ? new Date(r.termin) : null;
+    const day = t ? String(t.getDate()).padStart(2,'0') : '—';
+    const mon = t ? months[t.getMonth()] : '';
+    const time = t ? t.toLocaleTimeString('cs-CZ', { hour:'2-digit', minute:'2-digit' }) : '';
+
+    if (r.type === 'pause') {
+      const endT = t && r.duration ? new Date(t.getTime() + r.duration*60*1000) : null;
+      const endTime = endT ? endT.toLocaleTimeString('cs-CZ', { hour:'2-digit', minute:'2-digit' }) : '';
+      return `<div class="card pause" data-id="${escHtml(r.id)}">
+        <div class="when-box">
+          <div class="d">${day}</div>
+          <div class="m">${mon}</div>
+          <div class="t">${time}</div>
+        </div>
+        <div class="main-info">
+          <div class="name"><span class="pause-badge">Pauza</span>${escHtml(r.note || 'Bez popisu')}</div>
+          <div class="meta">
+            <span class="duration-info">${time}${endTime ? ' – ' + endTime : ''} · ${r.duration || 0} min</span>
+          </div>
+        </div>
+        <div class="row-actions">
+          <button class="icon-btn danger" data-act="del-pause" data-id="${escHtml(r.id)}" title="Smazat pauzu" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+          </button>
+        </div>
+      </div>`;
+    }
+
+    const statusLabel = { new:'Nová', confirmed:'Potvrzená', done:'Dokončená' }[r.status||'new'] || 'Nová';
+    const statusClass = 's-' + (r.status||'new');
+    return `<div class="card" data-id="${escHtml(r.id)}">
+      <div class="when-box">
+        <div class="d">${day}</div>
+        <div class="m">${mon}</div>
+        <div class="t">${time}</div>
+      </div>
+      <div class="main-info">
+        <div class="name"><span class="status-dot ${statusClass}" title="${statusLabel}"></span>${escHtml(r.jmeno||'—')}${r.sluzba?`<span class="svc">${escHtml(r.sluzba)}${r.duration?' · '+r.duration+' min':''}</span>`:''}</div>
+        <div class="meta">
+          ${r.telefon?`<span>📞 <a href="tel:${escHtml(r.telefon)}">${escHtml(r.telefon)}</a></span>`:''}
+          ${r.email?`<span>✉ <a href="mailto:${escHtml(r.email)}">${escHtml(r.email)}</a></span>`:''}
+          <span style="color:#b8932f">${statusLabel}</span>
+        </div>
+        ${r.zprava?`<div class="note">${escHtml(r.zprava)}</div>`:''}
+      </div>
+      <div class="row-actions">
+        <button class="icon-btn" data-act="edit" data-id="${escHtml(r.id)}" title="Upravit" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </button>
+        <button class="icon-btn danger" data-act="del" data-id="${escHtml(r.id)}" title="Smazat" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+
+  // wire row actions
+  wrap.querySelectorAll('[data-act]').forEach(b => {
+    b.addEventListener('click', () => {
+      const id = b.getAttribute('data-id');
+      const act = b.getAttribute('data-act');
+      const item = store.find(x => x.id === id);
+      if (!item) return;
+      if (act === 'edit') openModal(item);
+      if (act === 'del') deleteItem(id);
+      if (act === 'del-pause') deletePause(id);
+    });
+  });
+}
+
+/* ═══ Modal ═══ */
+const modalBg = document.getElementById('modalBg');
+const modalTitle = document.getElementById('modalTitle');
+const resForm = document.getElementById('resForm');
+
+window.openModal = function(item) {
+  modalTitle.textContent = item ? 'Upravit rezervaci' : 'Nová rezervace';
+  document.getElementById('f_id').value = item?.id || '';
+  document.getElementById('f_jmeno').value = item?.jmeno || '';
+  document.getElementById('f_telefon').value = item?.telefon || '';
+  document.getElementById('f_email').value = item?.email || '';
+  document.getElementById('f_termin').value = item?.termin || defaultTermin();
+  const sluzbaSel = document.getElementById('f_sluzba');
+  sluzbaSel.value = item?.sluzba || 'Depilace podpaží';
+  const sluzbaOpt = sluzbaSel.options[sluzbaSel.selectedIndex];
+  const defaultDur = parseInt(sluzbaOpt?.dataset.duration || '30', 10);
+  document.getElementById('f_duration').value = item?.duration || defaultDur;
+  document.getElementById('f_status').value = item?.status || 'new';
+  document.getElementById('f_zprava').value = item?.zprava || '';
+  modalBg.classList.add('open');
+  setTimeout(() => document.getElementById('f_jmeno').focus(), 50);
+};
+
+// Auto-fill duration when service changes
+document.getElementById('f_sluzba').addEventListener('change', (e) => {
+  const opt = e.target.options[e.target.selectedIndex];
+  const dur = parseInt(opt?.dataset.duration || '30', 10);
+  document.getElementById('f_duration').value = dur;
+});
+function closeModal() { modalBg.classList.remove('open'); }
+function defaultTermin() {
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  d.setHours(10, 0, 0, 0);
+  // format YYYY-MM-DDTHH:MM in local time
+  const pad = n => String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+document.getElementById('fabAdd').addEventListener('click', () => openModal());
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalCancel').addEventListener('click', closeModal);
+modalBg.addEventListener('click', e => { if (e.target === modalBg) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && modalBg.classList.contains('open')) closeModal(); });
+
+resForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const id = document.getElementById('f_id').value;
+  const payload = {
+    jmeno: document.getElementById('f_jmeno').value.trim(),
+    telefon: document.getElementById('f_telefon').value.trim(),
+    email: document.getElementById('f_email').value.trim(),
+    termin: document.getElementById('f_termin').value,
+    sluzba: document.getElementById('f_sluzba').value,
+    duration: parseInt(document.getElementById('f_duration').value, 10) || 30,
+    status: document.getElementById('f_status').value,
+    zprava: document.getElementById('f_zprava').value.trim(),
+  };
+  const saveBtn = document.getElementById('modalSave');
+  saveBtn.disabled = true;
+  try {
+    if (id) {
+      const updated = await fsUpdate(id, payload);
+      const idx = store.findIndex(x => x.id === id);
+      if (idx >= 0) store[idx] = { ...store[idx], ...updated };
+    } else {
+      const created = await fsAdd(payload);
+      store.push(created);
+    }
+    closeModal();
+    render();
+    document.getElementById('dataSrc').textContent = 'Firestore · ' + store.length + ' záznamů';
+  } catch (err) {
+    alert('Uložení selhalo: ' + (err.message || err));
+  } finally {
+    saveBtn.disabled = false;
+  }
+});
+
+async function deleteItem(id) {
+  const it = store.find(x => x.id === id);
+  if (!it) return;
+  if (!confirm(`Smazat rezervaci „${it.jmeno}" (${new Date(it.termin).toLocaleString('cs-CZ')})?`)) return;
+  try {
+    await fsRemove(id);
+    store = store.filter(x => x.id !== id);
+    render();
+    document.getElementById('dataSrc').textContent = 'Firestore · ' + store.length + ' záznamů';
+  } catch (err) {
+    alert('Smazání selhalo: ' + (err.message || err));
+  }
+}
+
+/* ═══ Pause management ═══ */
+const pauseModalBg = document.getElementById('pauseModalBg');
+const pauseForm = document.getElementById('pauseForm');
+
+function openPauseModal() {
+  pauseForm.reset();
+  document.getElementById('p_termin').value = defaultTermin();
+  document.getElementById('p_duration').value = 60;
+  pauseModalBg.classList.add('open');
+  setTimeout(() => document.getElementById('p_termin').focus(), 50);
+}
+function closePauseModal() { pauseModalBg.classList.remove('open'); }
+
+document.getElementById('fabPause').addEventListener('click', openPauseModal);
+document.getElementById('pauseModalClose').addEventListener('click', closePauseModal);
+document.getElementById('pauseModalCancel').addEventListener('click', closePauseModal);
+pauseModalBg.addEventListener('click', e => { if (e.target === pauseModalBg) closePauseModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && pauseModalBg.classList.contains('open')) closePauseModal(); });
+
+pauseForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const payload = {
+    termin: document.getElementById('p_termin').value,
+    duration: parseInt(document.getElementById('p_duration').value, 10) || 60,
+    note: document.getElementById('p_note').value.trim(),
+    createdAt: serverTimestamp(),
+  };
+  if (!payload.termin) { alert('Vyplňte čas pauzy.'); return; }
+  const btn = document.getElementById('pauseModalSave');
+  btn.disabled = true;
+  try {
+    const ref = doc(collection(db, BREAKS_COL));
+    await setDoc(ref, payload);
+    store.push({ id: ref.id, type: 'pause', ...payload, createdAt: null });
+    closePauseModal();
+    render();
+    document.getElementById('dataSrc').textContent = 'Firestore · ' + store.length + ' záznamů';
+  } catch (err) {
+    alert('Uložení pauzy selhalo: ' + (err.message || err));
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+async function deletePause(id) {
+  const it = store.find(x => x.id === id && x.type === 'pause');
+  if (!it) return;
+  if (!confirm(`Smazat pauzu "${it.note || 'bez popisu'}" (${new Date(it.termin).toLocaleString('cs-CZ')})?`)) return;
+  try {
+    await deleteDoc(doc(db, BREAKS_COL, id));
+    store = store.filter(x => x.id !== id);
+    render();
+    document.getElementById('dataSrc').textContent = 'Firestore · ' + store.length + ' záznamů';
+  } catch (err) {
+    alert('Smazání selhalo: ' + (err.message || err));
+  }
+}
+
+/* ═══ Toolbar ═══ */
+document.getElementById('refreshBtn').addEventListener('click', loadData);
+document.getElementById('searchInput').addEventListener('input', render);
+
+document.getElementById('exportBtn').addEventListener('click', () => {
+  if (!store.length) { alert('Žádná data k exportu.'); return; }
+  const cols = ['termin','jmeno','telefon','email','sluzba','status','zprava','createdAt'];
+  const csv = [cols.join(';')].concat(
+    store.map(r => cols.map(c => `"${String(r[c]||'').replace(/"/g,'""')}"`).join(';'))
+  ).join('\n');
+  const blob = new Blob(['﻿'+csv], { type:'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'rezervace-' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+/* ═══ Boot ═══
+   onAuthStateChanged se postará o initial state — boot splash je vidět,
+   dokud Firebase neoznámí stav přihlášení. Pak se přepne login / admin. */
+</script>
+</body>
+</html>

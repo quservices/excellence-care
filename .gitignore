@@ -23,3 +23,7 @@ node_modules/
 maison-luxe-light (1).html
 
 .vercel
+
+# Firebase (lokální cache + project link)
+.firebase/
+.firebaserc

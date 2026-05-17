@@ -1,0 +1,62 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Plné rezervace (vč. osobních údajů) -- jen pro admina
+    match /reservations/{id} {
+      allow create: if
+        request.resource.data.jmeno is string &&
+        request.resource.data.jmeno.size() >= 2 &&
+        request.resource.data.jmeno.size() <= 80 &&
+        request.resource.data.telefon is string &&
+        request.resource.data.telefon.size() >= 6 &&
+        request.resource.data.telefon.size() <= 30 &&
+        request.resource.data.termin is string &&
+        request.resource.data.termin.size() >= 10 &&
+        request.resource.data.termin.size() <= 40 &&
+        request.resource.data.sluzba is string &&
+        request.resource.data.sluzba.size() <= 100 &&
+        request.resource.data.duration is number &&
+        request.resource.data.duration >= 5 &&
+        request.resource.data.duration <= 480 &&
+        request.resource.data.status == 'new' &&
+        (!('email' in request.resource.data) ||
+          (request.resource.data.email is string && request.resource.data.email.size() <= 200)) &&
+        (!('zprava' in request.resource.data) ||
+          (request.resource.data.zprava is string && request.resource.data.zprava.size() <= 1000));
+
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // Veřejné obsazené sloty (BEZ osobních údajů) -- public read pro
+    // zjištění dostupnosti. ID dokumentu = ID rezervace (kvůli sync).
+    match /bookedSlots/{id} {
+      allow read: if true;
+
+      // Public create -- jen termin + duration.
+      allow create: if
+        request.resource.data.keys().hasOnly(['termin', 'duration']) &&
+        request.resource.data.termin is string &&
+        request.resource.data.termin.size() >= 10 &&
+        request.resource.data.termin.size() <= 40 &&
+        request.resource.data.duration is number &&
+        request.resource.data.duration >= 5 &&
+        request.resource.data.duration <= 480;
+
+      // Update/delete -- jen admin
+      allow update, delete: if request.auth != null;
+    }
+
+    // Pauzy / dovolená majitelky -- blokují volné termíny stejně jako
+    // rezervace. Public read pro výpočet dostupnosti, zápis jen admin.
+    match /breaks/{id} {
+      allow read: if true;
+      allow create, update, delete: if request.auth != null;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

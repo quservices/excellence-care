@@ -375,6 +375,102 @@ html,body{overflow-x:hidden;max-width:100vw}
 
 /* small dark-text variant for badge inside contact */
 .tag-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(184,147,47,.08);border:1px solid rgba(184,147,47,.2);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#8a6c1f;font-weight:600}
+
+/* ═══ BOOKING MODAL ═══ */
+.b-modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:24px;opacity:0;transition:opacity .3s ease}
+.b-modal.open{display:flex;opacity:1}
+.b-backdrop{position:absolute;inset:0;background:rgba(10,10,10,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.b-sheet{position:relative;background:#faf7f2;width:100%;max-width:680px;max-height:92vh;overflow-y:auto;box-shadow:0 32px 90px rgba(0,0,0,.28),0 12px 24px rgba(0,0,0,.12);border:1px solid rgba(184,147,47,.15);transform:translateY(20px);transition:transform .35s cubic-bezier(.22,.61,.36,1);scrollbar-width:thin}
+.b-modal.open .b-sheet{transform:translateY(0)}
+.b-head{position:sticky;top:0;background:#faf7f2;border-bottom:1px solid rgba(184,147,47,.15);padding:24px 28px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;z-index:2}
+.b-eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#b8932f;font-weight:600;margin-bottom:6px}
+.b-head h2{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;line-height:1.1;color:#0a0a0a;margin:0}
+.b-close{background:#fff;border:1px solid rgba(184,147,47,.25);color:#8a6c1f;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;flex-shrink:0}
+.b-close:hover{background:#b8932f;color:#fff;border-color:#b8932f}
+.b-close svg{width:18px;height:18px}
+.b-body{padding:24px 28px 28px}
+.b-step{border:none;padding:0;margin:0 0 28px 0}
+.b-legend{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#b8932f;font-weight:600;margin-bottom:14px;display:block;padding:0}
+
+/* Services radio cards */
+.b-services{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.b-svc{position:relative;cursor:pointer;background:#fff;border:1px solid rgba(184,147,47,.2);padding:14px 16px;transition:all .25s;display:block}
+.b-svc:hover{border-color:#b8932f}
+.b-svc input{position:absolute;opacity:0;width:0;height:0}
+.b-svc-inner{display:flex;flex-direction:column;gap:6px;position:relative}
+.b-svc-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:#0a0a0a;line-height:1.2}
+.b-svc-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:11px;color:rgba(10,10,10,.55);letter-spacing:.08em;text-transform:uppercase}
+.b-svc-price{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:#b8932f;letter-spacing:0;text-transform:none}
+.b-svc-tag{position:absolute;top:-22px;right:-8px;background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);color:#fff;font-size:8px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:3px 8px}
+.b-svc:has(input:checked){border-color:#b8932f;background:linear-gradient(180deg,#fff 0%,rgba(184,147,47,.07) 100%);box-shadow:0 6px 20px rgba(184,147,47,.18)}
+.b-svc:has(input:checked) .b-svc-name{color:#8a6c1f}
+.b-svc:has(input:checked)::after{content:'✓';position:absolute;top:8px;right:10px;color:#b8932f;font-size:14px;font-weight:600}
+.b-svc:has(input:focus-visible){outline:2px solid #b8932f;outline-offset:2px}
+
+/* Form fields */
+.b-fields-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.b-field{display:block;margin-bottom:14px}
+.b-label{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#8a6c1f;font-weight:600;margin-bottom:6px}
+.b-field input,.b-field textarea,.b-field select{display:block;width:100%;padding:12px 14px;background:#fff;border:1px solid rgba(184,147,47,.25);font-family:'Inter',sans-serif;font-size:14px;color:#0a0a0a;transition:all .25s;outline:none}
+.b-field input:focus,.b-field textarea:focus{border-color:#b8932f;box-shadow:0 0 0 3px rgba(184,147,47,.12)}
+.b-field textarea{resize:vertical;min-height:80px;font-family:'Inter',sans-serif}
+.b-helper{font-size:11px;color:rgba(10,10,10,.5);margin-top:8px;letter-spacing:.04em}
+.b-honeypot{position:absolute;left:-9999px;opacity:0;pointer-events:none}
+
+/* Slot grid */
+.b-slots-wrap{margin-top:14px}
+.b-slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:6px;margin-top:6px}
+.b-slot{padding:11px 8px;border:1px solid rgba(184,147,47,.25);background:#fff;cursor:pointer;text-align:center;font-size:14px;font-weight:600;color:#0a0a0a;transition:all .2s;font-family:'Inter',sans-serif}
+.b-slot:hover:not(:disabled){border-color:#b8932f;background:rgba(184,147,47,.06);transform:translateY(-1px)}
+.b-slot.selected{background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(184,147,47,.35)}
+.b-slot:disabled,.b-slot.unavailable{opacity:.32;cursor:not-allowed;background:#f5efe1;color:rgba(10,10,10,.5);text-decoration:line-through}
+.b-no-slots{margin-top:12px;font-size:13px;color:#a04040;text-align:center;padding:14px;background:rgba(160,64,64,.06);border:1px solid rgba(160,64,64,.18)}
+.b-slots-loading{padding:18px;text-align:center;color:rgba(10,10,10,.5);font-size:13px}
+
+/* Footer */
+.b-foot{display:flex;flex-direction:column;align-items:center;gap:12px;padding-top:14px;border-top:1px solid rgba(184,147,47,.15)}
+.b-submit{background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);color:#fff;border:none;padding:16px 36px;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:10px;width:100%;justify-content:center;font-family:'Inter',sans-serif}
+.b-submit:hover{opacity:.92;transform:translateY(-1px);box-shadow:0 12px 28px rgba(184,147,47,.4)}
+.b-submit:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.b-submit svg{width:14px;height:14px}
+.b-status{font-size:13px;text-align:center;margin:0;min-height:1.2em}
+.b-status.err{color:#a04040}
+.b-status.ok{color:#3a7a3a}
+.b-fineprint{font-size:11px;color:rgba(10,10,10,.5);text-align:center;margin:0;letter-spacing:.04em}
+
+/* Success view */
+.b-success{text-align:center;padding:20px 0 10px}
+.b-check{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#d4af37,#b8932f);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;box-shadow:0 12px 32px rgba(184,147,47,.35);animation:checkPop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes checkPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.b-check svg{width:34px;height:34px}
+.b-success h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:10px}
+.b-success > p{color:rgba(10,10,10,.65);margin-bottom:22px;font-size:15px;line-height:1.55}
+.b-success-summary{background:#fff;border:1px solid rgba(184,147,47,.18);padding:18px 20px;margin-bottom:22px;text-align:left}
+.b-success-summary > div{display:flex;justify-content:space-between;padding:8px 0;gap:14px;border-bottom:1px solid rgba(184,147,47,.1);font-size:13px}
+.b-success-summary > div:last-child{border-bottom:none}
+.b-success-summary > div > span{color:rgba(10,10,10,.55);text-transform:uppercase;font-size:10px;letter-spacing:.18em;font-weight:600}
+.b-success-summary > div > strong{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:15px;text-align:right}
+
+/* Mobile */
+@media (max-width:768px){
+  .b-modal{padding:0;align-items:flex-end}
+  .b-sheet{max-width:100%;max-height:96vh;border-left:none;border-right:none}
+  .b-head{padding:18px 18px;background:#faf7f2}
+  .b-head h2{font-size:24px}
+  .b-body{padding:18px 18px 22px}
+  .b-services{grid-template-columns:1fr;gap:8px}
+  .b-svc{padding:12px 14px}
+  .b-svc-name{font-size:16px}
+  .b-fields-2{grid-template-columns:1fr;gap:0}
+  .b-submit{padding:14px 24px}
+  .b-success h3{font-size:26px}
+}
+
+/* ═══ ADMIN LOCK ═══ */
+#adminLock{flex-shrink:0;width:34px;height:34px;margin-left:10px;color:#b8932f;opacity:.55;transition:opacity .25s ease,color .25s ease,background .25s ease,border-color .25s ease;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid rgba(184,147,47,.25);border-radius:50%;background:rgba(255,255,255,.6)}
+#adminLock svg{width:16px;height:16px}
+#adminLock:hover,#adminLock:focus-visible{opacity:1;color:#8a6c1f;background:#fff;border-color:#b8932f;outline:none}
+@media (max-width:1024px){#adminLock{width:30px;height:30px;margin-left:6px}#adminLock svg{width:14px;height:14px}}
 </style>
 </head>
 <body>
@@ -411,6 +507,9 @@ html,body{overflow-x:hidden;max-width:100vw}
     <a href="https://www.notino.cz" target="_blank" rel="noopener" class="hidden md:inline-block btn-shimmer text-white text-[10px] font-semibold tracking-[0.2em] uppercase px-7 py-3 hover:opacity-90 transition-opacity">
       Rezervovat termín
     </a>
+    <a href="admin.html" id="adminLock" aria-label="Admin – přihlášení" title="Admin">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
+    </a>
     <button id="menuBtn" class="lg:hidden text-ink w-10 h-10 flex items-center justify-center" aria-label="Menu">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
     </button>
@@ -446,7 +545,7 @@ html,body{overflow-x:hidden;max-width:100vw}
     <div class="lg:col-span-7">
       <div class="badge fadeUp mb-8" style="animation-delay:.1s">
         <span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
-        Otevřeno · Po–So
+        Otevřeno · denně
       </div>
 
       <h1 class="fadeUp font-serif text-6xl md:text-7xl lg:text-[110px] font-light leading-[0.92] mb-6 tracking-tight" style="animation-delay:.25s">
@@ -520,24 +619,6 @@ html,body{overflow-x:hidden;max-width:100vw}
     <div class="w-px h-12 bg-gradient-to-b from-gold to-transparent"></div>
   </div>
 </section>
-
-<!-- ═══════ MARQUEE BRAND BANNER ═══════ -->
-<div class="border-y border-gold/15 py-6 overflow-hidden bg-cream2">
-  <div class="marquee-track text-ink/40 font-serif italic text-lg whitespace-nowrap">
-    <span>✦ Depilace voskem</span>
-    <span>✦ Cukrová pasta · sugaring</span>
-    <span>✦ Šetrné k pokožce</span>
-    <span>✦ Hladkost na 3–4 týdny</span>
-    <span>✦ Méně zarůstání chloupků</span>
-    <span>✦ Štefánikova 1163, Kopřivnice</span>
-    <span>✦ Depilace voskem</span>
-    <span>✦ Cukrová pasta · sugaring</span>
-    <span>✦ Šetrné k pokožce</span>
-    <span>✦ Hladkost na 3–4 týdny</span>
-    <span>✦ Méně zarůstání chloupků</span>
-    <span>✦ Štefánikova 1163, Kopřivnice</span>
-  </div>
-</div>
 
 <!-- ═══════ O SALONU ═══════ -->
 <section id="o-salonu" class="relative py-32 px-6 md:px-16">
@@ -992,7 +1073,7 @@ html,body{overflow-x:hidden;max-width:100vw}
               <div class="text-base space-y-1">
                 <div class="flex justify-between"><span class="font-serif">Po–Pá</span><span class="text-ink/70">9:00 — 20:00</span></div>
                 <div class="flex justify-between"><span class="font-serif">Sobota</span><span class="text-ink/70">10:00 — 18:00</span></div>
-                <div class="flex justify-between"><span class="font-serif">Neděle</span><span class="text-ink/40">Zavřeno</span></div>
+                <div class="flex justify-between"><span class="font-serif">Neděle</span><span class="text-ink/70">10:00 — 18:00</span></div>
               </div>
             </div>
           </div>
@@ -1405,6 +1486,389 @@ if (shareBtn) {
 /* ═══ Year auto-update in footer ═══ */
 const yEl = document.getElementById('yr');
 if (yEl) yEl.textContent = new Date().getFullYear();
+</script>
+
+<!-- ═══ BOOKING MODAL ═══ -->
+<div id="bookingModal" class="b-modal" aria-hidden="true" role="dialog" aria-labelledby="bModalTitle">
+  <div class="b-backdrop"></div>
+  <div class="b-sheet">
+    <div class="b-head">
+      <div>
+        <p class="b-eyebrow">Online rezervace</p>
+        <h2 id="bModalTitle">Rezervace <span class="italic gold-text">termínu</span></h2>
+      </div>
+      <button class="b-close" type="button" aria-label="Zavřít">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="b-body" id="bookingBody">
+      <!-- FORM VIEW -->
+      <form id="bookingForm" novalidate>
+        <fieldset class="b-step">
+          <legend class="b-legend">1. Vyberte službu</legend>
+          <div class="b-services" id="bServices"></div>
+        </fieldset>
+
+        <fieldset class="b-step">
+          <legend class="b-legend">2. Vyberte termín</legend>
+          <label class="b-field">
+            <span class="b-label">Datum *</span>
+            <input id="bDate" type="date" required/>
+          </label>
+          <div class="b-slots-wrap" id="bSlotsWrap" hidden>
+            <p class="b-label" style="margin-top:8px">Volné časy</p>
+            <div class="b-slots" id="bSlots"></div>
+            <p class="b-no-slots" id="bNoSlots" hidden></p>
+          </div>
+          <p class="b-helper">Otevřeno Po–Pá 9:00–20:00, So–Ne 10:00–18:00</p>
+          <input type="hidden" id="bTermin" name="termin"/>
+        </fieldset>
+
+        <fieldset class="b-step">
+          <legend class="b-legend">3. Vaše kontaktní údaje</legend>
+          <div class="b-fields-2">
+            <label class="b-field">
+              <span class="b-label">Jméno a příjmení *</span>
+              <input id="bJmeno" name="jmeno" type="text" autocomplete="name" required minlength="2" maxlength="80"/>
+            </label>
+            <label class="b-field">
+              <span class="b-label">Telefon *</span>
+              <input id="bTelefon" name="telefon" type="tel" autocomplete="tel" required minlength="6" maxlength="30"/>
+            </label>
+          </div>
+          <label class="b-field">
+            <span class="b-label">E-mail (volitelné)</span>
+            <input id="bEmail" name="email" type="email" autocomplete="email" maxlength="200"/>
+          </label>
+          <label class="b-field">
+            <span class="b-label">Poznámka pro nás (volitelné)</span>
+            <textarea id="bZprava" name="zprava" rows="3" maxlength="500"></textarea>
+          </label>
+          <!-- honeypot -->
+          <input type="text" name="_hp" tabindex="-1" autocomplete="off" class="b-honeypot" aria-hidden="true"/>
+        </fieldset>
+
+        <div class="b-foot">
+          <p id="bStatus" class="b-status" aria-live="polite"></p>
+          <button type="submit" id="bSubmit" class="b-submit">
+            <span class="b-submit-label">Odeslat rezervaci</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+          <p class="b-fineprint">Po odeslání vás budeme do 24 hodin kontaktovat pro potvrzení.</p>
+        </div>
+      </form>
+
+      <!-- SUCCESS VIEW -->
+      <div id="bookingSuccess" class="b-success" hidden>
+        <div class="b-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12l5 5L20 7"/></svg>
+        </div>
+        <h3>Děkujeme!</h3>
+        <p>Vaše rezervace byla úspěšně odeslána. Co nejdříve vás budeme kontaktovat pro potvrzení termínu.</p>
+        <div class="b-success-summary" id="bSuccessSummary"></div>
+        <button type="button" id="bDone" class="b-submit">Zavřít</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FIREBASE BOOKING SDK ═══ -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js';
+import { getFirestore, collection, doc, setDoc, writeBatch, getDocs, query, where, serverTimestamp }
+  from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyASTJH8cYPBIvqtSH3-Bz2lYfNTz7yHwf0",
+  authDomain: "excellence-care-cz.firebaseapp.com",
+  projectId: "excellence-care-cz",
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// duration v minutách
+const SERVICES = [
+  { id: 'podpazi',  name: 'Depilace podpaží',     duration: 20, dur: '20 min', price: '400 Kč' },
+  { id: 'nadlokti', name: 'Depilace nadloktí',    duration: 30, dur: '30 min', price: '450 Kč' },
+  { id: 'predlokti',name: 'Depilace předloktí',   duration: 25, dur: '25 min', price: '400 Kč' },
+  { id: 'zada',     name: 'Depilace zad',         duration: 60, dur: '60 min', price: '1 100 Kč' },
+  { id: 'stehna',   name: 'Stehna bez třísel',    duration: 40, dur: '40 min', price: '600 Kč' },
+  { id: 'lytka',    name: 'Lýtka včetně kolen',   duration: 40, dur: '40 min', price: '650 Kč', featured: true },
+  { id: 'nart',     name: 'Nárt a prsty',         duration: 15, dur: '15 min', price: '300 Kč' },
+];
+
+// Otevírací doba (v minutách od půlnoci). 0=neděle, 1=pondělí…
+const OPENING_HOURS = {
+  0: { open: 10*60, close: 18*60 },         // Ne
+  1: { open: 9*60, close: 20*60 },          // Po–Pá
+  2: { open: 9*60, close: 20*60 },
+  3: { open: 9*60, close: 20*60 },
+  4: { open: 9*60, close: 20*60 },
+  5: { open: 9*60, close: 20*60 },
+  6: { open: 10*60, close: 18*60 },         // So
+};
+const SLOT_MINUTES = 30; // granularita slotů
+
+// Render services
+const svcWrap = document.getElementById('bServices');
+svcWrap.innerHTML = SERVICES.map((s, i) => `
+  <label class="b-svc${s.featured ? ' featured' : ''}">
+    <input type="radio" name="sluzba" value="${s.name}" data-id="${s.id}" ${i === 0 ? 'checked' : ''}/>
+    <div class="b-svc-inner">
+      ${s.featured ? '<span class="b-svc-tag">Nejoblíbenější</span>' : ''}
+      <span class="b-svc-name">${s.name}</span>
+      <span class="b-svc-meta"><span>${s.dur}</span><span class="b-svc-price">${s.price}</span></span>
+    </div>
+  </label>
+`).join('');
+
+// Modal open/close
+const modal = document.getElementById('bookingModal');
+const closeBtn = modal.querySelector('.b-close');
+const backdrop = modal.querySelector('.b-backdrop');
+const formView = document.getElementById('bookingForm');
+const successView = document.getElementById('bookingSuccess');
+
+const pad2 = n => String(n).padStart(2, '0');
+const isoDate = (d) => `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+const minToTime = (m) => `${pad2(Math.floor(m/60))}:${pad2(m%60)}`;
+const timeToMin = (t) => { const [h,m] = t.split(':').map(Number); return h*60 + m; };
+
+function setMinDateNow() {
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const dEl = document.getElementById('bDate');
+  dEl.min = isoDate(today);
+  if (!dEl.value) dEl.value = isoDate(tomorrow);
+}
+
+function openBooking(presetService) {
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  formView.hidden = false;
+  successView.hidden = true;
+  setMinDateNow();
+  if (presetService) {
+    const radio = svcWrap.querySelector(`input[value="${CSS.escape(presetService)}"]`);
+    if (radio) radio.checked = true;
+  }
+  document.getElementById('bStatus').textContent = '';
+  document.getElementById('bTermin').value = '';
+  refreshSlots();
+  setTimeout(() => document.getElementById('bJmeno').focus(), 100);
+}
+
+/* ═══ SLOT GRID ═══ */
+let dayBookings = []; // [{termin, duration}, ...]
+
+function getSelectedService() {
+  const r = formView.querySelector('input[name="sluzba"]:checked');
+  if (!r) return null;
+  return SERVICES.find(s => s.name === r.value);
+}
+
+async function loadDayBookings(dateStr) {
+  const dayStart = dateStr + 'T00:00';
+  const dayEnd = dateStr + 'T23:59';
+  try {
+    const [slotsSnap, breaksSnap] = await Promise.all([
+      getDocs(query(collection(db, 'bookedSlots'),
+        where('termin', '>=', dayStart),
+        where('termin', '<=', dayEnd))),
+      getDocs(query(collection(db, 'breaks'),
+        where('termin', '>=', dayStart),
+        where('termin', '<=', dayEnd))),
+    ]);
+    return [
+      ...slotsSnap.docs.map(d => d.data()),
+      ...breaksSnap.docs.map(d => d.data()),
+    ];
+  } catch (err) {
+    console.error('Failed to load day bookings:', err);
+    return [];
+  }
+}
+
+async function refreshSlots() {
+  const dateStr = document.getElementById('bDate').value;
+  const svc = getSelectedService();
+  const wrap = document.getElementById('bSlotsWrap');
+  const grid = document.getElementById('bSlots');
+  const noSlots = document.getElementById('bNoSlots');
+
+  if (!dateStr || !svc) { wrap.hidden = true; return; }
+  wrap.hidden = false;
+
+  grid.innerHTML = '<div class="b-slots-loading">Načítám volné časy…</div>';
+  noSlots.hidden = true;
+
+  const date = new Date(dateStr + 'T00:00');
+  const dow = date.getDay();
+  const hours = OPENING_HOURS[dow];
+
+  if (!hours) {
+    grid.innerHTML = '';
+    noSlots.hidden = false;
+    noSlots.textContent = 'V neděli máme zavřeno. Vyberte prosím jiný den.';
+    return;
+  }
+
+  dayBookings = await loadDayBookings(dateStr);
+
+  const duration = svc.duration;
+  const slots = [];
+  for (let m = hours.open; m + duration <= hours.close; m += SLOT_MINUTES) {
+    const slotStart = m;
+    const slotEnd = m + duration;
+    const conflict = dayBookings.some(b => {
+      const bStart = timeToMin(b.termin.slice(11, 16));
+      const bDur = b.duration || 30;
+      return slotStart < bStart + bDur && slotEnd > bStart;
+    });
+    const now = new Date();
+    const isTodayDate = dateStr === isoDate(now);
+    const slotIsPast = isTodayDate && slotStart < now.getHours() * 60 + now.getMinutes();
+    slots.push({ m: slotStart, label: minToTime(slotStart), available: !conflict && !slotIsPast });
+  }
+
+  if (!slots.length || slots.every(s => !s.available)) {
+    grid.innerHTML = '';
+    noSlots.hidden = false;
+    noSlots.textContent = 'Tento den už nemá volné termíny pro vybranou službu. Vyberte jiný den nebo službu.';
+    return;
+  }
+
+  grid.innerHTML = slots.map(s =>
+    `<button type="button" class="b-slot ${s.available ? '' : 'unavailable'}" data-min="${s.m}" ${s.available ? '' : 'disabled'}>${s.label}</button>`
+  ).join('');
+
+  // wire slot clicks
+  grid.querySelectorAll('.b-slot:not(:disabled)').forEach(btn => {
+    btn.addEventListener('click', () => {
+      grid.querySelectorAll('.b-slot').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      const m = parseInt(btn.dataset.min, 10);
+      const time = minToTime(m);
+      document.getElementById('bTermin').value = `${dateStr}T${time}`;
+    });
+  });
+}
+
+document.getElementById('bDate').addEventListener('change', refreshSlots);
+svcWrap.addEventListener('change', refreshSlots);
+function closeBooking() {
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+closeBtn.addEventListener('click', closeBooking);
+backdrop.addEventListener('click', closeBooking);
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeBooking(); });
+document.getElementById('bDone').addEventListener('click', closeBooking);
+
+// Wire all "Rezervovat termín" links
+document.querySelectorAll('a[data-book], a[href*="notino.cz"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    openBooking();
+  });
+  a.setAttribute('role', 'button');
+});
+window.openBookingModal = openBooking;
+
+// Submit
+formView.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (formView._hp.value) return; // bot
+  const svc = getSelectedService();
+  const data = {
+    jmeno:   document.getElementById('bJmeno').value.trim(),
+    telefon: document.getElementById('bTelefon').value.trim(),
+    email:   document.getElementById('bEmail').value.trim(),
+    termin:  document.getElementById('bTermin').value,
+    sluzba:  svc?.name || '',
+    duration: svc?.duration || 30,
+    zprava:  document.getElementById('bZprava').value.trim(),
+    status:  'new',
+  };
+  const status = document.getElementById('bStatus');
+  const submitBtn = document.getElementById('bSubmit');
+
+  if (data.jmeno.length < 2 || data.telefon.length < 6) {
+    status.textContent = 'Vyplňte prosím jméno a telefon.';
+    status.className = 'b-status err';
+    return;
+  }
+  if (!svc || !data.termin) {
+    status.textContent = 'Vyberte prosím službu a volný čas.';
+    status.className = 'b-status err';
+    return;
+  }
+  // remove empty optional fields so they don't violate validation
+  if (!data.email) delete data.email;
+  if (!data.zprava) delete data.zprava;
+
+  submitBtn.disabled = true;
+  status.textContent = 'Odesílám…';
+  status.className = 'b-status';
+
+  try {
+    // Last-second conflict check (anti race-condition)
+    const dateStr = data.termin.slice(0, 10);
+    const fresh = await loadDayBookings(dateStr);
+    const slotStart = timeToMin(data.termin.slice(11, 16));
+    const slotEnd = slotStart + data.duration;
+    const conflict = fresh.some(b => {
+      const bStart = timeToMin(b.termin.slice(11, 16));
+      const bDur = b.duration || 30;
+      return slotStart < bStart + bDur && slotEnd > bStart;
+    });
+    if (conflict) {
+      status.textContent = 'Bohužel, tento čas si právě někdo zarezervoval. Vyberte jiný.';
+      status.className = 'b-status err';
+      submitBtn.disabled = false;
+      await refreshSlots();
+      return;
+    }
+
+    // Batch write: reservations + bookedSlots se stejným ID
+    const resRef = doc(collection(db, 'reservations'));
+    const slotRef = doc(db, 'bookedSlots', resRef.id);
+    const batch = writeBatch(db);
+    batch.set(resRef, {
+      ...data,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    });
+    batch.set(slotRef, {
+      termin: data.termin,
+      duration: data.duration,
+    });
+    await batch.commit();
+
+    // Success view
+    formView.hidden = true;
+    successView.hidden = false;
+    const summary = document.getElementById('bSuccessSummary');
+    const dt = new Date(data.termin).toLocaleString('cs-CZ', { dateStyle:'long', timeStyle:'short' });
+    summary.innerHTML = `
+      <div><span>Služba</span><strong>${data.sluzba}</strong></div>
+      <div><span>Termín</span><strong>${dt}</strong></div>
+      <div><span>Trvání</span><strong>${data.duration} min</strong></div>
+      <div><span>Jméno</span><strong>${data.jmeno}</strong></div>
+      <div><span>Telefon</span><strong>${data.telefon}</strong></div>`;
+    formView.reset();
+  } catch (err) {
+    console.error(err);
+    status.textContent = 'Odeslání selhalo. Zkuste to znovu, nebo nám zavolejte na +420 775 111 222.';
+    status.className = 'b-status err';
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
 </script>
 </body>
 </html>
