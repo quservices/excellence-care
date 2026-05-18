@@ -180,7 +180,8 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 
 /* ═══ BRAND LOGO ═══ */
 /* SVG inline version (default — uses #brandLogoSymbol with Italiana + gold gradient + bolder stroke) */
-.brand-logo-svg{display:block;height:auto;width:auto;overflow:visible}
+.brand-logo-svg{display:block;height:auto;width:auto;overflow:visible!important}
+.brand-logo-svg text{fill:url(#brandLogoGrad)}
 .brand-logo .brand-logo-svg{height:62px;width:auto}
 .brand-logo-lg .brand-logo-svg{height:130px;width:auto}
 .brand-logo-xl .brand-logo-svg{height:180px;width:auto}
@@ -612,9 +613,9 @@ html,body{overflow-x:hidden;max-width:100vw}
       <stop offset="75%" stop-color="#a37f1e"/>
       <stop offset="100%" stop-color="#6b5215"/>
     </linearGradient>
-    <symbol id="brandLogoSymbol" viewBox="0 0 1000 540">
-      <text x="500" y="230" text-anchor="middle" font-family="Italiana, 'Cormorant Garamond', Georgia, serif" font-weight="400" font-size="170" letter-spacing="22" fill="url(#brandLogoGrad)" stroke="url(#brandLogoGrad)" stroke-width="2.6" paint-order="stroke fill">EXELANCE</text>
-      <text x="500" y="475" text-anchor="middle" font-family="Italiana, 'Cormorant Garamond', Georgia, serif" font-weight="400" font-size="150" letter-spacing="42" fill="url(#brandLogoGrad)" stroke="url(#brandLogoGrad)" stroke-width="2.6" paint-order="stroke fill">CARE</text>
+    <symbol id="brandLogoSymbol" viewBox="0 0 1400 620" overflow="visible">
+      <text x="700" y="260" text-anchor="middle" font-family="Italiana, 'Cormorant Garamond', Georgia, serif" font-weight="400" font-size="170" letter-spacing="22" fill="url(#brandLogoGrad)" stroke="url(#brandLogoGrad)" stroke-width="2.4" paint-order="stroke fill">EXELANCE</text>
+      <text x="700" y="540" text-anchor="middle" font-family="Italiana, 'Cormorant Garamond', Georgia, serif" font-weight="400" font-size="150" letter-spacing="42" fill="url(#brandLogoGrad)" stroke="url(#brandLogoGrad)" stroke-width="2.4" paint-order="stroke fill">CARE</text>
     </symbol>
   </defs>
 </svg>
@@ -623,7 +624,7 @@ html,body{overflow-x:hidden;max-width:100vw}
 <nav id="nav" class="fixed top-0 left-0 right-0 z-50 px-6 md:px-16 py-5">
   <div class="flex items-center justify-between max-w-7xl mx-auto">
     <a href="#" class="brand-logo" aria-label="Exelance Care — domovská stránka">
-      <svg class="brand-logo-svg" viewBox="0 0 1000 540" aria-hidden="true"><use href="#brandLogoSymbol"/></svg>
+      <svg class="brand-logo-svg" viewBox="0 0 1400 620" overflow="visible" aria-hidden="true"><use href="#brandLogoSymbol"/></svg>
     </a>
     <ul class="hidden lg:flex gap-10 items-center">
       <li><a href="#o-salonu" class="text-[10px] tracking-[0.22em] uppercase text-ink/70 hover:text-gold transition-colors">O salonu</a></li>
@@ -756,7 +757,7 @@ html,body{overflow-x:hidden;max-width:100vw}
         <div class="relative max-w-md">
           <div class="polaroid relative bg-white p-3 soft-shadow">
             <img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=900&q=85" alt="Interiér salonu" class="w-full aspect-[4/5] object-cover" loading="lazy"/>
-            <svg viewBox="0 0 1000 540" aria-hidden="true" class="mx-auto mt-3 block" style="height:64px;width:auto"><use href="#brandLogoSymbol"/></svg>
+            <svg viewBox="0 0 1400 620" overflow="visible" aria-hidden="true" class="mx-auto mt-3 block" style="height:64px;width:auto"><use href="#brandLogoSymbol"/></svg>
           </div>
           <!-- Decorative element -->
           <div class="absolute -bottom-12 -right-8 w-48 h-48 hidden md:block">
@@ -941,7 +942,7 @@ html,body{overflow-x:hidden;max-width:100vw}
             <div class="absolute inset-0 bg-gradient-to-br from-gold2/30 via-gold/10 to-transparent blur-2xl"></div>
             <div class="relative bg-white border border-gold/30 p-8 soft-shadow text-center" style="transform:rotate(-3deg)">
               <p class="text-[9px] tracking-[0.3em] uppercase text-gold mb-3">Dárkový poukaz</p>
-              <svg viewBox="0 0 1000 540" aria-hidden="true" class="mx-auto mb-4" style="height:95px;width:auto;display:block"><use href="#brandLogoSymbol"/></svg>
+              <svg viewBox="0 0 1400 620" overflow="visible" aria-hidden="true" class="mx-auto mb-4" style="height:95px;width:auto;display:block"><use href="#brandLogoSymbol"/></svg>
               <div class="gold-divider mb-4"><span class="line" style="width:32px"></span><span class="dot"></span><span class="line" style="width:32px"></span></div>
               <p class="font-serif text-4xl gold-text leading-none mb-2">500–5000</p>
               <p class="text-[9px] tracking-[0.25em] uppercase text-ink/60">Korun českých</p>
@@ -1200,7 +1201,7 @@ html,body{overflow-x:hidden;max-width:100vw}
     <div class="grid md:grid-cols-4 gap-12 mb-16">
       <div class="md:col-span-2">
         <a href="#" class="brand-logo brand-logo-lg mb-6" aria-label="Exelance Care">
-          <svg class="brand-logo-svg" viewBox="0 0 1000 540" aria-hidden="true"><use href="#brandLogoSymbol"/></svg>
+          <svg class="brand-logo-svg" viewBox="0 0 1400 620" overflow="visible" aria-hidden="true"><use href="#brandLogoSymbol"/></svg>
         </a>
         <p class="text-cream/60 text-sm leading-relaxed max-w-md mb-8">
           Prémiový salon krásy v centru Kopřivnice — přístrojová maderoterapie, neinvazivní liposukce, spa pedikúra a depilace pod jednou střechou. Od roku 2017.
