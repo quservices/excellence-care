@@ -1938,24 +1938,29 @@ async function refreshSlots() {
 
   const duration = svc.duration;
   const slots = [];
+  const now = new Date();
+  const isTodayDate = dateStr === isoDate(now);
+  const nowMin = now.getHours() * 60 + now.getMinutes();
   for (let m = hours.open; m + duration <= hours.close; m += SLOT_MINUTES) {
     const slotStart = m;
+    /* Skip past slots entirely when booking for today — user shouldn't see
+       times they can no longer take. */
+    if (isTodayDate && slotStart <= nowMin) continue;
     const slotEnd = m + duration;
     const conflict = dayBookings.some(b => {
       const bStart = timeToMin(b.termin.slice(11, 16));
       const bDur = b.duration || 30;
       return slotStart < bStart + bDur && slotEnd > bStart;
     });
-    const now = new Date();
-    const isTodayDate = dateStr === isoDate(now);
-    const slotIsPast = isTodayDate && slotStart < now.getHours() * 60 + now.getMinutes();
-    slots.push({ m: slotStart, label: minToTime(slotStart), available: !conflict && !slotIsPast });
+    slots.push({ m: slotStart, label: minToTime(slotStart), available: !conflict });
   }
 
   if (!slots.length || slots.every(s => !s.available)) {
     grid.innerHTML = '';
     noSlots.hidden = false;
-    noSlots.textContent = 'Tento den už nemá volné termíny pro vybranou službu. Vyberte jiný den nebo službu.';
+    noSlots.textContent = (isTodayDate && !slots.length)
+      ? 'Pro dnešní den už není volný čas. Vyberte prosím jiný den.'
+      : 'Tento den už nemá volné termíny pro vybranou službu. Vyberte jiný den nebo službu.';
     return;
   }
 
