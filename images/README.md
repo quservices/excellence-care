@@ -4,12 +4,19 @@ Sem si uložte vlastní fotky kategorií. Pokud soubor existuje, web ho použije
 
 ## Očekávané názvy
 
-| Soubor | Kategorie | Co tam dát |
+| Soubor | Kde se zobrazí | Doporučení |
 |---|---|---|
+| **`logo.png`** | **Nav, footer, voucher karta, O salonu** | **Logo "EXELANCE CARE" v zlaté barvě, transparentní PNG, šířka ~800px** |
 | `maderoterapie.jpg` | Přístrojová maderoterapie | Fotka s VIBROSLIMFIT / BYELMARIE — momentka procedury |
 | `liposukce.jpg` | Neinvazivní liposukce | Fotka ošetření kavitací nebo radiofrekvencí |
 | `pedikura.jpg` | Spa pedikúra | Fotka relaxační pedikúry / lázně chodidel |
 | `depilace.jpg` | Depilace | Fotka procedury voskem / cukrovou pastou |
+
+### Logo PNG — důležité!
+
+- **Transparentní pozadí** (PNG s alpha kanálem) — aby logo sedělo na bílém pozadí webu bez krémového rámu
+- **Šířka cca 800px** — automaticky se škáluje na 54px (nav), 96px (footer), 80px (voucher), 50px (O salonu)
+- Pokud `logo.png` neexistuje, web automaticky zobrazí text "EXELANCE / CARE" v Italiana fontu jako fallback
 
 ## Doporučené parametry
 
