@@ -7,7 +7,11 @@
       "**/.*",
       "**/node_modules/**",
       "FIREBASE_SETUP.md",
-      "README.md"
+      "README.md",
+      "scripts/**",
+      "logo65+94.jpeg",
+      "package.json",
+      "package-lock.json"
     ],
     "cleanUrls": true,
     "trailingSlash": false,
