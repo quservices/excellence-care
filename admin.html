@@ -105,10 +105,49 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
 .s-confirmed{background:#3a7a3a}
 .s-done{background:#999}
 
-/* ═══ EMPTY ═══ */
-.empty{text-align:center;padding:80px 20px;color:rgba(10,10,10,.5);background:#fff;border:1px dashed rgba(184,147,47,.2)}
-.empty .icon{font-family:'Cormorant Garamond',serif;font-size:48px;color:#b8932f;margin-bottom:12px;font-style:italic}
-.empty p{margin-bottom:16px}
+/* ═══ EMPTY (refined) ═══ */
+.empty{text-align:center;padding:72px 20px;color:rgba(10,10,10,.5);background:#fff;border:1px dashed rgba(184,147,47,.2);position:relative}
+.empty .ornament{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 auto 18px;max-width:180px}
+.empty .ornament .line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(184,147,47,.4),transparent)}
+.empty .ornament .dot{width:5px;height:5px;border-radius:50%;background:#b8932f}
+.empty .icon{font-family:'Cormorant Garamond',serif;font-size:40px;color:#b8932f;margin-bottom:8px;font-style:italic;letter-spacing:.04em}
+.empty p{margin-bottom:8px}
+.empty .quote{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(10,10,10,.4);margin:6px 0 18px;letter-spacing:.01em}
+
+/* ═══ TITLE BLOCK (header) ═══ */
+.title-block{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.today-date{font-size:11px;color:rgba(10,10,10,.55);letter-spacing:.06em;line-height:1.2;font-weight:400}
+.today-date::first-letter{text-transform:uppercase}
+
+/* ═══ AVATAR ═══ */
+.avatar{width:42px;height:42px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:#fff;letter-spacing:.02em;flex-shrink:0;text-shadow:0 1px 1px rgba(0,0,0,.18);background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);align-self:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+.card{grid-template-columns:auto auto 1fr auto}
+.card.pause .avatar{background:linear-gradient(135deg,#9a8770,#7a6b5a,#5a4d40)}
+.card.pause .avatar svg{width:18px;height:18px}
+
+/* ═══ NEW BOOKING PULSE ═══ */
+@keyframes newPulse{0%{box-shadow:0 0 0 0 rgba(184,147,47,.55)}50%{box-shadow:0 0 0 9px rgba(184,147,47,0)}100%{box-shadow:0 0 0 0 rgba(184,147,47,0)}}
+.card--new{animation:newPulse 2.4s ease-out 2;background:linear-gradient(180deg,rgba(184,147,47,.07),#fff);border-color:#b8932f}
+
+/* ═══ TOAST ═══ */
+.toast-stack{position:fixed;top:84px;right:24px;display:flex;flex-direction:column;gap:10px;z-index:200;pointer-events:none;max-width:340px}
+.toast{background:#fff;border:1px solid rgba(184,147,47,.3);border-left:3px solid #b8932f;padding:14px 18px;box-shadow:0 12px 36px rgba(0,0,0,.12),0 3px 8px rgba(0,0,0,.05);font-size:13px;color:#0a0a0a;pointer-events:auto;animation:toastIn .4s cubic-bezier(.22,.61,.36,1);cursor:pointer}
+.toast .toast-eyebrow{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:#b8932f;font-weight:600;margin-bottom:5px;display:flex;align-items:center;gap:7px}
+.toast .toast-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:#b8932f;animation:liveDotPulse 2s ease-in-out infinite;flex-shrink:0}
+.toast .toast-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;line-height:1.2;margin-bottom:2px}
+.toast .toast-sub{font-size:12px;color:rgba(10,10,10,.6);line-height:1.4}
+@keyframes toastIn{from{transform:translateX(20px);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes toastOut{to{transform:translateX(20px);opacity:0}}
+.toast.removing{animation:toastOut .3s ease forwards;pointer-events:none}
+
+/* ═══ KEYBOARD HINT ═══ */
+.kbd-hint-btn{position:fixed;bottom:32px;left:24px;width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid rgba(184,147,47,.25);color:#8a6c1f;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.05);transition:all .2s;opacity:.55;z-index:40;line-height:1}
+.kbd-hint-btn:hover{opacity:1;background:#b8932f;color:#fff;border-color:#b8932f}
+.kbd-panel{position:fixed;bottom:78px;left:24px;background:#fff;padding:18px 22px;box-shadow:0 18px 50px rgba(0,0,0,.18);border:1px solid rgba(184,147,47,.2);display:none;z-index:40;min-width:240px}
+.kbd-panel.open{display:block;animation:toastIn .25s ease}
+.kbd-panel h4{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;margin-bottom:12px}
+.kbd-panel ul{list-style:none;display:flex;flex-direction:column;gap:7px;font-size:12px;color:rgba(10,10,10,.7);padding:0;margin:0}
+.kbd-panel kbd{display:inline-block;background:#faf7f2;border:1px solid rgba(184,147,47,.25);padding:1px 7px;font-family:'Inter',sans-serif;font-size:11px;color:#8a6c1f;margin-right:10px;min-width:18px;text-align:center;font-weight:600;line-height:1.6}
 
 /* ═══ MODAL ═══ */
 .modal-bg{position:fixed;inset:0;background:rgba(10,10,10,.55);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}
@@ -164,8 +203,14 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
   .toolbar .src{font-size:10px;width:100%;order:2}
   .toolbar .actions{width:100%;order:1}
   .search input{width:100%;padding:10px 12px 10px 34px}
-  .card{grid-template-columns:auto 1fr;gap:12px;padding:14px;position:relative}
+  .card{grid-template-columns:auto auto 1fr;gap:12px;padding:14px;position:relative}
   .card .when-box{min-width:52px;padding-right:12px}
+  .avatar{width:36px;height:36px;font-size:14px}
+  .card.pause .avatar svg{width:14px;height:14px}
+  .toast-stack{top:auto;bottom:90px;right:14px;left:14px;max-width:none}
+  .toast{max-width:none}
+  .kbd-hint-btn,.kbd-panel{display:none}
+  header.bar .today-date{font-size:10px;letter-spacing:.04em}
   .card .when-box .d{font-size:24px}
   .card .when-box .m{font-size:9px;margin-top:2px}
   .card .when-box .t{font-size:11px}
@@ -218,7 +263,10 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
 <!-- ═══ ADMIN ═══ -->
 <div id="adminView" class="hidden" style="flex:1;display:flex;flex-direction:column">
   <header class="bar">
-    <h1><span class="italic gold">Excelence</span> Care <span class="pill">Rezervace</span></h1>
+    <div class="title-block">
+      <h1><span class="italic gold">Excelence</span> Care <span class="pill">Rezervace</span></h1>
+      <p class="today-date" id="todayDate"></p>
+    </div>
     <div class="meta">
       <span id="lastSync" class="last-sync"></span>
       <a class="btn icon" href="index.html" title="Zpět na stránku" aria-label="Zpět na stránku">
@@ -263,12 +311,26 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
   </main>
 
   <div class="fab-stack">
-    <button class="fab fab-pause" id="fabPause" type="button" aria-label="Přidat pauzu" title="Přidat pauzu">
+    <button class="fab fab-pause" id="fabPause" type="button" aria-label="Přidat pauzu" title="Přidat pauzu (P)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
     </button>
-    <button class="fab" id="fabAdd" type="button" aria-label="Přidat rezervaci">+</button>
+    <button class="fab" id="fabAdd" type="button" aria-label="Přidat rezervaci" title="Přidat rezervaci (N)">+</button>
+  </div>
+
+  <button class="kbd-hint-btn" id="kbdHintBtn" type="button" aria-label="Klávesové zkratky" title="Klávesové zkratky (?)">?</button>
+  <div class="kbd-panel" id="kbdPanel" role="dialog" aria-label="Klávesové zkratky">
+    <h4>Klávesové zkratky</h4>
+    <ul>
+      <li><kbd>N</kbd>Nová rezervace</li>
+      <li><kbd>P</kbd>Nová pauza</li>
+      <li><kbd>/</kbd>Hledat</li>
+      <li><kbd>1</kbd>–<kbd>5</kbd>Přepnout tab</li>
+      <li><kbd>Esc</kbd>Zavřít</li>
+    </ul>
   </div>
 </div>
+
+<div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="false"></div>
 
 <!-- ═══ PAUSE MODAL ═══ -->
 <div class="modal-bg" id="pauseModalBg">
@@ -497,7 +559,8 @@ let unsubBreaks = null;
 let latestReservations = [];
 let latestBreaks = [];
 let resInitialized = false;
-let lastResCount = -1;
+let seenResIds = null;        /* Set of IDs we've already shown — null until first snapshot */
+let pendingPulseIds = new Set(); /* IDs that should pulse on the next render() */
 
 function mergeAndRender() {
   store = [...latestReservations, ...latestBreaks];
@@ -514,7 +577,8 @@ function unsubscribeLive() {
   if (unsubReservations) { try { unsubReservations(); } catch {} unsubReservations = null; }
   if (unsubBreaks) { try { unsubBreaks(); } catch {} unsubBreaks = null; }
   resInitialized = false;
-  lastResCount = -1;
+  seenResIds = null;
+  pendingPulseIds.clear();
 }
 
 function flashNewBookingIndicator() {
@@ -537,10 +601,19 @@ function loadData() {
     query(collection(db, RES_COL), orderBy('termin', 'asc')),
     (snap) => {
       latestReservations = snap.docs.map(d => ({ id: d.id, type: 'reservation', ...d.data() }));
-      if (resInitialized && latestReservations.length > lastResCount && !snap.metadata.hasPendingWrites) {
-        flashNewBookingIndicator();
+      /* Detect specific new IDs since last snapshot — handles arrivals that
+         don't grow the total count (e.g. one added + one deleted in same tick) */
+      if (resInitialized && !snap.metadata.hasPendingWrites) {
+        const newOnes = snap.docs.filter(d => !seenResIds.has(d.id));
+        if (newOnes.length) {
+          newOnes.forEach(d => {
+            notifyNewBooking(d.data());
+            pendingPulseIds.add(d.id);
+          });
+          flashNewBookingIndicator();
+        }
       }
-      lastResCount = latestReservations.length;
+      seenResIds = new Set(snap.docs.map(d => d.id));
       resInitialized = true;
       mergeAndRender();
     },
@@ -599,6 +672,120 @@ function inTab(termin, tab, r) {
 /* ═══ Render ═══ */
 const escHtml = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
+/* ═══ Initials for avatar ═══ */
+function initials(name) {
+  const parts = (name || '').trim().split(/\s+/).filter(Boolean);
+  if (!parts.length) return '?';
+  if (parts.length === 1) return parts[0].slice(0,2).toUpperCase();
+  return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+}
+
+/* ═══ Header date — Pondělí · 18. května 2026 ═══ */
+function updateTodayDate() {
+  const el = document.getElementById('todayDate');
+  if (!el) return;
+  const d = new Date();
+  const days = ['neděle','pondělí','úterý','středa','čtvrtek','pátek','sobota'];
+  const months = ['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince'];
+  el.textContent = `${days[d.getDay()]} · ${d.getDate()}. ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+updateTodayDate();
+setInterval(updateTodayDate, 60_000);
+
+/* ═══ Audio chime — soft two-note ding via Web Audio API ═══ */
+let audioCtx = null;
+function unlockAudio() {
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  } catch {}
+}
+document.addEventListener('click', unlockAudio, { once: true });
+document.addEventListener('keydown', unlockAudio, { once: true });
+
+function playChime() {
+  try {
+    if (!audioCtx) return;
+    const t0 = audioCtx.currentTime;
+    const notes = [{f:880,t:0,d:0.18},{f:1318.5,t:0.10,d:0.22}];
+    notes.forEach(n => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = n.f;
+      gain.gain.setValueAtTime(0, t0 + n.t);
+      gain.gain.linearRampToValueAtTime(0.08, t0 + n.t + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t0 + n.t + n.d);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(t0 + n.t);
+      osc.stop(t0 + n.t + n.d + 0.02);
+    });
+  } catch {}
+}
+
+/* ═══ Favicon badge — dynamically rendered E with red counter ═══ */
+let unseenCount = 0;
+function updateFaviconBadge(count) {
+  const size = 64;
+  const cv = document.createElement('canvas');
+  cv.width = size; cv.height = size;
+  const ctx = cv.getContext('2d');
+  const grad = ctx.createLinearGradient(0,0,size,size);
+  grad.addColorStop(0,'#d4af37'); grad.addColorStop(0.5,'#b8932f'); grad.addColorStop(1,'#8a6c1f');
+  ctx.fillStyle = grad;
+  ctx.beginPath(); ctx.arc(size/2, size/2, size/2, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#fff';
+  ctx.font = '600 38px Georgia, serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText('E', size/2, size/2 + 3);
+  if (count > 0) {
+    ctx.fillStyle = '#cc3030';
+    ctx.beginPath(); ctx.arc(size - 14, 14, 14, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 18px Inter, sans-serif';
+    ctx.fillText(count > 9 ? '9+' : String(count), size - 14, 16);
+  }
+  let link = document.querySelector('link[rel="icon"]');
+  if (!link) {
+    link = document.createElement('link');
+    link.rel = 'icon'; document.head.appendChild(link);
+  }
+  link.href = cv.toDataURL('image/png');
+}
+updateFaviconBadge(0);
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && unseenCount > 0) { unseenCount = 0; updateFaviconBadge(0); }
+});
+
+/* ═══ Toast — slide-in card top-right with auto-dismiss ═══ */
+function showToast({ eyebrow = 'Nová rezervace', title, sub, duration = 5500 }) {
+  const stack = document.getElementById('toastStack');
+  if (!stack) return;
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.innerHTML = `<div class="toast-eyebrow">${escHtml(eyebrow)}</div>
+                 <div class="toast-title">${escHtml(title || '—')}</div>
+                 ${sub ? `<div class="toast-sub">${escHtml(sub)}</div>` : ''}`;
+  const close = () => {
+    if (!t.parentElement) return;
+    t.classList.add('removing');
+    setTimeout(() => t.remove(), 300);
+  };
+  t.addEventListener('click', close);
+  stack.appendChild(t);
+  setTimeout(close, duration);
+}
+
+/* ═══ Notify on new booking (called from onSnapshot) ═══ */
+function notifyNewBooking(data) {
+  const t = data.termin ? new Date(data.termin) : null;
+  const timeStr = t ? t.toLocaleString('cs-CZ', { day:'numeric', month:'long', hour:'2-digit', minute:'2-digit' }) : '';
+  const sub = [data.sluzba, timeStr].filter(Boolean).join(' · ');
+  showToast({ title: data.jmeno || 'Bez jména', sub });
+  playChime();
+  if (document.hidden) { unseenCount++; updateFaviconBadge(unseenCount); }
+}
+
 function render() {
   const ranges = dayRanges();
 
@@ -656,14 +843,24 @@ function render() {
 
   const wrap = document.getElementById('listWrap');
   if (!filtered.length) {
-    const emptyMsgs = {
-      today: 'Dnes žádné rezervace.',
-      week: 'Tento týden žádné rezervace.',
-      month: 'Tento měsíc žádné rezervace.',
-      history: 'Zatím žádná historie.',
-      all: 'Zatím žádné rezervace.',
+    const emptyDef = {
+      today:   { msg: 'Dnes žádné rezervace.',         quote: 'Užijte si volný den.' },
+      week:    { msg: 'Tento týden žádné rezervace.',  quote: 'Čistý kalendář — prostor pro nové.' },
+      month:   { msg: 'Tento měsíc žádné rezervace.',  quote: 'Začněme první.' },
+      history: { msg: 'Zatím žádná historie.',         quote: 'Tady se sbírají vzpomínky.' },
+      all:     { msg: 'Zatím žádné rezervace.',        quote: 'Vše začíná první návštěvou.' },
     };
-    wrap.innerHTML = `<div class="empty"><div class="icon">— —</div><p>${q ? 'Žádný výsledek pro „' + escHtml(q) + '".' : (emptyMsgs[activeTab] || 'Žádné záznamy.')}</p>${q || activeTab === 'history' ? '' : '<button class="btn primary" onclick="openModal()">+ Přidat rezervaci</button>'}</div>`;
+    const def = emptyDef[activeTab] || { msg: 'Žádné záznamy.', quote: '' };
+    const msg = q ? 'Žádný výsledek pro „' + escHtml(q) + '".' : def.msg;
+    const quote = q ? '' : (def.quote ? `<p class="quote">${escHtml(def.quote)}</p>` : '');
+    const btn = (q || activeTab === 'history') ? '' : '<button class="btn primary" onclick="openModal()">+ Přidat rezervaci</button>';
+    wrap.innerHTML = `<div class="empty">
+      <div class="ornament"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
+      <div class="icon">${q ? '⌕' : '✦'}</div>
+      <p>${msg}</p>
+      ${quote}
+      ${btn}
+    </div>`;
     return;
   }
 
@@ -682,6 +879,9 @@ function render() {
           <div class="d">${day}</div>
           <div class="m">${mon}</div>
           <div class="t">${time}</div>
+        </div>
+        <div class="avatar" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
         </div>
         <div class="main-info">
           <div class="name"><span class="pause-badge">Pauza</span>${escHtml(r.note || 'Bez popisu')}</div>
@@ -705,6 +905,7 @@ function render() {
         <div class="m">${mon}</div>
         <div class="t">${time}</div>
       </div>
+      <div class="avatar" aria-hidden="true">${escHtml(initials(r.jmeno))}</div>
       <div class="main-info">
         <div class="name"><span class="status-dot ${statusClass}" title="${statusLabel}"></span>${escHtml(r.jmeno||'—')}${r.sluzba?`<span class="svc">${escHtml(r.sluzba)}${r.duration?' · '+r.duration+' min':''}</span>`:''}</div>
         <div class="meta">
@@ -737,6 +938,18 @@ function render() {
       if (act === 'del-pause') deletePause(id);
     });
   });
+
+  // Apply pulse to newly arrived cards (from onSnapshot detection)
+  if (pendingPulseIds.size) {
+    pendingPulseIds.forEach(id => {
+      const el = wrap.querySelector(`.card[data-id="${id}"]`);
+      if (el) {
+        el.classList.add('card--new');
+        setTimeout(() => el.classList.remove('card--new'), 5200);
+      }
+    });
+    pendingPulseIds.clear();
+  }
 }
 
 /* ═══ Modal ═══ */
@@ -906,6 +1119,54 @@ document.getElementById('exportBtn').addEventListener('click', () => {
   a.download = 'rezervace-' + new Date().toISOString().slice(0,10) + '.csv';
   a.click();
   URL.revokeObjectURL(a.href);
+});
+
+/* ═══ Keyboard shortcuts (N / P / / / 1-5 / ? / Esc) ═══ */
+function toggleKbdHint(force) {
+  const p = document.getElementById('kbdPanel');
+  if (!p) return;
+  if (typeof force === 'boolean') p.classList.toggle('open', force);
+  else p.classList.toggle('open');
+}
+const kbdBtn = document.getElementById('kbdHintBtn');
+if (kbdBtn) kbdBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleKbdHint(); });
+document.addEventListener('click', (e) => {
+  const p = document.getElementById('kbdPanel');
+  if (!p || !p.classList.contains('open')) return;
+  if (e.target === kbdBtn || p.contains(e.target)) return;
+  toggleKbdHint(false);
+});
+
+document.addEventListener('keydown', (e) => {
+  /* Skip if user is typing in an input/textarea/select — let the field receive the key */
+  const tag = (e.target && e.target.tagName) || '';
+  if (/^(INPUT|TEXTAREA|SELECT)$/.test(tag) || e.target?.isContentEditable) return;
+  /* If a modal is open, only Esc applies (handled per-modal already) */
+  if (document.querySelector('.modal-bg.open')) return;
+  /* Allow modifiers to pass through (Ctrl+R reload etc.) */
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+  switch (e.key) {
+    case 'n': case 'N': e.preventDefault(); openModal(); break;
+    case 'p': case 'P': e.preventDefault(); openPauseModal(); break;
+    case '/': e.preventDefault(); document.getElementById('searchInput').focus(); break;
+    case '?': e.preventDefault(); toggleKbdHint(); break;
+    case '1': case '2': case '3': case '4': case '5': {
+      e.preventDefault();
+      const tabs = ['today','week','month','history','all'];
+      const idx = parseInt(e.key, 10) - 1;
+      if (tabs[idx]) {
+        activeTab = tabs[idx];
+        sessionStorage.setItem('ec_admin_tab', activeTab);
+        render();
+      }
+      break;
+    }
+    case 'Escape': {
+      if (document.getElementById('kbdPanel')?.classList.contains('open')) toggleKbdHint(false);
+      break;
+    }
+  }
 });
 
 /* ═══ Boot ═══
