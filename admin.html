@@ -148,6 +148,9 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
 .kbd-panel h4{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;margin-bottom:12px}
 .kbd-panel ul{list-style:none;display:flex;flex-direction:column;gap:7px;font-size:12px;color:rgba(10,10,10,.7);padding:0;margin:0}
 .kbd-panel kbd{display:inline-block;background:#faf7f2;border:1px solid rgba(184,147,47,.25);padding:1px 7px;font-family:'Inter',sans-serif;font-size:11px;color:#8a6c1f;margin-right:10px;min-width:18px;text-align:center;font-weight:600;line-height:1.6}
+.kbd-test-btn{margin-top:14px;width:100%;background:#faf7f2;border:1px solid rgba(184,147,47,.25);color:#8a6c1f;padding:9px 12px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;font-family:'Inter',sans-serif}
+.kbd-test-btn:hover{background:#b8932f;color:#fff;border-color:#b8932f}
+.kbd-test-btn svg{width:14px;height:14px}
 
 /* ═══ MODAL ═══ */
 .modal-bg{position:fixed;inset:0;background:rgba(10,10,10,.55);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}
@@ -327,6 +330,10 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
       <li><kbd>1</kbd>–<kbd>5</kbd>Přepnout tab</li>
       <li><kbd>Esc</kbd>Zavřít</li>
     </ul>
+    <button type="button" id="testChimeBtn" class="kbd-test-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+      Test zvuku
+    </button>
   </div>
 </div>
 
@@ -692,35 +699,60 @@ function updateTodayDate() {
 updateTodayDate();
 setInterval(updateTodayDate, 60_000);
 
-/* ═══ Audio chime — soft two-note ding via Web Audio API ═══ */
+/* ═══ Audio chime — soft two-note ding via Web Audio API
+   Auto-unlock on any user gesture; also re-resumes inside playChime in case
+   the browser suspended the context (Chrome does this when the tab is idle). */
 let audioCtx = null;
-function unlockAudio() {
+let audioReady = false;
+
+function ensureAudio() {
   try {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-  } catch {}
+    if (audioCtx.state === 'suspended') {
+      const p = audioCtx.resume();
+      if (p && p.then) p.then(() => { audioReady = audioCtx.state === 'running'; });
+    }
+    if (audioCtx.state === 'running') audioReady = true;
+  } catch (e) {
+    console.warn('Audio init failed:', e);
+  }
 }
-document.addEventListener('click', unlockAudio, { once: true });
-document.addEventListener('keydown', unlockAudio, { once: true });
+
+/* Unlock on first interaction (browser autoplay policy) */
+['click','keydown','touchstart'].forEach(ev => {
+  document.addEventListener(ev, ensureAudio, { once: true, passive: true });
+});
 
 function playChime() {
+  ensureAudio(); /* try to resume in case the context got suspended */
   try {
     if (!audioCtx) return;
     const t0 = audioCtx.currentTime;
-    const notes = [{f:880,t:0,d:0.18},{f:1318.5,t:0.10,d:0.22}];
+    /* Two-note bell: A5 → E6, slightly louder + softer attack for a richer ding */
+    const notes = [
+      { f: 880,   t: 0.00, d: 0.32, peak: 0.22 },  /* A5 */
+      { f: 1318.5, t: 0.12, d: 0.40, peak: 0.20 }, /* E6 */
+    ];
+    /* Subtle low-pass colour via biquad so it doesn't sound shrill */
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 4000;
+    filter.connect(audioCtx.destination);
     notes.forEach(n => {
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
       osc.type = 'sine';
       osc.frequency.value = n.f;
       gain.gain.setValueAtTime(0, t0 + n.t);
-      gain.gain.linearRampToValueAtTime(0.08, t0 + n.t + 0.015);
+      gain.gain.linearRampToValueAtTime(n.peak, t0 + n.t + 0.02);
       gain.gain.exponentialRampToValueAtTime(0.0001, t0 + n.t + n.d);
-      osc.connect(gain).connect(audioCtx.destination);
+      osc.connect(gain).connect(filter);
       osc.start(t0 + n.t);
-      osc.stop(t0 + n.t + n.d + 0.02);
+      osc.stop(t0 + n.t + n.d + 0.05);
     });
-  } catch {}
+  } catch (e) {
+    console.warn('Chime failed:', e);
+  }
 }
 
 /* ═══ Favicon badge — dynamically rendered E with red counter ═══ */
@@ -1130,6 +1162,22 @@ function toggleKbdHint(force) {
 }
 const kbdBtn = document.getElementById('kbdHintBtn');
 if (kbdBtn) kbdBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleKbdHint(); });
+
+/* Test chime button — also serves as the canonical user-gesture unlock */
+const testChimeBtn = document.getElementById('testChimeBtn');
+if (testChimeBtn) testChimeBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  ensureAudio();
+  playChime();
+  /* If after a moment the context is still suspended, tell the user why */
+  setTimeout(() => {
+    if (!audioCtx || audioCtx.state !== 'running') {
+      showToast({ eyebrow: 'Zvuk', title: 'Zvuk zablokován', sub: 'Prohlížeč zvuk zatím nepovolil. Klikněte znovu, případně zkontrolujte zvuk v záložce / systému.', duration: 6000 });
+    } else {
+      showToast({ eyebrow: 'Zvuk', title: 'Zvuk funguje ✓', sub: 'Při nové rezervaci uslyšíte stejný tón.', duration: 3500 });
+    }
+  }, 200);
+});
 document.addEventListener('click', (e) => {
   const p = document.getElementById('kbdPanel');
   if (!p || !p.classList.contains('open')) return;
