@@ -728,27 +728,43 @@ function playChime() {
   try {
     if (!audioCtx) return;
     const t0 = audioCtx.currentTime;
-    /* Two-note bell: A5 → E6, slightly louder + softer attack for a richer ding */
+
+    /* Master gain + warm low-pass — keeps the chime soft, never shrill */
+    const master = audioCtx.createGain();
+    master.gain.value = 0.55;
+    const lp = audioCtx.createBiquadFilter();
+    lp.type = 'lowpass';
+    lp.frequency.value = 3400;
+    lp.Q.value = 0.5;
+    master.connect(lp).connect(audioCtx.destination);
+
+    /* Two ascending notes — A5 → E6 (perfect fifth, classic door-bell interval).
+       Each note is built from 4 partials = bell-like richness with subtle chorus. */
     const notes = [
-      { f: 880,   t: 0.00, d: 0.32, peak: 0.22 },  /* A5 */
-      { f: 1318.5, t: 0.12, d: 0.40, peak: 0.20 }, /* E6 */
+      { f: 880,    t: 0.00, dur: 1.40, peak: 0.20 }, /* A5  */
+      { f: 1318.5, t: 0.18, dur: 1.60, peak: 0.18 }, /* E6  */
     ];
-    /* Subtle low-pass colour via biquad so it doesn't sound shrill */
-    const filter = audioCtx.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.value = 4000;
-    filter.connect(audioCtx.destination);
+
     notes.forEach(n => {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.value = n.f;
-      gain.gain.setValueAtTime(0, t0 + n.t);
-      gain.gain.linearRampToValueAtTime(n.peak, t0 + n.t + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.0001, t0 + n.t + n.d);
-      osc.connect(gain).connect(filter);
-      osc.start(t0 + n.t);
-      osc.stop(t0 + n.t + n.d + 0.05);
+      const partials = [
+        { mult: 1.0, gain: 1.00, detune:  0 },  /* fundamental                 */
+        { mult: 1.0, gain: 0.50, detune: -8 },  /* slight detune → chorus warmth */
+        { mult: 2.0, gain: 0.30, detune:  0 },  /* octave up → bell shimmer    */
+        { mult: 0.5, gain: 0.22, detune:  0 },  /* octave down → hum tone      */
+      ];
+      partials.forEach(p => {
+        const osc = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = n.f * p.mult;
+        osc.detune.value = p.detune;
+        g.gain.setValueAtTime(0, t0 + n.t);
+        g.gain.linearRampToValueAtTime(n.peak * p.gain, t0 + n.t + 0.012);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + n.t + n.dur);
+        osc.connect(g).connect(master);
+        osc.start(t0 + n.t);
+        osc.stop(t0 + n.t + n.dur + 0.05);
+      });
     });
   } catch (e) {
     console.warn('Chime failed:', e);
