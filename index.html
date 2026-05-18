@@ -1468,46 +1468,60 @@ if (shareBtn) {
 const yEl = document.getElementById('yr');
 if (yEl) yEl.textContent = new Date().getFullYear();
 
-/* ═══ Category detail modals — click card → open, X / backdrop / Esc → close, variant → booking ═══ */
+/* ═══ Category detail modals (event delegation — works even though modals are parsed AFTER this script) ═══ */
 function openCatModal(id) {
   const m = document.getElementById(id);
   if (!m) return;
   document.querySelectorAll('.cat-modal:not([hidden])').forEach(other => other.hidden = true);
   m.hidden = false;
   document.body.classList.add('cat-modal-open');
+  const panel = m.querySelector('.cat-modal-panel');
+  if (panel) panel.scrollTop = 0;
   const closeBtn = m.querySelector('.cat-modal-close');
-  if (closeBtn) setTimeout(() => closeBtn.focus(), 50);
+  if (closeBtn) setTimeout(() => closeBtn.focus(), 60);
 }
 function closeAllCatModals() {
   document.querySelectorAll('.cat-modal').forEach(m => m.hidden = true);
   document.body.classList.remove('cat-modal-open');
 }
-/* open on cat-card click */
-document.querySelectorAll('[data-cat-open]').forEach(card => {
-  card.addEventListener('click', () => openCatModal(card.dataset.catOpen));
-});
-/* close on X / backdrop click */
-document.querySelectorAll('[data-cat-close]').forEach(el => {
-  el.addEventListener('click', closeAllCatModals);
-});
-/* close on Escape */
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && document.querySelector('.cat-modal:not([hidden])')) {
-    closeAllCatModals();
+window.closeAllCatModals = closeAllCatModals;
+
+/* Event delegation on document — handles clicks on elements added later in DOM */
+document.addEventListener('click', e => {
+  /* open category modal */
+  const openBtn = e.target.closest('[data-cat-open]');
+  if (openBtn) {
+    e.preventDefault();
+    openCatModal(openBtn.dataset.catOpen);
+    return;
   }
-});
-/* click variant → close detail modal + open booking modal preselected */
-document.querySelectorAll('[data-book-svc]').forEach(btn => {
-  btn.addEventListener('click', e => {
+  /* close: X button or backdrop */
+  if (e.target.closest('[data-cat-close]')) {
+    closeAllCatModals();
+    return;
+  }
+  /* variant clicked → close cat-modal + open booking with that service preselected */
+  const varBtn = e.target.closest('[data-book-svc]');
+  if (varBtn) {
+    e.preventDefault();
     e.stopPropagation();
-    const svc = btn.dataset.bookSvc;
+    const svc = varBtn.dataset.bookSvc;
     closeAllCatModals();
     setTimeout(() => {
       if (typeof window.openBookingModal === 'function') {
         window.openBookingModal(svc);
+      } else {
+        console.warn('openBookingModal not available — Firebase script may not have loaded yet');
       }
-    }, 250);
-  });
+    }, 280);
+  }
+});
+
+/* Close on Escape */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.querySelector('.cat-modal:not([hidden])')) {
+    closeAllCatModals();
+  }
 });
 </script>
 
