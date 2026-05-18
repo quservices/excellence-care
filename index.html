@@ -1869,7 +1869,14 @@ function openBooking(presetService) {
   document.getElementById('bStatus').textContent = '';
   document.getElementById('bTermin').value = '';
   refreshSlots();
-  setTimeout(() => document.getElementById('bJmeno').focus(), 100);
+  /* Always open at the top — step 1 (service selection) should be visible first.
+     Scroll both the sheet and any inner container to 0 on next frames so it
+     overrides any auto-scroll caused by focus / radio check. */
+  const sheet = modal.querySelector('.b-sheet');
+  const scrollTop = () => { if (sheet) sheet.scrollTop = 0; modal.scrollTop = 0; };
+  scrollTop();
+  requestAnimationFrame(scrollTop);
+  setTimeout(scrollTop, 100);
 }
 
 /* ═══ SLOT GRID ═══ */
