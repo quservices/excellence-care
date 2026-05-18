@@ -239,14 +239,16 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 .cat-card:hover .cat-card-img img{transform:scale(1.06)}
 .cat-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.55));pointer-events:none}
 .cat-card-num{position:absolute;top:16px;right:20px;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:42px;color:rgba(255,255,255,.75);line-height:1;z-index:2}
-.cat-card-body{padding:24px 26px 26px}
-@media (min-width:768px){.cat-card-body{padding:28px 30px 30px}}
-.cat-card-tag{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#b8932f;font-weight:600;margin-bottom:10px;display:block}
-.cat-card-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;line-height:1.1;margin-bottom:8px;letter-spacing:-.005em;color:#0a0a0a}
+.cat-card-body{padding:22px 24px 22px;display:flex;flex-direction:column;gap:14px}
+@media (min-width:768px){.cat-card-body{padding:26px 30px 26px}}
+.cat-card-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;line-height:1.1;letter-spacing:-.005em;color:#0a0a0a;margin:0}
 @media (min-width:768px){.cat-card-title{font-size:30px}}
-.cat-card-desc{font-size:13px;color:rgba(10,10,10,.6);line-height:1.55;margin-bottom:18px;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.cat-card-cta{display:inline-flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:#b8932f;border-bottom:1px solid currentColor;padding-bottom:3px;transition:gap .3s ease}
-.cat-card:hover .cat-card-cta{gap:14px}
+.cat-card-pricerow{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-top:14px;border-top:1px solid rgba(184,147,47,.18)}
+.cat-card-price{font-family:'Cormorant Garamond',serif;font-size:22px;background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:500;line-height:1}
+@media (min-width:768px){.cat-card-price{font-size:26px}}
+.cat-card-price-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(10,10,10,.45);margin-right:6px;font-weight:600;background:none;-webkit-text-fill-color:initial}
+.cat-card-cta{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:#b8932f;transition:gap .3s ease}
+.cat-card:hover .cat-card-cta{gap:12px}
 .cat-card-cta svg{width:12px;height:12px;stroke:currentColor}
 
 /* ═══ DETAIL MODAL ═══ */
@@ -819,55 +821,59 @@ html,body{overflow-x:hidden;max-width:100vw}
 
     <!-- ═══ KATEGORIE — KOMPAKTNÍ KARTY (klik otevře detail modal) ═══ -->
     <div class="cat-cards-grid">
-      <button type="button" class="cat-card rv" data-cat-open="cat-modal-madero" aria-label="Detail kategorie Přístrojová maderoterapie">
+      <button type="button" class="cat-card rv" data-cat-open="cat-modal-madero" aria-label="Detail Přístrojová maderoterapie">
         <div class="cat-card-img">
           <img src="images/maderoterapie.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80'" alt="" loading="lazy"/>
           <span class="cat-card-num">01</span>
         </div>
         <div class="cat-card-body">
-          <span class="cat-card-tag">Tvarování postavy</span>
           <h3 class="cat-card-title">Přístrojová maderoterapie</h3>
-          <p class="cat-card-desc">VIBROSLIMFIT + CELSLIMROLL + FUFFU baňky — účinné odstranění celulitidy, hubnutí a uvolnění svalů.</p>
-          <span class="cat-card-cta">Více & ceník <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          <div class="cat-card-pricerow">
+            <span><span class="cat-card-price-label">Od</span><span class="cat-card-price">880 Kč</span></span>
+            <span class="cat-card-cta">Více <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          </div>
         </div>
       </button>
 
-      <button type="button" class="cat-card rv" data-cat-open="cat-modal-liposukce" aria-label="Detail kategorie Neinvazivní liposukce">
+      <button type="button" class="cat-card rv" data-cat-open="cat-modal-liposukce" aria-label="Detail Neinvazivní liposukce">
         <div class="cat-card-img">
           <img src="images/liposukce.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80'" alt="" loading="lazy"/>
           <span class="cat-card-num">02</span>
         </div>
         <div class="cat-card-body">
-          <span class="cat-card-tag">Redukce tuku</span>
           <h3 class="cat-card-title">Neinvazivní liposukce</h3>
-          <p class="cat-card-desc">Ultrazvuková kavitace + radiofrekvence. Bez skalpelu, bez bolesti, bez rekonvalescence.</p>
-          <span class="cat-card-cta">Více & ceník <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          <div class="cat-card-pricerow">
+            <span><span class="cat-card-price-label">Od</span><span class="cat-card-price">1 490 Kč</span></span>
+            <span class="cat-card-cta">Více <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          </div>
         </div>
       </button>
 
-      <button type="button" class="cat-card rv" data-cat-open="cat-modal-pedikura" aria-label="Detail kategorie Spa pedikúra">
+      <button type="button" class="cat-card rv" data-cat-open="cat-modal-pedikura" aria-label="Detail Spa pedikúra">
         <div class="cat-card-img">
           <img src="images/pedikura.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=900&q=80'" alt="" loading="lazy"/>
           <span class="cat-card-num">03</span>
         </div>
         <div class="cat-card-body">
-          <span class="cat-card-tag">Péče o chodidla</span>
           <h3 class="cat-card-title">Spa pedikúra</h3>
-          <p class="cat-card-desc">Relaxační rituál — od aromatické koupele po regenerační masáž. Hebká, zdravá chodidla.</p>
-          <span class="cat-card-cta">Více & ceník <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          <div class="cat-card-pricerow">
+            <span><span class="cat-card-price-label">Od</span><span class="cat-card-price">690 Kč</span></span>
+            <span class="cat-card-cta">Více <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          </div>
         </div>
       </button>
 
-      <button type="button" class="cat-card rv" data-cat-open="cat-modal-depilace" aria-label="Detail kategorie Profesionální depilace">
+      <button type="button" class="cat-card rv" data-cat-open="cat-modal-depilace" aria-label="Detail Profesionální depilace">
         <div class="cat-card-img">
           <img src="images/depilace.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?w=900&q=80'" alt="" loading="lazy"/>
           <span class="cat-card-num">04</span>
         </div>
         <div class="cat-card-body">
-          <span class="cat-card-tag">Hladkost 3–4 týdny</span>
           <h3 class="cat-card-title">Profesionální depilace</h3>
-          <p class="cat-card-desc">Bezpáskový vosk nebo cukrová pasta — šetrné k pokožce, méně zarůstání, trvanlivý výsledek.</p>
-          <span class="cat-card-cta">Více & ceník <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          <div class="cat-card-pricerow">
+            <span><span class="cat-card-price-label">Od</span><span class="cat-card-price">300 Kč</span></span>
+            <span class="cat-card-cta">Více <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          </div>
         </div>
       </button>
     </div>
