@@ -46,7 +46,11 @@ header.bar{background:#fff;border-bottom:1px solid rgba(184,147,47,.15);padding:
 header.bar h1{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400}
 header.bar h1 .pill{display:inline-block;margin-left:10px;color:rgba(10,10,10,.45);font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-family:'Inter',sans-serif;font-weight:500;vertical-align:middle}
 header.bar .meta{display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(10,10,10,.55);flex-shrink:0}
-.last-sync{margin-right:6px}
+.last-sync{margin-right:6px;display:inline-flex;align-items:center;gap:6px;transition:color .3s ease,transform .3s ease}
+.live-dot-tiny{display:inline-block;width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.55);animation:liveDotPulse 2s ease-in-out infinite}
+@keyframes liveDotPulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}50%{box-shadow:0 0 0 6px rgba(34,197,94,0)}}
+.last-sync.flash-new{color:#22c55e;animation:flashNew 1.6s ease}
+@keyframes flashNew{0%{transform:scale(1.08);color:#16a34a}30%{transform:scale(1);color:#22c55e}100%{transform:scale(1);color:inherit}}
 .btn{background:#fff;border:1px solid rgba(184,147,47,.3);color:#8a6c1f;padding:9px 16px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .25s;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
 .btn:hover{background:#b8932f;color:#fff;border-color:#b8932f}
 .btn.primary{background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);color:#fff;border-color:transparent}
@@ -389,7 +393,7 @@ const ADMIN_EMAIL = 'admin@excellencecare.cz';  // interní login email (vytvoř
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js';
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
   from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js';
-import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, deleteDoc, writeBatch, serverTimestamp, query, orderBy }
+import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, deleteDoc, writeBatch, serverTimestamp, query, orderBy, onSnapshot }
   from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js';
 
 const app = initializeApp(firebaseConfig);
@@ -404,7 +408,7 @@ const loginErr  = document.getElementById('loginErr');
 
 const hideBoot = () => bootView && bootView.classList.add('hidden');
 const showAdmin = () => { hideBoot(); loginView.classList.add('hidden'); adminView.classList.remove('hidden'); loadData(); };
-const showLogin = () => { hideBoot(); adminView.classList.add('hidden'); loginView.classList.remove('hidden'); const pw = document.getElementById('pw'); pw.value=''; pw.focus(); };
+const showLogin = () => { hideBoot(); if (typeof unsubscribeLive === 'function') unsubscribeLive(); adminView.classList.add('hidden'); loginView.classList.remove('hidden'); const pw = document.getElementById('pw'); pw.value=''; pw.focus(); };
 
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -487,16 +491,70 @@ async function fsRemove(id) {
   await batch.commit();
 }
 
-async function loadData() {
-  document.getElementById('listWrap').innerHTML = '<div class="empty"><div class="icon">…</div><p>Načítám rezervace…</p></div>';
-  try {
-    store = await fsList();
-    document.getElementById('dataSrc').textContent = 'Firestore · ' + store.length + ' záznamů';
-    document.getElementById('lastSync').textContent = 'Aktualizováno: ' + new Date().toLocaleTimeString('cs-CZ');
-    render();
-  } catch (err) {
-    document.getElementById('listWrap').innerHTML = '<div class="empty"><div class="icon">!</div><p>Chyba načítání: ' + escHtml(err.message || String(err)) + '</p></div>';
+/* ═══ Live Firestore subscription (real-time admin) ═══ */
+let unsubReservations = null;
+let unsubBreaks = null;
+let latestReservations = [];
+let latestBreaks = [];
+let resInitialized = false;
+let lastResCount = -1;
+
+function mergeAndRender() {
+  store = [...latestReservations, ...latestBreaks];
+  store.sort((a, b) => (a.termin || '').localeCompare(b.termin || ''));
+  document.getElementById('dataSrc').textContent = 'Firestore · ' + store.length + ' záznamů';
+  const syncEl = document.getElementById('lastSync');
+  if (syncEl) {
+    syncEl.innerHTML = '<span class="live-dot-tiny" aria-hidden="true"></span>Live · ' + new Date().toLocaleTimeString('cs-CZ');
   }
+  render();
+}
+
+function unsubscribeLive() {
+  if (unsubReservations) { try { unsubReservations(); } catch {} unsubReservations = null; }
+  if (unsubBreaks) { try { unsubBreaks(); } catch {} unsubBreaks = null; }
+  resInitialized = false;
+  lastResCount = -1;
+}
+
+function flashNewBookingIndicator() {
+  const ind = document.getElementById('lastSync');
+  if (!ind) return;
+  ind.classList.remove('flash-new');
+  void ind.offsetWidth;
+  ind.classList.add('flash-new');
+}
+
+function loadData() {
+  unsubscribeLive();
+  document.getElementById('listWrap').innerHTML = '<div class="empty"><div class="icon">…</div><p>Načítám rezervace…</p></div>';
+
+  const onErr = (err) => {
+    document.getElementById('listWrap').innerHTML = '<div class="empty"><div class="icon">!</div><p>Chyba živého spojení: ' + escHtml(err.message || String(err)) + '</p></div>';
+  };
+
+  unsubReservations = onSnapshot(
+    query(collection(db, RES_COL), orderBy('termin', 'asc')),
+    (snap) => {
+      latestReservations = snap.docs.map(d => ({ id: d.id, type: 'reservation', ...d.data() }));
+      if (resInitialized && latestReservations.length > lastResCount && !snap.metadata.hasPendingWrites) {
+        flashNewBookingIndicator();
+      }
+      lastResCount = latestReservations.length;
+      resInitialized = true;
+      mergeAndRender();
+    },
+    onErr
+  );
+
+  unsubBreaks = onSnapshot(
+    query(collection(db, BREAKS_COL), orderBy('termin', 'asc')),
+    (snap) => {
+      latestBreaks = snap.docs.map(d => ({ id: d.id, type: 'pause', ...d.data() }));
+      mergeAndRender();
+    },
+    onErr
+  );
 }
 
 /* ═══ Tabs ═══ */

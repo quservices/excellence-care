@@ -562,7 +562,7 @@ html,body{overflow-x:hidden;max-width:100vw}
     <div class="lg:col-span-7">
       <div class="badge fadeUp mb-8" style="animation-delay:.1s">
         <span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
-        Otevřeno · denně
+        Po–Pá · dle rezervace
       </div>
 
       <h1 class="fadeUp font-serif text-6xl md:text-7xl lg:text-[110px] font-light leading-[0.92] mb-6 tracking-tight" style="animation-delay:.25s">
@@ -1088,9 +1088,9 @@ html,body{overflow-x:hidden;max-width:100vw}
             <div class="flex-1">
               <p class="text-[10px] tracking-[0.22em] uppercase text-gold mb-2">Otevírací doba</p>
               <div class="text-base space-y-1">
-                <div class="flex justify-between"><span class="font-serif">Po–Pá</span><span class="text-ink/70">9:00 — 20:00</span></div>
-                <div class="flex justify-between"><span class="font-serif">Sobota</span><span class="text-ink/70">10:00 — 18:00</span></div>
-                <div class="flex justify-between"><span class="font-serif">Neděle</span><span class="text-ink/70">10:00 — 18:00</span></div>
+                <div class="flex justify-between"><span class="font-serif">Po–Pá</span><span class="text-ink/70">dle rezervace</span></div>
+                <div class="flex justify-between"><span class="font-serif">Sobota</span><span class="text-ink/70">zavřeno</span></div>
+                <div class="flex justify-between"><span class="font-serif">Neděle</span><span class="text-ink/70">zavřeno</span></div>
               </div>
             </div>
           </div>
@@ -1115,7 +1115,7 @@ html,body{overflow-x:hidden;max-width:100vw}
             <div class="map-info">
               <div class="flex items-center gap-2 mb-3">
                 <span class="live-dot"></span>
-                <span class="text-[9px] tracking-[0.22em] uppercase font-semibold text-ink/70">Otevřeno · do 20:00</span>
+                <span class="text-[9px] tracking-[0.22em] uppercase font-semibold text-ink/70">Po–Pá · dle rezervace</span>
               </div>
               <p class="font-serif text-2xl leading-none mb-1"><span class="italic gold-text">Exelance</span> Care</p>
               <p class="text-[10px] tracking-[0.2em] uppercase text-ink/70 mt-2">Štefánikova 1163</p>
@@ -1401,7 +1401,7 @@ function initMap() {
   const goldIcon = L.divIcon({ className: 'gold-pin-wrap', html: pinSvg, iconSize: [50, 70], iconAnchor: [25, 65], popupAnchor: [0, -60] });
 
   L.marker(SALON, { icon: goldIcon, title: 'Exelance Care' }).addTo(map)
-    .bindPopup('<div class="pop-title">Exelance Care</div><div>Štefánikova 1163, Kopřivnice</div><div class="pop-sub">Otevřeno · do 20:00</div>');
+    .bindPopup('<div class="pop-title">Exelance Care</div><div>Štefánikova 1163, Kopřivnice</div><div class="pop-sub">Po–Pá · dle rezervace</div>');
 
   /* Click to enable scroll-zoom; toast hint */
   const hint = document.getElementById('mapHint');
@@ -1522,7 +1522,7 @@ if (yEl) yEl.textContent = new Date().getFullYear();
             <div class="b-slots" id="bSlots"></div>
             <p class="b-no-slots" id="bNoSlots" hidden></p>
           </div>
-          <p class="b-helper">Otevřeno Po–Pá 9:00–20:00, So–Ne 10:00–18:00</p>
+          <p class="b-helper">Termíny Po–Pá dle rezervace · So–Ne zavřeno</p>
           <input type="hidden" id="bTermin" name="termin"/>
         </fieldset>
 
@@ -1609,15 +1609,13 @@ const SERVICES = [
   { id: 'nart',     name: 'Nárt a prsty',         category: 'Depilace', duration: 15, dur: '15 min', price: '300 Kč' },
 ];
 
-// Otevírací doba (v minutách od půlnoci). 0=neděle, 1=pondělí…
+// Otevírací doba (v minutách od půlnoci). 0=neděle, 1=pondělí… So+Ne zavřeno.
 const OPENING_HOURS = {
-  0: { open: 10*60, close: 18*60 },         // Ne
-  1: { open: 9*60, close: 20*60 },          // Po–Pá
+  1: { open: 9*60, close: 20*60 },          // Po–Pá · dle rezervace
   2: { open: 9*60, close: 20*60 },
   3: { open: 9*60, close: 20*60 },
   4: { open: 9*60, close: 20*60 },
   5: { open: 9*60, close: 20*60 },
-  6: { open: 10*60, close: 18*60 },         // So
 };
 const SLOT_MINUTES = 30; // granularita slotů
 
@@ -1723,7 +1721,7 @@ async function refreshSlots() {
   if (!hours) {
     grid.innerHTML = '';
     noSlots.hidden = false;
-    noSlots.textContent = 'V neděli máme zavřeno. Vyberte prosím jiný den.';
+    noSlots.textContent = 'O víkendu máme zavřeno. Vyberte prosím den Po–Pá.';
     return;
   }
 
