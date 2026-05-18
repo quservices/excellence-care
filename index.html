@@ -208,6 +208,12 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 .cat-benefits li{display:flex;align-items:center;gap:8px;color:rgba(10,10,10,.72)}
 .cat-benefits li::before{content:'';width:5px;height:5px;background:#b8932f;border-radius:50%;flex-shrink:0}
 
+/* detailed benefits — vertical list with checkmarks for content-heavy categories */
+.cat-benefits-detail{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr;gap:8px}
+@media (min-width:768px){.cat-benefits-detail{grid-template-columns:1fr 1fr}}
+.cat-benefits-detail li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(10,10,10,.78);line-height:1.45}
+.cat-benefits-detail svg{width:14px;height:14px;color:#b8932f;flex-shrink:0;margin-top:3px}
+
 /* Service items grid within category */
 .cat-services{display:grid;gap:8px;grid-template-columns:1fr}
 @media (min-width:640px){.cat-services{grid-template-columns:1fr 1fr}}
@@ -746,31 +752,40 @@ html,body{overflow-x:hidden;max-width:100vw}
     <div class="cat-block rv">
       <div class="cat-header">
         <div class="cat-img">
-          <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80" alt="Přístrojová maderoterapie — dřevěné nástroje" loading="lazy"/>
+          <img src="images/maderoterapie.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80'" alt="Přístrojová maderoterapie VIBROSLIMFIT" loading="lazy"/>
           <span class="cat-num">01</span>
         </div>
         <div class="cat-info">
           <p class="cat-tag">Kategorie 01 · Tvarování postavy</p>
           <h3>Přístrojová maderoterapie</h3>
-          <p>Manuální masáž speciálními dřevěnými nástroji. Účinná přírodní metoda pro tvarování postavy, lifting obličeje a redukci celulitidy bez přístrojů a injekcí.</p>
-          <ul class="cat-benefits">
-            <li>100% přírodní</li>
-            <li>Stimuluje lymfu</li>
-            <li>Redukuje celulitidu</li>
-            <li>Zpevňuje pleť</li>
+          <p>Přístrojová maderoterapie za pomocí masážního přístroje <strong class="text-ink font-medium">VIBROSLIMFIT</strong> velmi efektivně pomáhá s odstraněním celulitidy, hubnutím a uvolněním svalů. Spolu s kombinací masážních pomůcek <strong class="text-ink font-medium">CELSLIMROLL</strong> a <strong class="text-ink font-medium">FUFFU baněk</strong> ošetření přinese viditelné výsledky již po první návštěvě.</p>
+          <ul class="cat-benefits-detail">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Podpora hubnutí a odbourávání tukových zásob</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Účinné odstranění celulitidy</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Podpora cirkulace nervového systému</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Regulace krevního oběhu</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Snížení svalové únavy a bolesti</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Zrychlení metabolismu</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Zlepšení pružnosti pokožky</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Zmírnění chronických svalových bolestí a křečí</span></li>
           </ul>
         </div>
       </div>
       <div class="cat-services">
         <article class="srv-item">
-          <h4>Maderoterapie tělo</h4>
-          <p class="srv-desc">Tvarování postavy, lymfodrenáž, hluboká masáž problematických partií.</p>
-          <div class="srv-item-meta"><span class="dur">75 min</span><span class="price">1 290 Kč</span></div>
+          <h4>Horní polovina těla</h4>
+          <p class="srv-desc">Břicho, boky, ruce a záda.</p>
+          <div class="srv-item-meta"><span class="dur">60 min</span><span class="price">880 Kč</span></div>
         </article>
         <article class="srv-item">
-          <h4>Maderoterapie obličej</h4>
-          <p class="srv-desc">Přírodní lifting bez skalpelu — stimulace kolagenu, zpevnění kontur.</p>
-          <div class="srv-item-meta"><span class="dur">45 min</span><span class="price">990 Kč</span></div>
+          <h4>Dolní polovina těla</h4>
+          <p class="srv-desc">Lýtka, stehna a hýždě.</p>
+          <div class="srv-item-meta"><span class="dur">60 min</span><span class="price">880 Kč</span></div>
+        </article>
+        <article class="srv-item">
+          <h4>Celé tělo</h4>
+          <p class="srv-desc">Kompletní ošetření horní i dolní poloviny.</p>
+          <div class="srv-item-meta"><span class="dur">120 min</span><span class="price">1 760 Kč</span></div>
         </article>
       </div>
     </div>
@@ -1590,9 +1605,10 @@ const db = getFirestore(app);
 
 // duration v minutách — řazené podle kategorií
 const SERVICES = [
-  // Přístrojová maderoterapie
-  { id: 'madero-telo',     name: 'Maderoterapie tělo',       category: 'Maderoterapie',   duration: 75, dur: '75 min', price: '1 290 Kč' },
-  { id: 'madero-oblicej',  name: 'Maderoterapie obličej',    category: 'Maderoterapie',   duration: 45, dur: '45 min', price: '990 Kč' },
+  // Přístrojová maderoterapie (VIBROSLIMFIT)
+  { id: 'madero-horni',    name: 'Maderoterapie horní polovina těla', category: 'Maderoterapie', duration: 60, dur: '60 min',  price: '880 Kč' },
+  { id: 'madero-dolni',    name: 'Maderoterapie dolní polovina těla', category: 'Maderoterapie', duration: 60, dur: '60 min',  price: '880 Kč' },
+  { id: 'madero-cele',     name: 'Maderoterapie celé tělo',           category: 'Maderoterapie', duration: 120,dur: '120 min', price: '1 760 Kč' },
   // Neinvazivní liposukce
   { id: 'lipo-1',          name: 'Neinvazivní liposukce — 1 sezení', category: 'Liposukce', duration: 60, dur: '60 min', price: '1 490 Kč' },
   { id: 'lipo-5',          name: 'Neinvazivní liposukce — balíček 5×', category: 'Liposukce', duration: 60, dur: '5× 60 min', price: '6 490 Kč', featured: true },
