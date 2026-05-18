@@ -351,12 +351,12 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
         <p style="font-size:13px;color:rgba(10,10,10,.6);margin-bottom:18px;line-height:1.55">Pauza zablokuje rezervační sloty na webu — klienti se v daném čase nebudou moct objednat.</p>
         <div class="row two">
           <div>
-            <label for="p_termin">Začátek *</label>
+            <label for="p_termin">Od *</label>
             <input id="p_termin" name="termin" type="datetime-local" required/>
           </div>
           <div>
-            <label for="p_duration">Trvání (min) *</label>
-            <input id="p_duration" name="duration" type="number" min="15" max="1440" step="15" value="60" required/>
+            <label for="p_konec">Do *</label>
+            <input id="p_konec" name="konec" type="datetime-local" required/>
           </div>
         </div>
         <div class="row">
@@ -1097,13 +1097,38 @@ async function deleteItem(id) {
 const pauseModalBg = document.getElementById('pauseModalBg');
 const pauseForm = document.getElementById('pauseForm');
 
+/* Format a Date as YYYY-MM-DDTHH:MM in local time (for datetime-local input) */
+function toLocalInput(d) {
+  const pad = n => String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
 function openPauseModal() {
   pauseForm.reset();
-  document.getElementById('p_termin').value = defaultTermin();
-  document.getElementById('p_duration').value = 60;
+  /* Default: zítra 10:00 → 11:00 (1 hour) */
+  const start = new Date();
+  start.setDate(start.getDate() + 1);
+  start.setHours(10, 0, 0, 0);
+  const end = new Date(start.getTime() + 60 * 60 * 1000);
+  document.getElementById('p_termin').value = toLocalInput(start);
+  document.getElementById('p_konec').value  = toLocalInput(end);
   pauseModalBg.classList.add('open');
   setTimeout(() => document.getElementById('p_termin').focus(), 50);
 }
+
+/* Auto-shift end when user changes start, preserving the previous duration —
+   feels natural and prevents end < start state */
+document.getElementById('p_termin').addEventListener('change', () => {
+  const startV = document.getElementById('p_termin').value;
+  const endV   = document.getElementById('p_konec').value;
+  if (!startV) return;
+  const s = new Date(startV);
+  const e = endV ? new Date(endV) : null;
+  /* If end is invalid or before/equal start, push it to start + 1h */
+  if (!e || e <= s) {
+    document.getElementById('p_konec').value = toLocalInput(new Date(s.getTime() + 60*60*1000));
+  }
+});
 function closePauseModal() { pauseModalBg.classList.remove('open'); }
 
 document.getElementById('fabPause').addEventListener('click', openPauseModal);
@@ -1114,13 +1139,21 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && pauseModal
 
 pauseForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  const startV = document.getElementById('p_termin').value;
+  const endV   = document.getElementById('p_konec').value;
+  if (!startV || !endV) { alert('Vyplňte čas od a do.'); return; }
+  const start = new Date(startV);
+  const end   = new Date(endV);
+  if (isNaN(start) || isNaN(end)) { alert('Neplatný čas.'); return; }
+  if (end <= start) { alert('Konec musí být po začátku.'); return; }
+  const durationMin = Math.round((end - start) / 60000);
+  if (durationMin < 5) { alert('Pauza musí trvat alespoň 5 minut.'); return; }
   const payload = {
-    termin: document.getElementById('p_termin').value,
-    duration: parseInt(document.getElementById('p_duration').value, 10) || 60,
+    termin: startV,
+    duration: durationMin,
     note: document.getElementById('p_note').value.trim(),
     createdAt: serverTimestamp(),
   };
-  if (!payload.termin) { alert('Vyplňte čas pauzy.'); return; }
   const btn = document.getElementById('pauseModalSave');
   btn.disabled = true;
   try {
