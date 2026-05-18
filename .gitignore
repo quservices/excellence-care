@@ -27,3 +27,9 @@ maison-luxe-light (1).html
 # Firebase (lokální cache + project link)
 .firebase/
 .firebaserc
+
+# Local helper scripts and source assets that aren't deployed
+scripts/
+logo65+94.jpeg
+package.json
+package-lock.json

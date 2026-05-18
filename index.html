@@ -179,20 +179,14 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 .marquee-track{display:flex;animation:marquee 30s linear infinite;gap:60px;width:max-content}
 
 /* ═══ BRAND LOGO ═══ */
-/* SVG inline version (default — uses #brandLogoSymbol with Italiana + gold gradient + bolder stroke) */
-.brand-logo-svg{display:block;height:auto;width:auto;overflow:visible!important}
-.brand-logo-svg text{fill:url(#brandLogoGrad)}
-.brand-logo .brand-logo-svg{height:62px;width:auto}
-.brand-logo-lg .brand-logo-svg{height:130px;width:auto}
-.brand-logo-xl .brand-logo-svg{height:180px;width:auto}
+.brand-logo-img{display:block;height:auto;max-width:100%}
+/* Nav logo: vizuálně 110px, ale negativní margin udrží lištu na původní výšce 54px */
+.brand-logo .brand-logo-img{max-height:110px;width:auto;margin:-28px 0}
+.brand-logo-lg .brand-logo-img{max-height:190px;width:auto}
+.brand-logo-xl .brand-logo-img{max-height:240px;width:auto}
 @media (max-width:768px){
-  .brand-logo .brand-logo-svg{height:50px}
+  .brand-logo .brand-logo-img{max-height:84px;margin:-20px 0}
 }
-/* Image variant (only if user uploads custom images/logo.png) */
-.brand-logo-img{display:block;height:auto;max-width:100%;filter:url(#logo-thicken)}
-.brand-logo .brand-logo-img{max-height:54px;width:auto}
-.brand-logo-lg .brand-logo-img{max-height:96px;width:auto}
-.brand-logo-xl .brand-logo-img{max-height:140px;width:auto}
 /* Wrapper allows image + text fallback inside */
 .brand-logo{display:inline-flex;flex-direction:column;text-decoration:none;line-height:.95;align-items:flex-start}
 .brand-logo .brand-line{font-family:'Italiana','Cormorant Garamond',serif;font-weight:400;background:linear-gradient(140deg,#f0d488 0%,#d4af37 28%,#b8932f 55%,#8a6c1f 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 1px 0 rgba(184,147,47,.18))}
@@ -491,12 +485,8 @@ html,body{overflow-x:hidden;max-width:100vw}
 /* ═══════ SCROLL PROGRESS BAR ═══════ */
 .scroll-prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#d4af37,#b8932f);z-index:9999;width:0;transition:width .12s ease-out;pointer-events:none}
 
-/* ═══════ COUNTER / SLOT MACHINE ═══════ */
+/* ═══════ COUNTER ═══════ */
 .counter{display:inline-block;font-variant-numeric:tabular-nums;font-feature-settings:'tnum'}
-.counter.counting{animation:slotFlicker .12s ease-in-out infinite alternate}
-@keyframes slotFlicker{from{filter:brightness(1)}to{filter:brightness(1.18)}}
-.counter.done{animation:counterPop .55s cubic-bezier(.34,1.56,.64,1)}
-@keyframes counterPop{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
 
 /* small dark-text variant for badge inside contact */
 .tag-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(184,147,47,.08);border:1px solid rgba(184,147,47,.2);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#8a6c1f;font-weight:600}
@@ -600,34 +590,11 @@ html,body{overflow-x:hidden;max-width:100vw}
 </head>
 <body>
 
-<!-- SVG inline logo symbol (EXELANCE CARE — Italiana + gold gradient + slightly bolder via stroke) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <filter id="logo-thicken">
-      <feMorphology operator="dilate" radius="1.2"/>
-    </filter>
-    <linearGradient id="brandLogoGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#fbe79b"/>
-      <stop offset="22%" stop-color="#f0d488"/>
-      <stop offset="50%" stop-color="#d4af37"/>
-      <stop offset="75%" stop-color="#a37f1e"/>
-      <stop offset="100%" stop-color="#6b5215"/>
-    </linearGradient>
-    <symbol id="brandLogoSymbol" viewBox="0 0 1400 620" overflow="visible">
-      <text x="700" y="260" text-anchor="middle" font-family="Italiana, 'Cormorant Garamond', Georgia, serif" font-weight="400" font-size="170" letter-spacing="22" fill="url(#brandLogoGrad)" stroke="url(#brandLogoGrad)" stroke-width="2.4" paint-order="stroke fill">EXELANCE</text>
-      <text x="700" y="540" text-anchor="middle" font-family="Italiana, 'Cormorant Garamond', Georgia, serif" font-weight="400" font-size="150" letter-spacing="42" fill="url(#brandLogoGrad)" stroke="url(#brandLogoGrad)" stroke-width="2.4" paint-order="stroke fill">CARE</text>
-    </symbol>
-  </defs>
-</svg>
-
 <!-- ═══════ NAV ═══════ -->
 <nav id="nav" class="fixed top-0 left-0 right-0 z-50 px-6 md:px-16 py-5">
   <div class="flex items-center justify-between max-w-7xl mx-auto">
     <a href="#" class="brand-logo" aria-label="Exelance Care — domovská stránka">
-      <img src="images/logo.png" alt="Exelance Care" class="brand-logo-img"
-           onload="this.nextElementSibling.style.display='none'"
-           onerror="this.style.display='none'"/>
-      <svg class="brand-logo-svg" viewBox="0 0 1400 620" overflow="visible" aria-hidden="true"><use href="#brandLogoSymbol"/></svg>
+      <img src="images/logo.png" alt="Exelance Care" class="brand-logo-img"/>
     </a>
     <ul class="hidden lg:flex gap-10 items-center">
       <li><a href="#o-salonu" class="text-[10px] tracking-[0.22em] uppercase text-ink/70 hover:text-gold transition-colors">O salonu</a></li>
@@ -704,15 +671,15 @@ html,body{overflow-x:hidden;max-width:100vw}
       <!-- mini stats - bez fadeUp, viditelné okamžitě aby byl slot-machine efekt vidět -->
       <div class="hero-stats grid grid-cols-3 gap-3 sm:gap-6 mt-12 pt-8 border-t border-gold/15 max-w-xl">
         <div class="flex flex-col">
-          <div class="font-serif text-[28px] sm:text-3xl md:text-4xl gold-text leading-none mb-3 whitespace-nowrap"><span class="counter" data-target="8" data-suffix="+">0</span></div>
+          <div class="font-serif text-[28px] sm:text-3xl md:text-4xl gold-text leading-none mb-3 whitespace-nowrap"><span class="counter" data-target="8" data-suffix="+">0+</span></div>
           <div class="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.22em] uppercase text-ink/55 font-medium mt-auto">Let péče</div>
         </div>
         <div class="flex flex-col">
-          <div class="font-serif text-[28px] sm:text-3xl md:text-4xl gold-text leading-none mb-3 whitespace-nowrap"><span class="counter" data-target="2000" data-suffix="+">0</span></div>
+          <div class="font-serif text-[28px] sm:text-3xl md:text-4xl gold-text leading-none mb-3 whitespace-nowrap"><span class="counter" data-target="2000" data-suffix="+">0&nbsp;000+</span></div>
           <div class="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.22em] uppercase text-ink/55 font-medium mt-auto">Klientek</div>
         </div>
         <div class="flex flex-col">
-          <div class="font-serif text-[28px] sm:text-3xl md:text-4xl gold-text leading-none mb-2 whitespace-nowrap"><span class="counter" data-target="4.9" data-decimals="1">0</span></div>
+          <div class="font-serif text-[28px] sm:text-3xl md:text-4xl gold-text leading-none mb-2 whitespace-nowrap"><span class="counter" data-target="4.9" data-decimals="1">0,0</span></div>
           <div class="flex gap-0.5 text-gold mb-2" aria-label="4.9 z 5 hvězdiček">
             <svg class="w-[7px] h-[7px] sm:w-2.5 sm:h-2.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
             <svg class="w-[7px] h-[7px] sm:w-2.5 sm:h-2.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 8-6-4-6 4 2-8-6-4h7z"/></svg>
@@ -723,6 +690,48 @@ html,body{overflow-x:hidden;max-width:100vw}
           <div class="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.22em] uppercase text-ink/55 font-medium mt-auto">Google</div>
         </div>
       </div>
+      <!-- Counter: minimal, deterministic count-up. Console logs for debugging. -->
+      <script>
+      (function(){
+        console.log('[counter] script parsed at', performance.now().toFixed(0)+'ms');
+        const fmt = new Intl.NumberFormat('cs-CZ');
+        function format(val, decimals){
+          return decimals > 0
+            ? val.toFixed(decimals).replace('.', ',')
+            : fmt.format(Math.floor(val));
+        }
+        function animateCounter(el){
+          if (el.dataset.animated) return;
+          el.dataset.animated = '1';
+          const target = parseFloat(el.dataset.target);
+          const suffix = el.dataset.suffix || '';
+          const decimals = parseInt(el.dataset.decimals || '0', 10);
+          const duration = 2200;
+          console.log('[counter] animating target=' + target);
+          const startTime = Date.now();
+          const id = setInterval(() => {
+            const elapsed = Date.now() - startTime;
+            const t = Math.min(elapsed / duration, 1);
+            if (t >= 1){
+              clearInterval(id);
+              el.textContent = format(target, decimals) + suffix;
+              console.log('[counter] done target=' + target);
+              return;
+            }
+            const eased = 1 - Math.pow(1 - t, 3);
+            el.textContent = format(target * eased, decimals) + suffix;
+          }, 30);
+        }
+        window.__animateCounter = animateCounter;
+        function runHero(){
+          const els = document.querySelectorAll('.hero-stats .counter[data-target]:not([data-animated])');
+          console.log('[counter] runHero, found ' + els.length + ' elements');
+          els.forEach(animateCounter);
+        }
+        requestAnimationFrame(() => requestAnimationFrame(runHero));
+        window.addEventListener('load', () => setTimeout(runHero, 200));
+      })();
+      </script>
     </div>
 
     <!-- Image column - layered images -->
@@ -744,11 +753,6 @@ html,body{overflow-x:hidden;max-width:100vw}
     </div>
   </div>
 
-  <!-- scroll indicator (skrytý na mobilu) -->
-  <div class="fadeUp scroll-ind hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-3 text-ink/40" style="animation-delay:1.2s">
-    <span class="text-[9px] tracking-[0.3em] uppercase">Scroll</span>
-    <div class="w-px h-12 bg-gradient-to-b from-gold to-transparent"></div>
-  </div>
 </section>
 
 <!-- ═══════ O SALONU ═══════ -->
@@ -760,10 +764,7 @@ html,body{overflow-x:hidden;max-width:100vw}
         <div class="relative max-w-md">
           <div class="polaroid relative bg-white p-3 soft-shadow">
             <img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=900&q=85" alt="Interiér salonu" class="w-full aspect-[4/5] object-cover" loading="lazy"/>
-            <img src="images/logo.png" alt="Exelance Care" class="mx-auto mt-3 block" style="max-height:70px;width:auto;filter:url(#logo-thicken)"
-                 onload="this.nextElementSibling.style.display='none'"
-                 onerror="this.style.display='none'"/>
-            <svg viewBox="0 0 1400 620" overflow="visible" aria-hidden="true" class="mx-auto mt-3 block" style="height:64px;width:auto"><use href="#brandLogoSymbol"/></svg>
+            <img src="images/logo.png" alt="Exelance Care" class="mx-auto mt-3 block" style="max-height:140px;width:auto"/>
           </div>
           <!-- Decorative element -->
           <div class="absolute -bottom-12 -right-8 w-48 h-48 hidden md:block">
@@ -948,10 +949,7 @@ html,body{overflow-x:hidden;max-width:100vw}
             <div class="absolute inset-0 bg-gradient-to-br from-gold2/30 via-gold/10 to-transparent blur-2xl"></div>
             <div class="relative bg-white border border-gold/30 p-8 soft-shadow text-center" style="transform:rotate(-3deg)">
               <p class="text-[9px] tracking-[0.3em] uppercase text-gold mb-3">Dárkový poukaz</p>
-              <img src="images/logo.png" alt="Exelance Care" class="mx-auto mb-4" style="max-height:110px;width:auto;display:block;filter:url(#logo-thicken)"
-                   onload="this.nextElementSibling.style.display='none'"
-                   onerror="this.style.display='none'"/>
-              <svg viewBox="0 0 1400 620" overflow="visible" aria-hidden="true" class="mx-auto mb-4" style="height:95px;width:auto;display:block"><use href="#brandLogoSymbol"/></svg>
+              <img src="images/logo.png" alt="Exelance Care" class="mx-auto mb-4" style="max-height:200px;width:auto;display:block"/>
               <div class="gold-divider mb-4"><span class="line" style="width:32px"></span><span class="dot"></span><span class="line" style="width:32px"></span></div>
               <p class="font-serif text-4xl gold-text leading-none mb-2">500–5000</p>
               <p class="text-[9px] tracking-[0.25em] uppercase text-ink/60">Korun českých</p>
@@ -1210,10 +1208,7 @@ html,body{overflow-x:hidden;max-width:100vw}
     <div class="grid md:grid-cols-4 gap-12 mb-16">
       <div class="md:col-span-2">
         <a href="#" class="brand-logo brand-logo-lg mb-6" aria-label="Exelance Care">
-          <img src="images/logo.png" alt="Exelance Care" class="brand-logo-img"
-               onload="this.nextElementSibling.style.display='none'"
-               onerror="this.style.display='none'"/>
-          <svg class="brand-logo-svg" viewBox="0 0 1400 620" overflow="visible" aria-hidden="true"><use href="#brandLogoSymbol"/></svg>
+          <img src="images/logo.png" alt="Exelance Care" class="brand-logo-img"/>
         </a>
         <p class="text-cream/60 text-sm leading-relaxed max-w-md mb-8">
           Prémiový salon krásy v centru Kopřivnice — přístrojová maderoterapie, neinvazivní liposukce, spa pedikúra a depilace pod jednou střechou. Od roku 2017.
@@ -1316,87 +1311,17 @@ window.addEventListener('scroll', () => {
   });
 }, {passive: true});
 
-/* ═══ Slot-machine counter — digits roll & lock left→right ═══ */
-const fmt = new Intl.NumberFormat('cs-CZ');
-function animateCounter(el) {
-  if (el.dataset.animated) return;
-  el.dataset.animated = '1';
-  const target = parseFloat(el.dataset.target);
-  const suffix = el.dataset.suffix || '';
-  const prefix = el.dataset.prefix || '';
-  const decimals = parseInt(el.dataset.decimals || '0', 10);
-  const duration = 1100 + Math.min(Math.log10(Math.max(target, 1)) * 110, 350);
-  const start = performance.now();
-  el.classList.add('counting');
-
-  /* Final formatted string + positions of digit characters */
-  const finalStr = decimals > 0
-    ? target.toFixed(decimals).replace('.', ',')
-    : fmt.format(Math.floor(target));
-  const chars = [...finalStr];
-  const digitPositions = [];
-  chars.forEach((c, i) => { if (/\d/.test(c)) digitPositions.push(i); });
-  const numDigits = digitPositions.length;
-  /* Reserve width once so the layout doesn't jiggle while digits cycle */
-  el.style.minWidth = el.getBoundingClientRect().width ? null : 'auto';
-
-  let lastRoll = 0;
-  function tick(now) {
-    const t = Math.min((now - start) / duration, 1);
-    if (t >= 1) {
-      el.textContent = prefix + finalStr + suffix;
-      el.classList.remove('counting');
-      el.classList.add('done');
-      setTimeout(() => el.classList.remove('done'), 600);
-      return;
-    }
-    /* ease-out cubic — last reels stop slower */
-    const eased = 1 - Math.pow(1 - t, 2.6);
-    const lockedCount = Math.floor(eased * numDigits);
-
-    /* Re-roll random digits every ~55ms (visible slot-reel cadence) */
-    if (now - lastRoll > 55) {
-      lastRoll = now;
-      const out = [...chars];
-      digitPositions.forEach((pos, idx) => {
-        if (idx < lockedCount) {
-          out[pos] = chars[pos];
-        } else {
-          out[pos] = Math.floor(Math.random() * 10).toString();
-        }
-      });
-      el.textContent = prefix + out.join('') + suffix;
-    }
-    requestAnimationFrame(tick);
-  }
-  /* Reserve final width to prevent layout shift while rolling */
-  el.textContent = prefix + finalStr + suffix;
-  const lockedWidth = el.getBoundingClientRect().width;
-  if (lockedWidth) el.style.minWidth = lockedWidth + 'px';
-  /* Initial state: 0s with formatting preserved (spaces, commas) */
-  el.textContent = prefix + chars.map(c => /\d/.test(c) ? '0' : c).join('') + suffix;
-  requestAnimationFrame(tick);
-}
+/* ═══ Slot-machine counter — function defined early in <body> (window.__animateCounter).
+       Here we just observe below-fold counters and fire when scrolled into view. ═══ */
 const counterIO = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      animateCounter(e.target);
+      window.__animateCounter && window.__animateCounter(e.target);
       counterIO.unobserve(e.target);
     }
   });
 }, {threshold: .1});
-document.querySelectorAll('.counter[data-target]').forEach(el => counterIO.observe(el));
-
-/* Force-trigger counters that are visible on load (e.g. hero stats) — start ASAP */
-function triggerVisibleCounters() {
-  document.querySelectorAll('.counter[data-target]:not([data-animated])').forEach(el => {
-    const r = el.getBoundingClientRect();
-    if (r.top < innerHeight && r.bottom > 0) animateCounter(el);
-  });
-}
-/* Fire immediately + small delay safety net (handles fonts/layout settling) */
-triggerVisibleCounters();
-setTimeout(triggerVisibleCounters, 250);
+document.querySelectorAll('.counter[data-target]:not([data-animated])').forEach(el => counterIO.observe(el));
 
 /* ═══ Leaflet interactive map ═══ */
 function initMap() {
