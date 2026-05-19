@@ -237,6 +237,17 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 .srv-item.featured{background:linear-gradient(135deg,#f9f8f5,#fff);border-color:rgba(184,147,47,.4)}
 .srv-item.featured::after{content:'Nejoblíbenější';position:absolute;top:-9px;right:14px;font-size:8px;letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(135deg,#d4af37,#b8932f);color:#fff;padding:3px 9px;font-weight:600}
 
+/* ═══ ABOUT — 3 SLUŽBY KARTY ═══ */
+.about-card{position:relative;background:#fff;border:1px solid rgba(184,147,47,.15);padding:36px 28px 30px;transition:all .45s cubic-bezier(.22,.61,.36,1);overflow:hidden}
+.about-card:hover{transform:translateY(-4px);border-color:rgba(184,147,47,.4);box-shadow:0 20px 50px rgba(0,0,0,.05),0 8px 16px rgba(184,147,47,.06)}
+.about-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,#b8932f,transparent);transform:scaleX(0);transform-origin:center;transition:transform .6s ease}
+.about-card:hover::before{transform:scaleX(1)}
+.about-card-num{position:absolute;top:18px;right:22px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:34px;font-weight:300;color:rgba(184,147,47,.28);line-height:1}
+.about-card-icon{width:52px;height:52px;border:1px solid rgba(184,147,47,.35);display:flex;align-items:center;justify-content:center;color:#b8932f;margin-bottom:22px}
+.about-card h4{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;line-height:1.2;margin-bottom:14px;color:#0a0a0a;letter-spacing:-.005em}
+@media (min-width:1024px){.about-card h4{font-size:24px}}
+.about-card p{font-size:13.5px;color:rgba(10,10,10,.68);line-height:1.65;margin:0}
+
 /* ═══ COMPACT CLICKABLE CATEGORY CARDS ═══ */
 .cat-cards-grid{display:grid;grid-template-columns:1fr;gap:18px}
 @media (min-width:640px){.cat-cards-grid{grid-template-columns:1fr 1fr;gap:20px}}
@@ -758,14 +769,16 @@ html,body{overflow-x:hidden;max-width:100vw}
 </section>
 
 <!-- ═══════ O SALONU ═══════ -->
-<section id="o-salonu" class="relative py-32 px-6 md:px-16">
+<section id="o-salonu" class="relative py-24 md:py-32 px-6 md:px-16">
   <div class="max-w-7xl mx-auto">
-    <div class="grid lg:grid-cols-12 gap-16 items-center">
+
+    <!-- TOP: image + intro -->
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-20 md:mb-24">
       <!-- Image collage -->
-      <div class="lg:col-span-6 rvl">
-        <div class="relative max-w-md">
+      <div class="lg:col-span-5 rvl">
+        <div class="relative max-w-md mx-auto lg:mx-0">
           <div class="polaroid relative bg-white p-3 soft-shadow">
-            <img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=900&q=85" alt="Interiér salonu" class="w-full aspect-[4/5] object-cover" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=900&q=85" alt="Interiér salonu Exelance Care" class="w-full aspect-[4/5] object-cover" loading="lazy"/>
             <img src="images/logo.png" alt="Exelance Care" class="mx-auto mt-3 block" style="max-height:140px;width:auto"/>
           </div>
           <!-- Floating quote -->
@@ -777,39 +790,76 @@ html,body{overflow-x:hidden;max-width:100vw}
       </div>
 
       <!-- Content -->
-      <div class="lg:col-span-6 rvr">
+      <div class="lg:col-span-7 rvr">
         <p class="badge mb-6">
           <span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
           O salonu
         </p>
         <h2 class="font-serif text-5xl md:text-6xl font-light leading-[1.05] mb-6 tracking-tight">
-          Místo, kde se<br>
-          <span class="italic gold-text">krása</span> setkává<br>
-          s klidem.
+          Vítejte v&nbsp;<span class="italic gold-text">oáze krásy</span><br>
+          a&nbsp;relaxace.
         </h2>
         <div class="gold-divider mb-8"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
 
-        <p class="text-ink/70 leading-relaxed mb-5 text-base">
-          Exelance Care je intimní prémiový salon v centru Kopřivnice, kde se každá návštěva mění v rituál. Spojujeme moderní přístrojové ošetření s relaxačními procedurami a každé klientce věnujeme plnou pozornost.
+        <p class="text-ink/75 leading-relaxed mb-5 text-base md:text-lg">
+          Vítejte v&nbsp;oáze krásy a&nbsp;relaxace, kde se vaše tělo i&nbsp;mysl nadechnou. Specializujeme se na <strong class="text-ink font-medium">komplexní péči od hlavy až k&nbsp;patě</strong> — nabízíme moderní neinvazivní liposukci, tvarování postavy pomocí přístrojové maderoterapie, profesionální pedikúru a&nbsp;šetrnou depilaci.
         </p>
-        <p class="text-ink/70 leading-relaxed mb-10 text-base">
-          Specializujeme se na <strong class="text-ink">profesionální depilaci</strong> celého těla. Používáme <strong class="text-ink">bezpáskový vosk</strong> nebo <strong class="text-ink">cukrovou pastu</strong> podle ošetřované oblasti — pro hladkou pokožku, která vydrží.
+        <p class="text-ink/65 leading-relaxed text-base italic">
+          Objevte procedury, které podtrhnou vaši přirozenou krásu a&nbsp;dodají vám nové sebevědomí.
         </p>
+      </div>
+    </div>
 
-        <div class="space-y-4">
-          <div class="flex items-start gap-4">
-            <div class="feat-bullet"></div>
-            <p class="text-ink/80 text-sm leading-relaxed"><strong class="font-medium text-ink">Šetrné metody</strong> — bezpáskový vosk a cukrová pasta volené podle citlivosti dané oblasti.</p>
+    <!-- BOTTOM: 3 main service highlights -->
+    <div class="rv">
+      <div class="text-center mb-12 md:mb-16">
+        <p class="badge mb-5"><span class="w-1.5 h-1.5 bg-gold rounded-full"></span>Naše hlavní služby</p>
+        <h3 class="font-serif text-4xl md:text-5xl font-light tracking-tight">
+          Tři rituály <span class="italic gold-text">pro&nbsp;vás</span>
+        </h3>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+        <!-- Card 1: Postava bez skalpelu -->
+        <article class="about-card">
+          <div class="about-card-num">01</div>
+          <div class="about-card-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 12c2-3 5-3 7 0s5 3 7 0 2-3 4 0"/><path d="M3 7c2-3 5-3 7 0s5 3 7 0 2-3 4 0"/><path d="M3 17c2-3 5-3 7 0s5 3 7 0 2-3 4 0"/></svg>
           </div>
-          <div class="flex items-start gap-4">
-            <div class="feat-bullet"></div>
-            <p class="text-ink/80 text-sm leading-relaxed"><strong class="font-medium text-ink">Hygiena na prvním místě</strong> — sterilizace všech nástrojů, jednorázové pomůcky.</p>
+          <h4>Vytvarujte si postavu <span class="italic gold-text">bez skalpelu</span></h4>
+          <p>Trápí vás odolný tuk nebo celulitida? Vyzkoušejte naši <strong class="text-ink font-medium">neinvazivní liposukci</strong>, která cíleně a&nbsp;bezbolestně redukuje tukové buňky. Pro ještě pevnější a&nbsp;hladší pokožku doporučujeme <strong class="text-ink font-medium">přístrojovou maderoterapii</strong>, která nastartuje lymfatický systém a&nbsp;efektivně vyhladí problematické partie.</p>
+        </article>
+
+        <!-- Card 2: Krok s lehkostí -->
+        <article class="about-card">
+          <div class="about-card-num">02</div>
+          <div class="about-card-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z"/></svg>
           </div>
-          <div class="flex items-start gap-4">
-            <div class="feat-bullet"></div>
-            <p class="text-ink/80 text-sm leading-relaxed"><strong class="font-medium text-ink">Osobní rituál</strong> — privátní atmosféra, individuální péče, klid a diskrétnost.</p>
+          <h4>Krok <span class="italic gold-text">s&nbsp;lehkostí</span></h4>
+          <p>Dopřejte svým nohám <strong class="text-ink font-medium">profesionální péči</strong>. Naše pedikúra vám zajistí nejen krásný, ale hlavně zdravý vzhled chodidel. Zbavíme vás otlaků, ošetříme nehty a&nbsp;vy se budete cítit jako v&nbsp;bavlnce.</p>
+        </article>
+
+        <!-- Card 3: Dokonale hladká pokožka -->
+        <article class="about-card">
+          <div class="about-card-num">03</div>
+          <div class="about-card-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5 12l5 5L20 7"/></svg>
           </div>
-        </div>
+          <h4>Dokonale <span class="italic gold-text">hladká pokožka</span></h4>
+          <p>Užijte si dlouhotrvající pocit hedvábně hladké pokožky. Naše <strong class="text-ink font-medium">precizní depilace</strong> vás spolehlivě a&nbsp;šetrně zbaví nežádoucích chloupků na jakékoliv části těla.</p>
+        </article>
+      </div>
+
+      <!-- Closing CTA -->
+      <div class="text-center mt-14 md:mt-16">
+        <p class="font-serif italic text-xl md:text-2xl text-ink/75 mb-6 max-w-2xl mx-auto leading-relaxed">
+          Objednejte se ještě dnes a&nbsp;svěřte se do rukou našich odborníků. Těšíme se na vaši návštěvu!
+        </p>
+        <button type="button" class="btn-shimmer text-white text-xs font-semibold tracking-[0.2em] uppercase px-10 py-5 inline-flex items-center gap-3 cta-pulse" onclick="window.openBookingModal && window.openBookingModal()">
+          Rezervovat termín
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
       </div>
     </div>
   </div>
