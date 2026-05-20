@@ -187,6 +187,82 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
 
 .hidden{display:none!important}
 
+/* ═══ CALENDAR ═══ */
+.cal-wrap{background:#fff;border:1px solid rgba(184,147,47,.12);padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.02)}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:14px;flex-wrap:wrap}
+.cal-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;line-height:1;flex:1;min-width:0;display:flex;align-items:baseline;gap:10px}
+.cal-title .cal-month{text-transform:capitalize}
+.cal-title .cal-year{color:rgba(10,10,10,.4);font-size:20px}
+.cal-nav{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.cal-nav button{background:#fff;border:1px solid rgba(184,147,47,.25);color:#8a6c1f;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:inherit}
+.cal-nav button:hover{background:#b8932f;color:#fff;border-color:#b8932f}
+.cal-nav button svg{width:14px;height:14px}
+.cal-nav .today-btn{width:auto;padding:0 16px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:rgba(184,147,47,.18);border:1px solid rgba(184,147,47,.18)}
+.cal-dayname{background:#faf7f2;padding:11px 8px;text-align:center;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#b8932f;font-weight:600}
+.cal-day{background:#fff;min-height:118px;padding:8px 8px 6px;display:flex;flex-direction:column;gap:5px;cursor:pointer;transition:background .15s;position:relative}
+.cal-day:hover{background:#faf7f2}
+.cal-day .num{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:#0a0a0a;line-height:1;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.cal-day.other-month{background:#faf8f3}
+.cal-day.other-month .num{color:rgba(10,10,10,.32)}
+.cal-day.other-month .cal-event{opacity:.55}
+.cal-day.today{background:linear-gradient(180deg,rgba(184,147,47,.12),#fff)}
+.cal-day.today .num{color:#b8932f;font-weight:500}
+.cal-day.today .num::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#b8932f}
+.cal-events{display:flex;flex-direction:column;gap:2px;overflow:hidden;min-height:0}
+.cal-event{background:rgba(184,147,47,.12);color:#5a4d40;padding:2px 6px;font-size:11px;border-left:2px solid #b8932f;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5;transition:all .15s}
+.cal-event:hover{background:rgba(184,147,47,.25);transform:translateX(1px)}
+.cal-event.pause{background:rgba(122,107,90,.14);border-left-color:#7a6b5a;color:#5a4d40;font-style:italic}
+.cal-event.pause:hover{background:rgba(122,107,90,.25)}
+.cal-event .ev-time{color:#8a6c1f;font-weight:600;margin-right:5px;font-family:'Inter',sans-serif;font-style:normal}
+.cal-event.pause .ev-time{color:#5a4d40}
+.cal-more{font-size:10px;color:#b8932f;font-weight:600;letter-spacing:.04em;padding:1px 6px;cursor:pointer;font-family:'Inter',sans-serif}
+.cal-more:hover{text-decoration:underline}
+
+/* ═══ DAY DETAIL MODAL ═══ */
+.day-modal-date{font-size:11px;color:#b8932f;letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.day-modal-date::before,.day-modal-date::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(184,147,47,.35),transparent)}
+.day-event-item{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(184,147,47,.1)}
+.day-event-item:last-child{border-bottom:0;padding-bottom:4px}
+.day-event-item:first-child{padding-top:4px}
+.day-event-item .ev-time-box{font-family:'Cormorant Garamond',serif;font-size:20px;color:#b8932f;min-width:60px;text-align:center;font-weight:500;line-height:1.2;flex-shrink:0;padding-top:2px}
+.day-event-item .ev-info{flex:1;min-width:0;overflow:hidden}
+.day-event-item .ev-name{font-size:15px;color:#0a0a0a;margin-bottom:3px;font-weight:500;line-height:1.3}
+.day-event-item .ev-meta{font-size:12px;color:rgba(10,10,10,.6);line-height:1.45;word-break:break-word}
+.day-event-item .ev-meta a{color:rgba(10,10,10,.6);text-decoration:none}
+.day-event-item .ev-meta a:hover{color:#b8932f}
+.day-event-item .ev-status{display:inline-block;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#b8932f;font-weight:600;margin-left:8px}
+.day-event-item.is-pause{background:linear-gradient(180deg,rgba(122,107,90,.04),transparent);margin:0 -10px;padding-left:14px;padding-right:14px;border-left:2px solid #7a6b5a}
+.day-event-item.is-pause .ev-name{color:#5a4d40;font-style:italic}
+.day-event-item.is-pause .ev-time-box{color:#7a6b5a}
+.day-event-item .ev-actions{display:flex;gap:6px;flex-shrink:0}
+.day-event-item .ev-note{font-size:12px;color:rgba(10,10,10,.55);margin-top:4px;font-style:italic;line-height:1.45}
+.day-empty{text-align:center;padding:32px 12px;color:rgba(10,10,10,.5);font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic}
+
+@media(max-width:768px){
+  .cal-wrap{padding:12px}
+  .cal-head{margin-bottom:12px}
+  .cal-title{font-size:20px}
+  .cal-title .cal-year{font-size:15px}
+  .cal-nav button{width:34px;height:34px}
+  .cal-nav .today-btn{padding:0 12px;font-size:9px}
+  .cal-dayname{padding:7px 2px;font-size:9px;letter-spacing:.14em}
+  .cal-day{min-height:68px;padding:5px 4px;gap:3px}
+  .cal-day .num{font-size:14px;gap:3px}
+  .cal-day.today .num::before{width:5px;height:5px}
+  /* Tečky místo chipů + pointer-events:none, aby tap propadl na buňku
+     a otevřel day-detail modal (jednotlivé tečky se na mobilu neklikají). */
+  .cal-events{flex-direction:row;flex-wrap:wrap;gap:3px;pointer-events:none}
+  .cal-event{width:6px;height:6px;border-radius:50%;background:#b8932f;border-left:0;padding:0;font-size:0;flex-shrink:0;color:transparent;pointer-events:none}
+  .cal-event .ev-time{display:none}
+  .cal-event.pause{background:#7a6b5a}
+  .cal-more{font-size:9px;padding:0;width:100%;line-height:1;pointer-events:auto}
+  /* Den-detail v modalu kompaktněji */
+  .day-event-item{gap:10px;padding:12px 0}
+  .day-event-item .ev-time-box{font-size:17px;min-width:50px;padding-top:1px}
+  .day-event-item .ev-name{font-size:14px}
+}
+
 @media(max-width:768px){
   main{padding:16px 14px}
   header.bar{padding:12px 14px;gap:8px}
@@ -297,6 +373,7 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
         <button class="tab" data-tab="today" role="tab" aria-selected="false" type="button">Dnes <span class="count" id="cntToday">0</span></button>
         <button class="tab" data-tab="week" role="tab" aria-selected="false" type="button">Týden <span class="count" id="cntWeek">0</span></button>
         <button class="tab" data-tab="month" role="tab" aria-selected="false" type="button">Měsíc <span class="count" id="cntMonth">0</span></button>
+        <button class="tab" data-tab="calendar" role="tab" aria-selected="false" type="button">Kalendář <span class="count" id="cntCalendar">0</span></button>
         <button class="tab" data-tab="history" role="tab" aria-selected="false" type="button">Historie <span class="count" id="cntHistory">0</span></button>
         <button class="tab" data-tab="all" role="tab" aria-selected="false" type="button">Vše <span class="count" id="cntAll">0</span></button>
       </div>
@@ -327,7 +404,7 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
       <li><kbd>N</kbd>Nová rezervace</li>
       <li><kbd>P</kbd>Nová pauza</li>
       <li><kbd>/</kbd>Hledat</li>
-      <li><kbd>1</kbd>–<kbd>5</kbd>Přepnout tab</li>
+      <li><kbd>1</kbd>–<kbd>6</kbd>Přepnout tab</li>
       <li><kbd>Esc</kbd>Zavřít</li>
     </ul>
     <button type="button" id="testChimeBtn" class="kbd-test-btn">
@@ -369,6 +446,21 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
         <button type="submit" class="btn primary" id="pauseModalSave">Uložit pauzu</button>
       </div>
     </form>
+  </div>
+</div>
+
+<!-- ═══ DAY DETAIL MODAL (kalendář — všechny eventy daného dne) ═══ -->
+<div class="modal-bg" id="dayModalBg">
+  <div class="modal" role="dialog" aria-labelledby="dayModalTitle">
+    <div class="modal-head">
+      <h2 id="dayModalTitle">Den</h2>
+      <button class="x" type="button" id="dayModalClose" aria-label="Zavřít">×</button>
+    </div>
+    <div class="modal-body" id="dayModalBody"></div>
+    <div class="modal-foot">
+      <button type="button" class="btn" id="dayModalCancel">Zavřít</button>
+      <button type="button" class="btn primary" id="dayModalAdd">+ Nová rezervace</button>
+    </div>
   </div>
 </div>
 
@@ -639,6 +731,8 @@ function loadData() {
 
 /* ═══ Tabs ═══ */
 let activeTab = sessionStorage.getItem('ec_admin_tab') || 'today';
+/* První den měsíce právě zobrazeného v kalendáři (default = aktuální měsíc) */
+let calMonth = (() => { const d = new Date(); return new Date(d.getFullYear(), d.getMonth(), 1); })();
 const tabsEl = document.getElementById('tabs');
 tabsEl.addEventListener('click', e => {
   const btn = e.target.closest('.tab');
@@ -838,18 +932,26 @@ function render() {
   const ranges = dayRanges();
 
   // Compute counts per tab
-  const counts = { today:0, week:0, month:0, history:0, all: store.length };
+  const counts = { today:0, week:0, month:0, calendar:0, history:0, all: store.length };
   store.forEach(r => {
     if (inTab(r.termin, 'today',   ranges)) counts.today++;
     if (inTab(r.termin, 'week',    ranges)) counts.week++;
     if (inTab(r.termin, 'month',   ranges)) counts.month++;
     if (inTab(r.termin, 'history', ranges)) counts.history++;
   });
-  document.getElementById('cntToday').textContent   = counts.today;
-  document.getElementById('cntWeek').textContent    = counts.week;
-  document.getElementById('cntMonth').textContent   = counts.month;
-  document.getElementById('cntHistory').textContent = counts.history;
-  document.getElementById('cntAll').textContent     = counts.all;
+  // Calendar tab count = počet záznamů v právě zobrazeném měsíci
+  const cmStart = new Date(calMonth.getFullYear(), calMonth.getMonth(), 1).getTime();
+  const cmEnd = new Date(calMonth.getFullYear(), calMonth.getMonth() + 1, 1).getTime();
+  counts.calendar = store.filter(r => {
+    const t = new Date(r.termin || 0).getTime();
+    return t >= cmStart && t < cmEnd;
+  }).length;
+  document.getElementById('cntToday').textContent    = counts.today;
+  document.getElementById('cntWeek').textContent     = counts.week;
+  document.getElementById('cntMonth').textContent    = counts.month;
+  document.getElementById('cntCalendar').textContent = counts.calendar;
+  document.getElementById('cntHistory').textContent  = counts.history;
+  document.getElementById('cntAll').textContent      = counts.all;
 
   // Update active tab visuals
   tabsEl.querySelectorAll('.tab').forEach(b => {
@@ -857,6 +959,12 @@ function render() {
     b.classList.toggle('active', on);
     b.setAttribute('aria-selected', on ? 'true' : 'false');
   });
+
+  // Kalendář používá vlastní vykreslení (mřížka místo seznamu karet)
+  if (activeTab === 'calendar') {
+    renderCalendar();
+    return;
+  }
 
   // Date range label under tabs
   const rangeEl = document.getElementById('tabRange');
@@ -999,6 +1107,273 @@ function render() {
     pendingPulseIds.clear();
   }
 }
+
+/* ═══ Calendar ═══
+   Měsíční mřížka 7×6 (vždy ukáže celé týdny okolo měsíce).
+   Klik na rezervaci → edit modal.
+   Klik na pauzu → potvrzení smazání.
+   Klik na prázdné místo dne → nová rezervace s předvyplněným datem (10:00).      */
+function renderCalendar() {
+  const monthNames = ['Leden','Únor','Březen','Duben','Květen','Červen','Červenec','Srpen','Září','Říjen','Listopad','Prosinec'];
+  const dayNames = ['Po','Út','St','Čt','Pá','So','Ne'];
+
+  const year = calMonth.getFullYear();
+  const month = calMonth.getMonth();
+
+  /* Najdi pondělí, kterým mřížka začíná (může být v předchozím měsíci) */
+  const firstDay = new Date(year, month, 1);
+  const dow = firstDay.getDay();                       // 0=Ne, 1=Po, …
+  const offsetFromMonday = (dow === 0) ? 6 : dow - 1;
+  const gridStart = new Date(year, month, 1 - offsetFromMonday);
+
+  const today = new Date();
+  const todayKey = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+
+  /* Vyhledávací řetězec se aplikuje i v kalendáři */
+  const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+  const matchesQuery = (it) => {
+    if (!q) return true;
+    return (it.jmeno||'').toLowerCase().includes(q) ||
+           (it.telefon||'').toLowerCase().includes(q) ||
+           (it.email||'').toLowerCase().includes(q) ||
+           (it.sluzba||'').toLowerCase().includes(q) ||
+           (it.zprava||'').toLowerCase().includes(q) ||
+           (it.note||'').toLowerCase().includes(q);
+  };
+
+  const MAX_VISIBLE = 3;
+  const cells = [];
+  for (let i = 0; i < 42; i++) {
+    const d = new Date(gridStart);
+    d.setDate(gridStart.getDate() + i);
+    const cellStart = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+    const cellEnd = cellStart + 24*3600*1000;
+    const items = store
+      .filter(r => {
+        const t = new Date(r.termin || 0).getTime();
+        return t >= cellStart && t < cellEnd && matchesQuery(r);
+      })
+      .sort((a,b) => (a.termin||'').localeCompare(b.termin||''));
+    cells.push({
+      date: d,
+      key: `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`,
+      items,
+      isToday: `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}` === todayKey,
+      isOtherMonth: d.getMonth() !== month,
+    });
+  }
+
+  /* Popisek pod taby = "Květen 2026 — X rezervací, Y pauz" */
+  const monthItems = store.filter(r => {
+    const t = new Date(r.termin || 0).getTime();
+    return t >= new Date(year, month, 1).getTime() && t < new Date(year, month + 1, 1).getTime();
+  });
+  const resCount = monthItems.filter(x => x.type !== 'pause').length;
+  const pauseCount = monthItems.filter(x => x.type === 'pause').length;
+  const parts = [`${resCount} ${resCount === 1 ? 'rezervace' : (resCount >= 2 && resCount <= 4 ? 'rezervace' : 'rezervací')}`];
+  if (pauseCount) parts.push(`${pauseCount} ${pauseCount === 1 ? 'pauza' : (pauseCount >= 2 && pauseCount <= 4 ? 'pauzy' : 'pauz')}`);
+  document.getElementById('tabRange').textContent = `${monthNames[month]} ${year} — ${parts.join(', ')}`;
+
+  const wrap = document.getElementById('listWrap');
+  wrap.innerHTML = `
+    <div class="cal-wrap">
+      <div class="cal-head">
+        <div class="cal-title"><span class="cal-month">${monthNames[month].toLowerCase()}</span><span class="cal-year">${year}</span></div>
+        <div class="cal-nav">
+          <button type="button" data-cal-act="prev" title="Předchozí měsíc" aria-label="Předchozí měsíc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="today-btn" data-cal-act="today">Dnes</button>
+          <button type="button" data-cal-act="next" title="Další měsíc" aria-label="Další měsíc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="cal-grid">
+        ${dayNames.map(n => `<div class="cal-dayname">${n}</div>`).join('')}
+        ${cells.map(c => {
+          const visible = c.items.slice(0, MAX_VISIBLE);
+          const overflow = c.items.length - visible.length;
+          const cls = ['cal-day'];
+          if (c.isToday) cls.push('today');
+          if (c.isOtherMonth) cls.push('other-month');
+          return `
+          <div class="${cls.join(' ')}" data-cal-day="${c.key}">
+            <div class="num">${c.date.getDate()}</div>
+            <div class="cal-events">
+              ${visible.map(it => {
+                const t = new Date(it.termin);
+                const time = t.toLocaleTimeString('cs-CZ', { hour:'2-digit', minute:'2-digit' });
+                if (it.type === 'pause') {
+                  const label = it.note || 'Pauza';
+                  return `<div class="cal-event pause" data-cal-event="${escHtml(it.id)}" title="Pauza · ${time} · ${escHtml(label)}"><span class="ev-time">${time}</span>${escHtml(label)}</div>`;
+                }
+                const label = it.jmeno || '—';
+                const titleAttr = [label, it.sluzba, time].filter(Boolean).join(' · ');
+                return `<div class="cal-event" data-cal-event="${escHtml(it.id)}" title="${escHtml(titleAttr)}"><span class="ev-time">${time}</span>${escHtml(label)}</div>`;
+              }).join('')}
+              ${overflow > 0 ? `<div class="cal-more" data-cal-more="${c.key}">+ ${overflow} dal${overflow === 1 ? 'ší' : 'ších'}</div>` : ''}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+
+  /* Navigace mezi měsíci — voláme render() aby se obnovil i tab count */
+  wrap.querySelectorAll('[data-cal-act]').forEach(b => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const act = b.dataset.calAct;
+      if (act === 'prev') calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth() - 1, 1);
+      else if (act === 'next') calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth() + 1, 1);
+      else if (act === 'today') { const n = new Date(); calMonth = new Date(n.getFullYear(), n.getMonth(), 1); }
+      render();
+    });
+  });
+
+  /* Klik na konkrétní rezervaci / pauzu */
+  wrap.querySelectorAll('[data-cal-event]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = el.dataset.calEvent;
+      const item = store.find(x => x.id === id);
+      if (!item) return;
+      if (item.type === 'pause') {
+        deletePause(id);
+      } else {
+        openModal(item);
+      }
+    });
+  });
+
+  /* Klik na "+N dalších" → otevře day-detail modal s plným soupisem */
+  wrap.querySelectorAll('[data-cal-more]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openDayModal(el.dataset.calMore);
+    });
+  });
+
+  /* Klik na buňku dne:
+     - má-li den už události → otevři day-detail modal (mobile-friendly)
+     - prázdný den → rovnou nová rezervace na 10:00 daného dne          */
+  wrap.querySelectorAll('[data-cal-day]').forEach(el => {
+    el.addEventListener('click', () => {
+      const key = el.dataset.calDay;        // YYYY-MM-DD
+      const cell = cells.find(c => c.key === key);
+      if (cell && cell.items.length > 0) {
+        openDayModal(key);
+      } else {
+        openModal();
+        const terminEl = document.getElementById('f_termin');
+        if (terminEl) terminEl.value = `${key}T10:00`;
+      }
+    });
+  });
+}
+
+/* ═══ Day detail modal (otvíráno z kalendáře) ═══ */
+const dayModalBg = document.getElementById('dayModalBg');
+let currentDayModalKey = null;
+
+function openDayModal(dateKey) {
+  currentDayModalKey = dateKey;
+  const [y, m, d] = dateKey.split('-').map(Number);
+  const date = new Date(y, m - 1, d);
+  const fullLabel = date.toLocaleDateString('cs-CZ', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  document.getElementById('dayModalTitle').textContent = fullLabel.charAt(0).toUpperCase() + fullLabel.slice(1);
+
+  const cellStart = new Date(y, m - 1, d).getTime();
+  const cellEnd = cellStart + 24*3600*1000;
+  const items = store
+    .filter(r => {
+      const t = new Date(r.termin || 0).getTime();
+      return t >= cellStart && t < cellEnd;
+    })
+    .sort((a,b) => (a.termin||'').localeCompare(b.termin||''));
+
+  const body = document.getElementById('dayModalBody');
+  if (!items.length) {
+    body.innerHTML = `<div class="day-empty">Žádné rezervace ani pauzy.</div>`;
+  } else {
+    const statusLabel = { new:'Nová', confirmed:'Potvrzená', done:'Dokončená' };
+    body.innerHTML = items.map(it => {
+      const t = new Date(it.termin);
+      const time = t.toLocaleTimeString('cs-CZ', { hour:'2-digit', minute:'2-digit' });
+      if (it.type === 'pause') {
+        const endT = new Date(t.getTime() + (it.duration || 0)*60*1000);
+        const endTime = endT.toLocaleTimeString('cs-CZ', { hour:'2-digit', minute:'2-digit' });
+        return `<div class="day-event-item is-pause" data-day-id="${escHtml(it.id)}">
+          <div class="ev-time-box">${time}</div>
+          <div class="ev-info">
+            <div class="ev-name">Pauza — ${escHtml(it.note || 'bez popisu')}</div>
+            <div class="ev-meta">${time} – ${endTime} · ${it.duration || 0} min</div>
+          </div>
+          <div class="ev-actions">
+            <button class="icon-btn danger" data-day-act="del-pause" type="button" title="Smazat pauzu" aria-label="Smazat pauzu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+            </button>
+          </div>
+        </div>`;
+      }
+      const metaParts = [];
+      if (it.sluzba) metaParts.push(escHtml(it.sluzba) + (it.duration ? ' · ' + it.duration + ' min' : ''));
+      if (it.telefon) metaParts.push(`<a href="tel:${escHtml(it.telefon)}">📞 ${escHtml(it.telefon)}</a>`);
+      if (it.email) metaParts.push(`<a href="mailto:${escHtml(it.email)}">✉ ${escHtml(it.email)}</a>`);
+      const status = statusLabel[it.status || 'new'] || 'Nová';
+      return `<div class="day-event-item" data-day-id="${escHtml(it.id)}">
+        <div class="ev-time-box">${time}</div>
+        <div class="ev-info">
+          <div class="ev-name">${escHtml(it.jmeno || '—')}<span class="ev-status">${status}</span></div>
+          <div class="ev-meta">${metaParts.join(' · ')}</div>
+          ${it.zprava ? `<div class="ev-note">${escHtml(it.zprava)}</div>` : ''}
+        </div>
+        <div class="ev-actions">
+          <button class="icon-btn" data-day-act="edit" type="button" title="Upravit" aria-label="Upravit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </button>
+          <button class="icon-btn danger" data-day-act="del" type="button" title="Smazat" aria-label="Smazat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+          </button>
+        </div>
+      </div>`;
+    }).join('');
+
+    body.querySelectorAll('[data-day-act]').forEach(b => {
+      b.addEventListener('click', () => {
+        const id = b.closest('[data-day-id]').dataset.dayId;
+        const act = b.dataset.dayAct;
+        const item = store.find(x => x.id === id);
+        if (!item) return;
+        closeDayModal();
+        if (act === 'edit') openModal(item);
+        else if (act === 'del') deleteItem(id);
+        else if (act === 'del-pause') deletePause(id);
+      });
+    });
+  }
+
+  dayModalBg.classList.add('open');
+}
+
+function closeDayModal() {
+  dayModalBg.classList.remove('open');
+  currentDayModalKey = null;
+}
+
+document.getElementById('dayModalClose').addEventListener('click', closeDayModal);
+document.getElementById('dayModalCancel').addEventListener('click', closeDayModal);
+dayModalBg.addEventListener('click', e => { if (e.target === dayModalBg) closeDayModal(); });
+document.getElementById('dayModalAdd').addEventListener('click', () => {
+  const key = currentDayModalKey;
+  closeDayModal();
+  if (key) {
+    openModal();
+    const terminEl = document.getElementById('f_termin');
+    if (terminEl) terminEl.value = `${key}T10:00`;
+  }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && dayModalBg.classList.contains('open')) closeDayModal(); });
 
 /* ═══ Modal ═══ */
 const modalBg = document.getElementById('modalBg');
@@ -1248,9 +1623,9 @@ document.addEventListener('keydown', (e) => {
     case 'p': case 'P': e.preventDefault(); openPauseModal(); break;
     case '/': e.preventDefault(); document.getElementById('searchInput').focus(); break;
     case '?': e.preventDefault(); toggleKbdHint(); break;
-    case '1': case '2': case '3': case '4': case '5': {
+    case '1': case '2': case '3': case '4': case '5': case '6': {
       e.preventDefault();
-      const tabs = ['today','week','month','history','all'];
+      const tabs = ['today','week','month','calendar','history','all'];
       const idx = parseInt(e.key, 10) - 1;
       if (tabs[idx]) {
         activeTab = tabs[idx];
