@@ -184,6 +184,11 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 .brand-logo .brand-logo-img{max-height:110px;width:auto;margin:-28px 0}
 .brand-logo-lg .brand-logo-img{max-height:190px;width:auto}
 .brand-logo-xl .brand-logo-img{max-height:240px;width:auto}
+/* Footer logo: smaller + remove the PNG's black background by screen-blending into the dark footer */
+.footer-logo .brand-logo-img{max-height:110px;margin:0;mix-blend-mode:screen}
+@media (max-width:768px){
+  .footer-logo .brand-logo-img{max-height:88px}
+}
 @media (max-width:768px){
   .brand-logo .brand-logo-img{max-height:84px;margin:-20px 0}
 }
@@ -1254,8 +1259,8 @@ html,body{overflow-x:hidden;max-width:100vw}
 
     <div class="grid md:grid-cols-4 gap-12 mb-16">
       <div class="md:col-span-2">
-        <a href="#" class="brand-logo brand-logo-lg mb-6" aria-label="Exelance Care">
-          <img src="images/logo.png" alt="Exelance Care" class="brand-logo-img"/>
+        <a href="#" class="brand-logo footer-logo mb-6" aria-label="Exelance Care">
+          <img src="images/logo.cerne.png" alt="Exelance Care" class="brand-logo-img"/>
         </a>
         <p class="text-cream/60 text-sm leading-relaxed max-w-md mb-8">
           Prémiový salon krásy v centru Kopřivnice — přístrojová maderoterapie, neinvazivní liposukce, spa pedikúra a depilace pod jednou střechou. Od roku 2017.
