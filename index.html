@@ -316,6 +316,9 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 .variant-meta .price{font-family:'Cormorant Garamond',serif;font-size:20px;background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:500;line-height:1}
 @media (min-width:768px){.variant-meta .price{font-size:24px}}
 .variant-btn .book-arrow{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:rgba(184,147,47,.1);display:flex;align-items:center;justify-content:center;color:#b8932f;transition:all .3s ease}
+.variant-btn.variant-featured{background:linear-gradient(135deg,#fdfaf2 0%,#fff 100%);border-color:rgba(184,147,47,.4);position:relative}
+.variant-btn.variant-featured::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,175,55,.05) 0%,transparent 60%);pointer-events:none}
+.variant-btn .variant-badge{display:inline-block;font-size:8px;letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(135deg,#d4af37,#b8932f);color:#fff;padding:3px 8px;font-weight:600;margin-left:8px;vertical-align:middle;font-family:'Inter',sans-serif}
 .variant-btn:hover .book-arrow{background:#b8932f;color:#fff;transform:rotate(-45deg)}
 .variant-btn .book-arrow svg{width:14px;height:14px}
 
@@ -1590,6 +1593,11 @@ document.addEventListener('keydown', e => {
           <div class="variant-meta"><span class="dur">120 min</span><span class="price">1 760 Kč</span></div>
           <span class="book-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
         </button>
+        <button type="button" class="variant-btn variant-featured" data-book-svc="Maderoterapie balíček 10 procedur">
+          <div class="variant-info"><h5>Balíček 10 procedur <span class="variant-badge">Doporučujeme</span></h5><p class="variant-desc">10× ošetření pro maximální dlouhodobý efekt — zvýhodněná cena</p></div>
+          <div class="variant-meta"><span class="dur">10× 60 min</span><span class="price">8 400 Kč</span></div>
+          <span class="book-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        </button>
       </div>
       <p class="cat-modal-footer">Klikněte na variantu pro okamžitou rezervaci termínu.</p>
     </div>
@@ -1845,6 +1853,7 @@ const SERVICES = [
   { id: 'madero-horni',    name: 'Maderoterapie horní polovina těla', category: 'Maderoterapie', duration: 60, dur: '60 min',  price: '880 Kč' },
   { id: 'madero-dolni',    name: 'Maderoterapie dolní polovina těla', category: 'Maderoterapie', duration: 60, dur: '60 min',  price: '880 Kč' },
   { id: 'madero-cele',     name: 'Maderoterapie celé tělo',           category: 'Maderoterapie', duration: 120,dur: '120 min', price: '1 760 Kč' },
+  { id: 'madero-balicek',  name: 'Maderoterapie balíček 10 procedur', category: 'Maderoterapie', duration: 60, dur: '10× 60 min', price: '8 400 Kč', featured: true },
   // Neinvazivní liposukce
   { id: 'lipo-1',          name: 'Neinvazivní liposukce — 1 sezení', category: 'Liposukce', duration: 60, dur: '60 min', price: '1 490 Kč' },
   { id: 'lipo-5',          name: 'Neinvazivní liposukce — balíček 5×', category: 'Liposukce', duration: 60, dur: '5× 60 min', price: '6 490 Kč', featured: true },
