@@ -337,8 +337,8 @@ body.cat-modal-open{overflow:hidden}
 .mail-chooser-options{display:flex;flex-direction:column;gap:7px}
 .mail-chooser-options a,.mail-chooser-options button{display:flex;align-items:center;gap:12px;padding:13px 16px;background:#fafaf6;border:1px solid rgba(184,147,47,.15);text-decoration:none;color:#0a0a0a;font-size:13px;cursor:pointer;transition:all .25s ease;font-family:inherit;width:100%;text-align:left;line-height:1.2}
 .mail-chooser-options a:hover,.mail-chooser-options button:hover{background:#fff;border-color:#b8932f;transform:translateX(3px)}
-.mail-chooser-options .mc-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.mail-chooser-options .mc-icon svg{width:22px;height:22px}
+.mail-chooser-options .mc-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mail-chooser-options .mc-icon svg{width:32px;height:32px;border-radius:5px;box-shadow:0 2px 4px rgba(0,0,0,.06)}
 .mail-chooser-close{position:absolute;top:10px;right:10px;width:36px;height:36px;background:rgba(255,255,255,.9);border:1px solid rgba(184,147,47,.2);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;color:#0a0a0a;font-weight:300;transition:all .25s ease}
 .mail-chooser-close:hover{background:#b8932f;color:#fff;border-color:#b8932f;transform:rotate(90deg)}
 
@@ -1798,23 +1798,23 @@ document.addEventListener('keydown', e => {
     <p class="mail-chooser-email">exelance.care@seznam.cz</p>
     <div class="mail-chooser-options">
       <a href="https://mail.google.com/mail/?view=cm&fs=1&to=exelance.care@seznam.cz" target="_blank" rel="noopener">
-        <span class="mc-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22 4H2v16h20V4z" fill="#fff" stroke="#EA4335" stroke-width="1.4"/><path d="M2 4l10 7 10-7" stroke="#EA4335" stroke-width="1.4" fill="none"/><path d="M2 4v16h5V8L2 4z" fill="#C5221F"/><path d="M22 4v16h-5V8l5-4z" fill="#FBBC04"/><path d="M7 8v12h10V8l-5 3.5L7 8z" fill="#34A853"/><path d="M2 4h5v4L2 4z" fill="#4285F4"/></svg></span>
+        <span class="mc-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#EA4335"/><path d="M5 9.5v7.8c0 .4.3.7.7.7H8V12l4 2.8L16 12v6h2.3c.4 0 .7-.3.7-.7V9.5L12 14.2 5 9.5z" fill="#fff"/><path d="M5 9.5l7 4.7 7-4.7v-2c0-.4-.3-.7-.7-.7h-1l-5.3 3.6L6.7 6.8h-1c-.4 0-.7.3-.7.7v2z" fill="#fff" opacity=".85"/></svg></span>
         Gmail
       </a>
       <a href="https://outlook.live.com/owa/?path=/mail/action/compose&to=exelance.care@seznam.cz" target="_blank" rel="noopener">
-        <span class="mc-icon"><svg viewBox="0 0 24 24" fill="#0078D4"><path d="M21.5 5H10a1 1 0 00-1 1v1H4.5C3.7 7 3 7.7 3 8.5v7c0 .8.7 1.5 1.5 1.5H9v1a1 1 0 001 1h11.5c.8 0 1.5-.7 1.5-1.5v-11c0-.8-.7-1.5-1.5-1.5zM7 14.5c-1.4 0-2.5-1.3-2.5-3s1.1-3 2.5-3 2.5 1.3 2.5 3-1.1 3-2.5 3zm14-.5h-9V9.4l4.5 3 4.5-3V14z"/></svg></span>
+        <span class="mc-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#0078D4"/><rect x="5.5" y="9" width="13" height="9" rx="1" fill="#fff"/><path d="M5.5 10.4l6.5 4.6 6.5-4.6" stroke="#0078D4" stroke-width="1.3" stroke-linejoin="round" fill="none"/><circle cx="9" cy="12.5" r="2.2" fill="none" stroke="#0078D4" stroke-width="1.3"/></svg></span>
         Outlook
       </a>
       <a href="https://compose.mail.yahoo.com/?to=exelance.care@seznam.cz" target="_blank" rel="noopener">
-        <span class="mc-icon"><svg viewBox="0 0 24 24" fill="#6001D2"><path d="M21 5h-4l-3 5.5L10.7 5H6.5l5.3 8.5V19h2.5v-5.5L21 5z"/><circle cx="18" cy="14" r="1.5" fill="#6001D2"/></svg></span>
+        <span class="mc-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#6001D2"/><text x="12" y="16.5" font-family="Arial Black, Arial, sans-serif" font-size="11" font-weight="900" fill="#fff" text-anchor="middle" letter-spacing="-0.5">Y!</text></svg></span>
         Yahoo Mail
       </a>
       <a href="mailto:exelance.care@seznam.cz">
-        <span class="mc-icon" style="color:#b8932f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/></svg></span>
+        <span class="mc-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#b8932f"/><rect x="5" y="8" width="14" height="9" rx="1" fill="none" stroke="#fff" stroke-width="1.4"/><path d="M5.5 9.5l6.5 4.5 6.5-4.5" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></span>
         Výchozí poštovní aplikace
       </a>
       <button type="button" data-mail-copy="exelance.care@seznam.cz">
-        <span class="mc-icon" style="color:#b8932f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="11" height="11" rx="1"/><path d="M5 15V5a1 1 0 011-1h10"/></svg></span>
+        <span class="mc-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#0a0a0a"/><rect x="9" y="8" width="9" height="10" rx="1" fill="none" stroke="#fff" stroke-width="1.4"/><path d="M14 5.5H7a1 1 0 00-1 1V14" stroke="#fff" stroke-width="1.4" fill="none"/></svg></span>
         Zkopírovat e-mail
       </button>
     </div>
