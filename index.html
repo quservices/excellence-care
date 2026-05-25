@@ -327,6 +327,21 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 /* Body scroll lock when modal open */
 body.cat-modal-open{overflow:hidden}
 
+/* ═══ MAIL CHOOSER POPUP ═══ */
+.mail-chooser{position:fixed;inset:0;z-index:9100;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s ease}
+.mail-chooser[hidden]{display:none}
+.mail-chooser-backdrop{position:absolute;inset:0;background:rgba(10,10,10,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.mail-chooser-panel{position:relative;background:#fff;max-width:380px;width:100%;padding:32px 28px 28px;animation:scaleIn .3s cubic-bezier(.22,.61,.36,1);box-shadow:0 30px 80px rgba(0,0,0,.25)}
+.mail-chooser-panel h4{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;text-align:center;margin:0 0 6px;color:#0a0a0a;line-height:1.1}
+.mail-chooser-email{text-align:center;font-size:11px;color:#b8932f;letter-spacing:.2em;text-transform:uppercase;margin:0 0 22px;font-weight:600;font-family:'Inter',sans-serif}
+.mail-chooser-options{display:flex;flex-direction:column;gap:7px}
+.mail-chooser-options a,.mail-chooser-options button{display:flex;align-items:center;gap:12px;padding:13px 16px;background:#fafaf6;border:1px solid rgba(184,147,47,.15);text-decoration:none;color:#0a0a0a;font-size:13px;cursor:pointer;transition:all .25s ease;font-family:inherit;width:100%;text-align:left;line-height:1.2}
+.mail-chooser-options a:hover,.mail-chooser-options button:hover{background:#fff;border-color:#b8932f;transform:translateX(3px)}
+.mail-chooser-options .mc-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mail-chooser-options .mc-icon svg{width:22px;height:22px}
+.mail-chooser-close{position:absolute;top:10px;right:10px;width:36px;height:36px;background:rgba(255,255,255,.9);border:1px solid rgba(184,147,47,.2);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;color:#0a0a0a;font-weight:300;transition:all .25s ease}
+.mail-chooser-close:hover{background:#b8932f;color:#fff;border-color:#b8932f;transform:rotate(90deg)}
+
 /* gold corner frame for map */
 .gold-corners{position:relative}
 .gold-corners::before,.gold-corners::after,
@@ -1523,13 +1538,56 @@ document.addEventListener('click', e => {
         console.warn('openBookingModal not available — Firebase script may not have loaded yet');
       }
     }, 280);
+    return;
+  }
+  /* mailto: link clicked anywhere → open mail-chooser instead */
+  const mailLink = e.target.closest('a[href^="mailto:"]');
+  if (mailLink && !e.target.closest('#mailChooser')) {
+    e.preventDefault();
+    const mc = document.getElementById('mailChooser');
+    if (mc) {
+      mc.hidden = false;
+      document.body.classList.add('cat-modal-open');
+    }
+    return;
+  }
+  /* close mail-chooser (X or backdrop) */
+  if (e.target.closest('[data-mail-close]')) {
+    const mc = document.getElementById('mailChooser');
+    if (mc) mc.hidden = true;
+    document.body.classList.remove('cat-modal-open');
+    return;
+  }
+  /* copy email button inside mail-chooser */
+  const copyBtn = e.target.closest('[data-mail-copy]');
+  if (copyBtn) {
+    e.preventDefault();
+    const email = copyBtn.dataset.mailCopy;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(email).then(() => {
+        if (typeof showToast === 'function') showToast('✓ E-mail zkopírován');
+      }).catch(() => {});
+    }
+    setTimeout(() => {
+      const mc = document.getElementById('mailChooser');
+      if (mc) mc.hidden = true;
+      document.body.classList.remove('cat-modal-open');
+    }, 400);
   }
 });
 
 /* Close on Escape */
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && document.querySelector('.cat-modal:not([hidden])')) {
-    closeAllCatModals();
+  if (e.key === 'Escape') {
+    const mc = document.getElementById('mailChooser');
+    if (mc && !mc.hidden) {
+      mc.hidden = true;
+      document.body.classList.remove('cat-modal-open');
+      return;
+    }
+    if (document.querySelector('.cat-modal:not([hidden])')) {
+      closeAllCatModals();
+    }
   }
 });
 </script>
@@ -1727,6 +1785,38 @@ document.addEventListener('keydown', e => {
         </button>
       </div>
       <p class="cat-modal-footer">Klikněte na variantu pro okamžitou rezervaci termínu.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MAIL CHOOSER POPUP (otevírá se po kliknutí na mailto: odkaz) ═══ -->
+<div id="mailChooser" class="mail-chooser" hidden role="dialog" aria-modal="true" aria-labelledby="mc-title">
+  <div class="mail-chooser-backdrop" data-mail-close></div>
+  <div class="mail-chooser-panel">
+    <button type="button" class="mail-chooser-close" data-mail-close aria-label="Zavřít">×</button>
+    <h4 id="mc-title">Otevřít e-mail v…</h4>
+    <p class="mail-chooser-email">exelance.care@seznam.cz</p>
+    <div class="mail-chooser-options">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=exelance.care@seznam.cz" target="_blank" rel="noopener">
+        <span class="mc-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22 4H2v16h20V4z" fill="#fff" stroke="#EA4335" stroke-width="1.4"/><path d="M2 4l10 7 10-7" stroke="#EA4335" stroke-width="1.4" fill="none"/><path d="M2 4v16h5V8L2 4z" fill="#C5221F"/><path d="M22 4v16h-5V8l5-4z" fill="#FBBC04"/><path d="M7 8v12h10V8l-5 3.5L7 8z" fill="#34A853"/><path d="M2 4h5v4L2 4z" fill="#4285F4"/></svg></span>
+        Gmail
+      </a>
+      <a href="https://outlook.live.com/owa/?path=/mail/action/compose&to=exelance.care@seznam.cz" target="_blank" rel="noopener">
+        <span class="mc-icon"><svg viewBox="0 0 24 24" fill="#0078D4"><path d="M21.5 5H10a1 1 0 00-1 1v1H4.5C3.7 7 3 7.7 3 8.5v7c0 .8.7 1.5 1.5 1.5H9v1a1 1 0 001 1h11.5c.8 0 1.5-.7 1.5-1.5v-11c0-.8-.7-1.5-1.5-1.5zM7 14.5c-1.4 0-2.5-1.3-2.5-3s1.1-3 2.5-3 2.5 1.3 2.5 3-1.1 3-2.5 3zm14-.5h-9V9.4l4.5 3 4.5-3V14z"/></svg></span>
+        Outlook
+      </a>
+      <a href="https://compose.mail.yahoo.com/?to=exelance.care@seznam.cz" target="_blank" rel="noopener">
+        <span class="mc-icon"><svg viewBox="0 0 24 24" fill="#6001D2"><path d="M21 5h-4l-3 5.5L10.7 5H6.5l5.3 8.5V19h2.5v-5.5L21 5z"/><circle cx="18" cy="14" r="1.5" fill="#6001D2"/></svg></span>
+        Yahoo Mail
+      </a>
+      <a href="mailto:exelance.care@seznam.cz">
+        <span class="mc-icon" style="color:#b8932f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/></svg></span>
+        Výchozí poštovní aplikace
+      </a>
+      <button type="button" data-mail-copy="exelance.care@seznam.cz">
+        <span class="mc-icon" style="color:#b8932f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="11" height="11" rx="1"/><path d="M5 15V5a1 1 0 011-1h10"/></svg></span>
+        Zkopírovat e-mail
+      </button>
     </div>
   </div>
 </div>
