@@ -342,6 +342,11 @@ body.cat-modal-open{overflow:hidden}
 .mail-chooser-close{position:absolute;top:10px;right:10px;width:36px;height:36px;background:rgba(255,255,255,.9);border:1px solid rgba(184,147,47,.2);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;color:#0a0a0a;font-weight:300;transition:all .25s ease}
 .mail-chooser-close:hover{background:#b8932f;color:#fff;border-color:#b8932f;transform:rotate(90deg)}
 
+/* map frame — desktop square, mobile shorter */
+.map-frame{aspect-ratio:1/1}
+@media (max-width:768px){.map-frame{aspect-ratio:auto;height:340px}}
+@media (max-width:480px){.map-frame{height:280px}}
+
 /* gold corner frame for map */
 .gold-corners{position:relative}
 .gold-corners::before,.gold-corners::after,
@@ -418,19 +423,28 @@ body.cat-modal-open{overflow:hidden}
 
   /* map: smaller corner accents, smaller pin, smaller info card */
   .gold-corners::before,.gold-corners::after,
-  .gold-corners > .c-tl,.gold-corners > .c-br{width:22px;height:22px}
-  .map-pin svg{width:42px;height:42px}
-  .map-pulse{width:42px;height:42px}
-  .map-info{top:14px;left:14px;padding:12px 14px;max-width:200px}
-  .map-info p.font-serif.text-2xl{font-size:18px!important}
-  .map-info p.text-\\[10px\\]{font-size:9px!important;letter-spacing:.15em!important}
+  .gold-corners > .c-tl,.gold-corners > .c-br{width:20px;height:20px}
+  .map-pin svg{width:38px;height:38px}
+  .map-pulse{width:38px;height:38px}
+  .map-info{top:12px;left:12px;padding:10px 13px;max-width:180px;border-left-width:2px}
+  .map-info p.font-serif.text-2xl{font-size:16px!important}
+  .map-info p.text-\\[10px\\]{font-size:8.5px!important;letter-spacing:.13em!important}
+  .map-info .text-\\[9px\\]{font-size:8px!important;letter-spacing:.16em!important}
 
-  /* map buttons: shorter text, smaller padding */
-  .map-btn{padding:12px 8px;font-size:9px;letter-spacing:.14em;gap:6px}
-  .map-btn svg{width:12px;height:12px}
+  /* hide scroll-zoom hint on touch — useless tip on mobile */
+  .map-hint{display:none!important}
 
-  /* transport info: smaller */
-  #kontakt .grid.grid-cols-3 p.text-sm{font-size:12px!important}
+  /* map buttons: shorter text, smaller padding, min 44px tap target */
+  .map-btn{padding:12px 6px;font-size:9px;letter-spacing:.12em;gap:5px;min-height:46px}
+  .map-btn svg{width:13px;height:13px}
+
+  /* transport info: tighter mobile layout */
+  #kontakt .grid.grid-cols-3.gap-3.text-center{gap:0!important;padding:14px 4px!important}
+  #kontakt .grid.grid-cols-3 p.text-sm{font-size:11px!important;line-height:1.3}
+  #kontakt .grid.grid-cols-3 p.text-\\[9px\\]{font-size:8.5px!important;margin-bottom:2px!important}
+
+  /* tighten map action buttons spacing */
+  #kontakt .grid.grid-cols-3.gap-2{gap:6px!important}
 
   /* footer (padding-top větší kvůli posunutému ornamentu) */
   footer{padding-top:120px!important}
@@ -466,8 +480,13 @@ body.cat-modal-open{overflow:hidden}
   .brand-logo .brand-line-2{font-size:11px}
   h1.fadeUp{font-size:clamp(40px,11vw,56px)!important}
   .hero-stats .font-serif{font-size:24px!important}
-  .map-info{max-width:170px;padding:10px 12px}
-  .map-info p.font-serif.text-2xl{font-size:16px!important}
+  .map-frame{height:240px}
+  .map-info{max-width:150px;padding:9px 11px;top:10px;left:10px}
+  .map-info p.font-serif.text-2xl{font-size:14px!important}
+  .map-info p.text-\\[10px\\]{font-size:8px!important}
+  .map-info .flex.items-center.gap-2.mb-3{margin-bottom:6px!important}
+  .map-btn span{font-size:8.5px}
+  .map-btn{padding:11px 4px}
   .srv-img-wrap{height:160px!important}
 }
 
@@ -1211,7 +1230,7 @@ html,body{overflow-x:hidden;max-width:100vw}
       <div class="rvr">
         <div class="gold-corners">
           <span class="c-tl"></span><span class="c-br"></span>
-          <div class="relative aspect-square overflow-hidden soft-shadow bg-cream2">
+          <div class="map-frame relative overflow-hidden soft-shadow bg-cream2">
             <div id="map" role="application" aria-label="Interaktivní mapa - Exelance Care, Tyršova 1015, Kopřivnice"></div>
 
             <!-- Info card overlay -->
