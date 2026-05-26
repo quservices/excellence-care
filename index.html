@@ -776,18 +776,40 @@ html,body{overflow-x:hidden;max-width:100vw}
       </script>
     </div>
 
-    <!-- Image column - layered images -->
-    <div class="lg:col-span-5 relative h-[480px] md:h-[640px] hidden md:block">
-      <!-- Main image -->
-      <div class="absolute inset-0 right-0 top-0 w-[85%] h-[80%] overflow-hidden soft-shadow parallax" id="heroImg1">
+    <!-- Image column - editorial magazine layout -->
+    <div class="lg:col-span-5 relative h-[480px] md:h-[680px] hidden md:block">
+
+      <!-- Outer gold frame anchoring the composition -->
+      <div aria-hidden="true" class="absolute top-4 right-4 w-[88%] h-[82%] border border-gold/35 -z-10"></div>
+
+      <!-- Top-left gold L-bracket -->
+      <div aria-hidden="true" class="absolute top-0 left-[6%] w-12 h-px bg-gold/60"></div>
+      <div aria-hidden="true" class="absolute top-0 left-[6%] w-px h-12 bg-gold/60"></div>
+
+      <!-- Main image (top-right, portrait-ish) -->
+      <div class="absolute top-0 right-0 w-[78%] h-[78%] overflow-hidden parallax" id="heroImg1" style="box-shadow:0 28px 60px -20px rgba(0,0,0,.28),0 12px 24px -12px rgba(184,147,47,.12)">
         <img src="https://images.pexels.com/photos/35884502/pexels-photo-35884502.jpeg?w=1200&auto=compress" alt="Luxusní treatment room — Exelance Care" class="w-full h-full object-cover" loading="eager"/>
+        <!-- Inner gold border line -->
+        <div aria-hidden="true" class="absolute inset-3 border border-cream/15 pointer-events-none"></div>
       </div>
-      <!-- Floating accent image -->
-      <div class="absolute bottom-0 left-0 w-[55%] h-[50%] overflow-hidden soft-shadow border-4 border-cream float">
+
+      <!-- Floating accent (bottom-left, smaller, cleaner overlap) -->
+      <div class="absolute bottom-0 left-0 w-[44%] h-[48%] overflow-hidden float" style="box-shadow:0 22px 50px -16px rgba(0,0,0,.32);border:6px solid #faf6ec;outline:1px solid rgba(184,147,47,.4);outline-offset:-7px">
         <img src="https://images.pexels.com/photos/11774389/pexels-photo-11774389.jpeg?w=800&auto=compress" alt="Luxusní spa atmosféra" class="w-full h-full object-cover" loading="eager"/>
       </div>
-      <!-- Gold frame accent -->
-      <div class="absolute top-8 right-0 w-32 h-32 border border-gold/40 -z-10"></div>
+
+      <!-- Decorative vertical gold thread + ornament between images -->
+      <div aria-hidden="true" class="absolute right-[14%] bottom-[8%] flex flex-col items-center gap-2">
+        <span class="block w-px h-16 bg-gradient-to-b from-transparent to-gold/55"></span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8932f" stroke-width="1"><path d="M12 2l2.4 7.4L22 12l-7.6 2.6L12 22l-2.4-7.4L2 12l7.6-2.6z"/></svg>
+        <span class="block w-px h-10 bg-gradient-to-t from-transparent to-gold/55"></span>
+      </div>
+
+      <!-- Bottom-right small year/badge ornament -->
+      <div aria-hidden="true" class="absolute -bottom-2 right-2 flex items-center gap-2 text-gold/70">
+        <span class="block w-8 h-px bg-gold/50"></span>
+        <span class="font-serif italic text-[13px] tracking-[0.2em]">est. 2017</span>
+      </div>
     </div>
   </div>
 
