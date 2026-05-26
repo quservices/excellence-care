@@ -1538,12 +1538,28 @@ function initMap() {
   map.on('focus click', () => { map.scrollWheelZoom.enable(); if (hint) hint.classList.add('hide'); });
   map.on('blur mouseout', () => { map.scrollWheelZoom.disable(); });
 
-  /* Hide .map-info card when Leaflet popup is open (prevents overlap on mobile) */
+  /* Hide .map-info card when Leaflet popup is open (prevents overlap) */
   const infoCard = document.querySelector('.map-info');
   if (infoCard) {
     map.on('popupopen', () => infoCard.classList.add('is-hidden'));
     map.on('popupclose', () => infoCard.classList.remove('is-hidden'));
   }
+
+  /* On mobile, shift map view so the pin appears below-right of the top-left info card */
+  function applyMobileOffset(){
+    const isMobile = window.matchMedia('(max-width:768px)').matches;
+    map.setView(SALON, 16, {animate:false});
+    if (isMobile) {
+      // pan map up-left so the pin (anchored to lat/lng) appears down-right
+      map.panBy([-50, -55], {animate:false});
+    }
+  }
+  applyMobileOffset();
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(applyMobileOffset, 200);
+  });
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initMap);
 else initMap();
