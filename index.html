@@ -421,14 +421,18 @@ body.cat-modal-open{overflow:hidden}
   #kontakt .bg-white,#kontakt .bg-ink3{padding:28px 22px!important}
   #kontakt h3.font-serif{font-size:22px!important}
 
-  /* map: smaller corner accents, smaller pin */
+  /* map: smaller corner accents, smaller pin, smaller info card */
   .gold-corners::before,.gold-corners::after,
   .gold-corners > .c-tl,.gold-corners > .c-br{width:20px;height:20px}
   .map-pin svg{width:38px;height:38px}
   .map-pulse{width:38px;height:38px}
+  .map-info{top:12px;left:12px;padding:10px 13px;max-width:180px;border-left-width:2px;transition:opacity .25s ease,transform .25s ease}
+  .map-info p.font-serif.text-2xl{font-size:16px!important}
+  .map-info p.text-\\[10px\\]{font-size:8.5px!important;letter-spacing:.13em!important}
+  .map-info .text-\\[9px\\]{font-size:8px!important;letter-spacing:.16em!important}
 
-  /* hide duplicate info card on mobile — same info shown in Leaflet popup on tap + above map */
-  .map-info{display:none!important}
+  /* hide info card when Leaflet popup is open (prevents overlap) */
+  .map-info.is-hidden{opacity:0;transform:translateY(-8px);pointer-events:none}
 
   /* hide scroll-zoom hint on touch — useless tip on mobile */
   .map-hint{display:none!important}
@@ -480,6 +484,10 @@ body.cat-modal-open{overflow:hidden}
   h1.fadeUp{font-size:clamp(40px,11vw,56px)!important}
   .hero-stats .font-serif{font-size:24px!important}
   .map-frame{height:240px}
+  .map-info{max-width:150px;padding:9px 11px;top:10px;left:10px}
+  .map-info p.font-serif.text-2xl{font-size:14px!important}
+  .map-info p.text-\\[10px\\]{font-size:8px!important}
+  .map-info .flex.items-center.gap-2.mb-3{margin-bottom:6px!important}
   .map-btn span{font-size:8.5px}
   .map-btn{padding:11px 4px}
   .srv-img-wrap{height:160px!important}
@@ -1529,6 +1537,13 @@ function initMap() {
   const hint = document.getElementById('mapHint');
   map.on('focus click', () => { map.scrollWheelZoom.enable(); if (hint) hint.classList.add('hide'); });
   map.on('blur mouseout', () => { map.scrollWheelZoom.disable(); });
+
+  /* Hide .map-info card when Leaflet popup is open (prevents overlap on mobile) */
+  const infoCard = document.querySelector('.map-info');
+  if (infoCard) {
+    map.on('popupopen', () => infoCard.classList.add('is-hidden'));
+    map.on('popupclose', () => infoCard.classList.remove('is-hidden'));
+  }
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initMap);
 else initMap();
