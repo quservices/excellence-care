@@ -2173,36 +2173,44 @@ const OPENING_HOURS = {
 };
 const SLOT_MINUTES = 30; // granularita slotů
 
-// Render services — grouped by category
+// Render services — grouped by category. Optional category filter.
 const svcWrap = document.getElementById('bServices');
-const grouped = SERVICES.reduce((acc, s) => {
-  (acc[s.category] ||= []).push(s);
-  return acc;
-}, {});
-let svcIdx = 0;
-svcWrap.innerHTML = Object.entries(grouped).map(([cat, items]) => `
-  <div class="b-svc-group">
-    <div class="b-svc-group-head">
-      <h4 class="b-svc-group-title">${cat}</h4>
-      <span class="b-svc-group-count">${items.length} ${items.length === 1 ? 'služba' : items.length < 5 ? 'služby' : 'služeb'}</span>
+function renderServices(filterCategory, presetService) {
+  const items = filterCategory ? SERVICES.filter(s => s.category === filterCategory) : SERVICES;
+  const grouped = items.reduce((acc, s) => { (acc[s.category] ||= []).push(s); return acc; }, {});
+  let idx = 0;
+  svcWrap.innerHTML = Object.entries(grouped).map(([cat, list]) => `
+    <div class="b-svc-group">
+      <div class="b-svc-group-head">
+        <h4 class="b-svc-group-title">${cat}</h4>
+        <span class="b-svc-group-count">${list.length} ${list.length === 1 ? 'služba' : list.length < 5 ? 'služby' : 'služeb'}</span>
+      </div>
+      <div class="b-svc-grid">
+        ${list.map(s => {
+          const isPreset = presetService && s.name === presetService;
+          const isFirst = idx++ === 0;
+          const checked = (isPreset || (!presetService && isFirst)) ? 'checked' : '';
+          return `
+            <label class="b-svc${s.featured ? ' featured' : ''}">
+              <input type="radio" name="sluzba" value="${s.name}" data-id="${s.id}" ${checked}/>
+              <div class="b-svc-inner">
+                ${s.featured ? '<span class="b-svc-tag">Nejoblíbenější</span>' : ''}
+                <span class="b-svc-name">${s.name}</span>
+                <span class="b-svc-meta"><span>${s.dur}</span><span class="b-svc-price">${s.price}</span></span>
+              </div>
+            </label>
+          `;
+        }).join('')}
+      </div>
     </div>
-    <div class="b-svc-grid">
-      ${items.map(s => {
-        const checked = svcIdx++ === 0 ? 'checked' : '';
-        return `
-          <label class="b-svc${s.featured ? ' featured' : ''}">
-            <input type="radio" name="sluzba" value="${s.name}" data-id="${s.id}" ${checked}/>
-            <div class="b-svc-inner">
-              ${s.featured ? '<span class="b-svc-tag">Nejoblíbenější</span>' : ''}
-              <span class="b-svc-name">${s.name}</span>
-              <span class="b-svc-meta"><span>${s.dur}</span><span class="b-svc-price">${s.price}</span></span>
-            </div>
-          </label>
-        `;
-      }).join('')}
-    </div>
-  </div>
-`).join('');
+  `).join('');
+  /* Pokud preset neni mezi vykreslenymi, zaskrtni prvni */
+  if (presetService && !svcWrap.querySelector('input[name="sluzba"]:checked')) {
+    const first = svcWrap.querySelector('input[name="sluzba"]');
+    if (first) first.checked = true;
+  }
+}
+renderServices();
 
 // Modal open/close
 const modal = document.getElementById('bookingModal');
@@ -2232,10 +2240,9 @@ function openBooking(presetService) {
   formView.hidden = false;
   successView.hidden = true;
   setMinDateNow();
-  if (presetService) {
-    const radio = svcWrap.querySelector(`input[value="${CSS.escape(presetService)}"]`);
-    if (radio) radio.checked = true;
-  }
+  /* Pokud je preset, ukazeme jen sluzby z dane kategorie */
+  const presetSvc = presetService ? SERVICES.find(s => s.name === presetService) : null;
+  renderServices(presetSvc?.category, presetService);
   document.getElementById('bStatus').textContent = '';
   document.getElementById('bTermin').value = '';
   refreshSlots();
