@@ -2090,8 +2090,8 @@ document.addEventListener('keydown', e => {
             </label>
           </div>
           <label class="b-field">
-            <span class="b-label">E-mail (volitelné)</span>
-            <input id="bEmail" name="email" type="email" autocomplete="email" maxlength="200"/>
+            <span class="b-label">E-mail *</span>
+            <input id="bEmail" name="email" type="email" autocomplete="email" required maxlength="200"/>
           </label>
           <label class="b-field">
             <span class="b-label">Poznámka pro nás (volitelné)</span>
@@ -2402,13 +2402,18 @@ formView.addEventListener('submit', async (e) => {
     status.className = 'b-status err';
     return;
   }
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
+  if (!emailOk) {
+    status.textContent = 'Vyplňte prosím platný e-mail.';
+    status.className = 'b-status err';
+    return;
+  }
   if (!svc || !data.termin) {
     status.textContent = 'Vyberte prosím službu a volný čas.';
     status.className = 'b-status err';
     return;
   }
   // remove empty optional fields so they don't violate validation
-  if (!data.email) delete data.email;
   if (!data.zprava) delete data.zprava;
 
   submitBtn.disabled = true;
