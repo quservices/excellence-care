@@ -1762,17 +1762,7 @@ document.addEventListener('click', e => {
     }, 280);
     return;
   }
-  /* mailto: link clicked anywhere → open mail-chooser instead */
-  const mailLink = e.target.closest('a[href^="mailto:"]');
-  if (mailLink && !e.target.closest('#mailChooser')) {
-    e.preventDefault();
-    const mc = document.getElementById('mailChooser');
-    if (mc) {
-      mc.hidden = false;
-      document.body.classList.add('cat-modal-open');
-    }
-    return;
-  }
+  /* mailto: odkazy nechame nativni → spusti se postovni klient (Mail, Outlook, Gmail app...) */
   /* close mail-chooser (X or backdrop) */
   if (e.target.closest('[data-mail-close]')) {
     const mc = document.getElementById('mailChooser');
