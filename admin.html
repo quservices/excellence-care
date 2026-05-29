@@ -86,6 +86,9 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
 .list{display:grid;gap:12px}
 .card{background:#fff;border:1px solid rgba(184,147,47,.12);padding:20px 24px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;transition:all .2s}
 .card:hover{border-color:rgba(184,147,47,.3);box-shadow:0 4px 18px rgba(0,0,0,.04)}
+.card.is-past{background:#fafaf6;opacity:.78}
+.card.is-past .main-info .name{text-decoration:line-through;text-decoration-color:rgba(184,147,47,.5);color:rgba(10,10,10,.7)}
+.card.is-past .when-box .d,.card.is-past .when-box .m{color:rgba(10,10,10,.5)}
 .card .when-box{text-align:center;min-width:64px;padding-right:18px;border-right:1px solid rgba(184,147,47,.15)}
 .card .when-box .d{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;line-height:1}
 .card .when-box .m{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#b8932f;margin-top:4px}
@@ -213,6 +216,11 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
 .cal-day.today{background:linear-gradient(180deg,rgba(184,147,47,.12),#fff)}
 .cal-day.today .num{color:#b8932f;font-weight:500}
 .cal-day.today .num::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#b8932f}
+/* Minule dny — proskrtnute cislo, jemne ztlumene */
+.cal-day.is-past{background:#fafaf6}
+.cal-day.is-past .num{color:rgba(10,10,10,.4);text-decoration:line-through;text-decoration-color:rgba(184,147,47,.6);text-decoration-thickness:1.5px}
+.cal-day.is-past .cal-event{opacity:.55}
+.cal-event.is-past{text-decoration:line-through;text-decoration-color:rgba(184,147,47,.55);opacity:.7}
 .cal-events{display:flex;flex-direction:column;gap:2px;overflow:hidden;min-height:0}
 .cal-event{background:rgba(184,147,47,.12);color:#5a4d40;padding:2px 6px;font-size:11px;border-left:2px solid #b8932f;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5;transition:all .15s}
 .cal-event:hover{background:rgba(184,147,47,.25);transform:translateX(1px)}
@@ -239,6 +247,8 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
 .day-event-item.is-pause{background:linear-gradient(180deg,rgba(122,107,90,.04),transparent);margin:0 -10px;padding-left:14px;padding-right:14px;border-left:2px solid #7a6b5a}
 .day-event-item.is-pause .ev-name{color:#5a4d40;font-style:italic}
 .day-event-item.is-pause .ev-time-box{color:#7a6b5a}
+.day-event-item.is-past .ev-name{text-decoration:line-through;text-decoration-color:rgba(184,147,47,.5)}
+.day-event-item.is-past{opacity:.65}
 .day-event-item .ev-actions{display:flex;gap:6px;flex-shrink:0}
 .day-event-item .ev-note{font-size:12px;color:rgba(10,10,10,.55);margin-top:4px;font-style:italic;line-height:1.45}
 .day-empty{text-align:center;padding:32px 12px;color:rgba(10,10,10,.5);font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic}
@@ -781,6 +791,22 @@ function inTab(termin, tab, r) {
 /* ═══ Render ═══ */
 const escHtml = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
+/* Past helpers — rezervace se povazuje za probehlou kdyz termin+duration < ted */
+function isPastReservation(it) {
+  if (!it || !it.termin) return false;
+  const start = new Date(it.termin).getTime();
+  if (isNaN(start)) return false;
+  const dur = (parseInt(it.duration, 10) || 30) * 60 * 1000;
+  return start + dur < Date.now();
+}
+/* Den se povazuje za minuly kdyz cely uplynul (dnesek se nepoctitra jako past) */
+function isPastDay(date) {
+  const today = new Date();
+  const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+  const dayEnd = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() + 24*3600*1000 - 1;
+  return dayEnd < todayStart;
+}
+
 /* ═══ Initials for avatar ═══ */
 function initials(name) {
   const parts = (name || '').trim().split(/\s+/).filter(Boolean);
@@ -1061,9 +1087,11 @@ function render() {
       </div>`;
     }
 
-    const statusLabel = { new:'Nová', confirmed:'Potvrzená', done:'Dokončená' }[r.status||'new'] || 'Nová';
-    const statusClass = 's-' + (r.status||'new');
-    return `<div class="card" data-id="${escHtml(r.id)}">
+    const past = isPastReservation(r);
+    const effStatus = past ? 'done' : (r.status||'new');
+    const statusLabel = { new:'Nová', confirmed:'Potvrzená', done:'Dokončená' }[effStatus] || 'Nová';
+    const statusClass = 's-' + effStatus;
+    return `<div class="card${past?' is-past':''}" data-id="${escHtml(r.id)}">
       <div class="when-box">
         <div class="d">${day}</div>
         <div class="m">${mon}</div>
@@ -1080,7 +1108,7 @@ function render() {
         ${r.zprava?`<div class="note">${escHtml(r.zprava)}</div>`:''}
       </div>
       <div class="row-actions">
-        ${(r.status||'new') !== 'done' ? `<button class="icon-btn success" data-act="confirm" data-id="${escHtml(r.id)}" title="${(r.status||'new')==='new' ? 'Potvrdit' : 'Dokončit'}" type="button">
+        ${effStatus !== 'done' ? `<button class="icon-btn success" data-act="confirm" data-id="${escHtml(r.id)}" title="${(r.status||'new')==='new' ? 'Potvrdit' : 'Dokončit'}" type="button">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>
         </button>` : ''}
         <button class="icon-btn" data-act="edit" data-id="${escHtml(r.id)}" title="Upravit" type="button">
@@ -1172,6 +1200,7 @@ function renderCalendar() {
       items,
       isToday: `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}` === todayKey,
       isOtherMonth: d.getMonth() !== month,
+      isPast: isPastDay(d),
     });
   }
 
@@ -1209,6 +1238,7 @@ function renderCalendar() {
           const cls = ['cal-day'];
           if (c.isToday) cls.push('today');
           if (c.isOtherMonth) cls.push('other-month');
+          if (c.isPast) cls.push('is-past');
           return `
           <div class="${cls.join(' ')}" data-cal-day="${c.key}">
             <div class="num">${c.date.getDate()}</div>
@@ -1216,13 +1246,14 @@ function renderCalendar() {
               ${visible.map(it => {
                 const t = new Date(it.termin);
                 const time = t.toLocaleTimeString('cs-CZ', { hour:'2-digit', minute:'2-digit' });
+                const pastCls = (it.type !== 'pause' && isPastReservation(it)) ? ' is-past' : '';
                 if (it.type === 'pause') {
                   const label = it.note || 'Pauza';
                   return `<div class="cal-event pause" data-cal-event="${escHtml(it.id)}" title="Pauza · ${time} · ${escHtml(label)}"><span class="ev-time">${time}</span>${escHtml(label)}</div>`;
                 }
                 const label = it.jmeno || '—';
                 const titleAttr = [label, it.sluzba, time].filter(Boolean).join(' · ');
-                return `<div class="cal-event" data-cal-event="${escHtml(it.id)}" title="${escHtml(titleAttr)}"><span class="ev-time">${time}</span>${escHtml(label)}</div>`;
+                return `<div class="cal-event${pastCls}" data-cal-event="${escHtml(it.id)}" title="${escHtml(titleAttr)}"><span class="ev-time">${time}</span>${escHtml(label)}</div>`;
               }).join('')}
               ${overflow > 0 ? `<div class="cal-more" data-cal-more="${c.key}">+ ${overflow} dal${overflow === 1 ? 'ší' : 'ších'}</div>` : ''}
             </div>
@@ -1332,8 +1363,10 @@ function openDayModal(dateKey) {
       if (it.sluzba) metaParts.push(escHtml(it.sluzba) + (it.duration ? ' · ' + it.duration + ' min' : ''));
       if (it.telefon) metaParts.push(`<a href="tel:${escHtml(it.telefon)}">📞 ${escHtml(it.telefon)}</a>`);
       if (it.email) metaParts.push(`<a href="mailto:${escHtml(it.email)}">✉ ${escHtml(it.email)}</a>`);
-      const status = statusLabel[it.status || 'new'] || 'Nová';
-      return `<div class="day-event-item" data-day-id="${escHtml(it.id)}">
+      const past = isPastReservation(it);
+      const effStatus = past ? 'done' : (it.status || 'new');
+      const status = statusLabel[effStatus] || 'Nová';
+      return `<div class="day-event-item${past?' is-past':''}" data-day-id="${escHtml(it.id)}">
         <div class="ev-time-box">${time}</div>
         <div class="ev-info">
           <div class="ev-name">${escHtml(it.jmeno || '—')}<span class="ev-status">${status}</span></div>
@@ -1341,7 +1374,7 @@ function openDayModal(dateKey) {
           ${it.zprava ? `<div class="ev-note">${escHtml(it.zprava)}</div>` : ''}
         </div>
         <div class="ev-actions">
-          ${(it.status||'new') !== 'done' ? `<button class="icon-btn success" data-day-act="confirm" type="button" title="${(it.status||'new')==='new' ? 'Potvrdit' : 'Dokončit'}" aria-label="Potvrdit">
+          ${effStatus !== 'done' ? `<button class="icon-btn success" data-day-act="confirm" type="button" title="${(it.status||'new')==='new' ? 'Potvrdit' : 'Dokončit'}" aria-label="Potvrdit">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>
           </button>` : ''}
           <button class="icon-btn" data-day-act="edit" type="button" title="Upravit" aria-label="Upravit">
@@ -1413,10 +1446,11 @@ window.openModal = function(item) {
   /* Tlacitko Potvrdit / Dokoncit pro vsechny existujici rezervace.
      - "Nova" -> Potvrdit (zelene) -> nastavi confirmed
      - "Potvrzena" -> Dokoncit (modre) -> nastavi done
-     - "Dokoncena" -> skryje se */
+     - "Dokoncena" nebo minula rezervace -> skryje se */
   const confirmBtn = document.getElementById('modalConfirm');
   const curStatus = item?.status || 'new';
-  if (item && item.id && curStatus !== 'done') {
+  const itemPast = item ? isPastReservation(item) : false;
+  if (item && item.id && curStatus !== 'done' && !itemPast) {
     confirmBtn.hidden = false;
     if (curStatus === 'new') {
       confirmBtn.className = 'btn success icon';
