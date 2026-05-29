@@ -126,8 +126,9 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 .polaroid{transform:rotate(-2deg);transition:transform .8s ease}
 .polaroid:hover{transform:rotate(0)}
 
-/* badge — bez ramecku, jen elegantni zlaty eyebrow text */
+/* badge — bez ramecku, bez tecky, jen elegantni zlaty eyebrow text */
 .badge{display:inline-flex;align-items:center;gap:10px;padding:0;background:none;border:none;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#b8932f;font-weight:500}
+.badge > span:first-child{display:none}
 
 /* stat tile */
 .stat-tile{background:#fff;border:1px solid rgba(184,147,47,.12);padding:32px 24px;text-align:center;transition:all .4s ease}
@@ -405,8 +406,30 @@ body.cat-modal-open{overflow:hidden}
   /* hero "since 2017" badge smaller */
   .lg\\:col-span-5 .absolute.-bottom-4{display:none}
 
-  /* badges — vetsi, bez ramecku */
-  .badge{font-size:12.5px!important;letter-spacing:.26em!important;padding:0!important}
+  /* badges — vetsi, bez ramecku, vystredene na mobilu */
+  .badge{font-size:12.5px!important;letter-spacing:.26em!important;padding:0!important;display:flex!important;justify-content:center!important;margin-left:auto!important;margin-right:auto!important;width:fit-content!important}
+
+  /* O salonu — text column vystredeny vcetne nadpisu, dividera a paragrafu */
+  #o-salonu .rvr{text-align:center}
+  #o-salonu .rvr .gold-divider{margin-left:auto;margin-right:auto}
+  /* O salonu — header "Tri ritualy" uz je v text-center */
+
+  /* Sluzby — header vystredit (grid item) */
+  #sluzby .lg\:col-span-7,
+  #sluzby .lg\:col-span-5{text-align:center}
+
+  /* Poukazy banner — vystredit text obsah a CTA */
+  .rv.mt-20 .lg\:col-span-7{text-align:center}
+  .rv.mt-20 .lg\:col-span-7 ul{display:inline-block;text-align:left}
+  .rv.mt-20 .lg\:col-span-7 .badge{margin-left:auto;margin-right:auto}
+
+  /* Hero text column vystredit vcetne CTA */
+  section.relative.min-h-screen .lg\:col-span-7{text-align:center}
+  section.relative.min-h-screen .fadeUp.flex{justify-content:center;align-items:center}
+  section.relative.min-h-screen .hero-stats{margin-left:auto;margin-right:auto}
+
+  /* Kontakt info card — nadpis vystredit, polozky nechat zarovnane vlevo (icon + text) */
+  #kontakt .bg-white h3,#kontakt .bg-ink3 h3{text-align:center}
 }
 
 /* ultra-small phones */
