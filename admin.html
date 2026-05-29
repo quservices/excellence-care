@@ -100,6 +100,8 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
 .icon-btn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(184,147,47,.25);background:#fff;color:#8a6c1f;cursor:pointer;transition:all .2s}
 .icon-btn:hover{background:#b8932f;color:#fff;border-color:#b8932f}
 .icon-btn.danger:hover{background:#a04040;border-color:#a04040}
+.icon-btn.success{color:#2d7a4f;border-color:rgba(45,122,79,.35)}
+.icon-btn.success:hover{background:#2d7a4f;border-color:#2d7a4f;color:#fff}
 .icon-btn svg{width:14px;height:14px}
 
 .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:middle}
@@ -1078,6 +1080,9 @@ function render() {
         ${r.zprava?`<div class="note">${escHtml(r.zprava)}</div>`:''}
       </div>
       <div class="row-actions">
+        ${(r.status||'new') !== 'done' ? `<button class="icon-btn success" data-act="confirm" data-id="${escHtml(r.id)}" title="${(r.status||'new')==='new' ? 'Potvrdit' : 'Dokončit'}" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>
+        </button>` : ''}
         <button class="icon-btn" data-act="edit" data-id="${escHtml(r.id)}" title="Upravit" type="button">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
         </button>
@@ -1098,6 +1103,7 @@ function render() {
       if (act === 'edit') openModal(item);
       if (act === 'del') deleteItem(id);
       if (act === 'del-pause') deletePause(id);
+      if (act === 'confirm') confirmItem(id);
     });
   });
 
@@ -1335,6 +1341,9 @@ function openDayModal(dateKey) {
           ${it.zprava ? `<div class="ev-note">${escHtml(it.zprava)}</div>` : ''}
         </div>
         <div class="ev-actions">
+          ${(it.status||'new') !== 'done' ? `<button class="icon-btn success" data-day-act="confirm" type="button" title="${(it.status||'new')==='new' ? 'Potvrdit' : 'Dokončit'}" aria-label="Potvrdit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>
+          </button>` : ''}
           <button class="icon-btn" data-day-act="edit" type="button" title="Upravit" aria-label="Upravit">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
           </button>
@@ -1351,6 +1360,7 @@ function openDayModal(dateKey) {
         const act = b.dataset.dayAct;
         const item = store.find(x => x.id === id);
         if (!item) return;
+        if (act === 'confirm') { confirmItem(id); return; }
         closeDayModal();
         if (act === 'edit') openModal(item);
         else if (act === 'del') deleteItem(id);
@@ -1485,6 +1495,23 @@ resForm.addEventListener('submit', async (e) => {
     saveBtn.disabled = false;
   }
 });
+
+/* Rychle potvrzeni primo z radku — bez otevirani modalu */
+async function confirmItem(id) {
+  const it = store.find(x => x.id === id);
+  if (!it) return;
+  const cur = it.status || 'new';
+  if (cur === 'done') return;
+  const next = cur === 'new' ? 'confirmed' : 'done';
+  try {
+    const updated = await fsUpdate(id, { ...it, status: next });
+    const idx = store.findIndex(x => x.id === id);
+    if (idx >= 0) store[idx] = { ...store[idx], ...updated, status: next };
+    render();
+  } catch (err) {
+    alert('Změna stavu selhala: ' + (err.message || err));
+  }
+}
 
 async function deleteItem(id) {
   const it = store.find(x => x.id === id);
