@@ -55,6 +55,8 @@ header.bar .meta{display:flex;align-items:center;gap:8px;font-size:11px;color:rg
 .btn:hover{background:#b8932f;color:#fff;border-color:#b8932f}
 .btn.primary{background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);color:#fff;border-color:transparent}
 .btn.primary:hover{opacity:.9;color:#fff}
+.btn.success{background:linear-gradient(135deg,#3aa86b,#2d7a4f);color:#fff;border-color:transparent}
+.btn.success:hover{opacity:.92;color:#fff}
 .btn.danger:hover{background:#a04040;border-color:#a04040;color:#fff}
 .btn.icon svg{width:14px;height:14px;flex-shrink:0}
 
@@ -532,6 +534,10 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
       </div>
       <div class="modal-foot">
         <button type="button" class="btn" id="modalCancel">Zrušit</button>
+        <button type="button" class="btn success icon" id="modalConfirm" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>
+          Potvrdit
+        </button>
         <button type="submit" class="btn primary" id="modalSave">Uložit</button>
       </div>
     </form>
@@ -1394,6 +1400,9 @@ window.openModal = function(item) {
   document.getElementById('f_duration').value = item?.duration || defaultDur;
   document.getElementById('f_status').value = item?.status || 'new';
   document.getElementById('f_zprava').value = item?.zprava || '';
+  /* Tlacitko Potvrdit jen u existujici "Nove" rezervace (neukazat u nove zakladane ani jiz potvrzene) */
+  const confirmBtn = document.getElementById('modalConfirm');
+  confirmBtn.hidden = !(item && item.id && (item.status || 'new') === 'new');
   modalBg.classList.add('open');
   setTimeout(() => document.getElementById('f_jmeno').focus(), 50);
 };
@@ -1417,6 +1426,10 @@ function defaultTermin() {
 document.getElementById('fabAdd').addEventListener('click', () => openModal());
 document.getElementById('modalClose').addEventListener('click', closeModal);
 document.getElementById('modalCancel').addEventListener('click', closeModal);
+document.getElementById('modalConfirm').addEventListener('click', () => {
+  document.getElementById('f_status').value = 'confirmed';
+  resForm.requestSubmit();
+});
 modalBg.addEventListener('click', e => { if (e.target === modalBg) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && modalBg.classList.contains('open')) closeModal(); });
 
