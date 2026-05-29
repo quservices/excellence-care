@@ -398,7 +398,7 @@ body.cat-modal-open{overflow:hidden}
   h1.fadeUp{font-size:clamp(48px,12vw,72px)!important;line-height:.96!important;margin-bottom:20px!important}
   .fadeUp.font-script{font-size:clamp(34px,9vw,44px)!important}
   section{padding-top:64px!important;padding-bottom:64px!important}
-  section.relative.min-h-screen{padding-top:108px!important;min-height:auto!important;padding-bottom:48px!important}
+  section.relative.min-h-screen{padding-top:92px!important;min-height:auto!important;padding-bottom:48px!important}
 
   /* hero paragraph — větší, čitelnější */
   section.relative.min-h-screen p.fadeUp{font-size:18px!important;line-height:1.65!important;margin-bottom:32px!important}
@@ -779,6 +779,15 @@ html,body{overflow-x:hidden;max-width:100vw}
   <div class="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-12 items-center">
     <!-- Text column -->
     <div class="lg:col-span-7">
+      <!-- Mobile-only hero image — vyplnuje prazdny prostor nad nadpisem -->
+      <div class="fadeUp md:hidden mb-8 relative overflow-hidden" style="animation-delay:.1s;aspect-ratio:16/10;box-shadow:0 24px 50px -18px rgba(0,0,0,.28),0 8px 20px -10px rgba(184,147,47,.12)">
+        <img src="https://images.pexels.com/photos/35884502/pexels-photo-35884502.jpeg?w=900&auto=compress" alt="Luxusní treatment room — Exelance Care" class="w-full h-full object-cover" loading="eager"/>
+        <div aria-hidden="true" class="absolute inset-3 border border-cream/25 pointer-events-none"></div>
+        <!-- jemny zlaty roh vlevo dole pro brand feel -->
+        <span aria-hidden="true" class="absolute bottom-0 left-0 w-8 h-px bg-gold"></span>
+        <span aria-hidden="true" class="absolute bottom-0 left-0 w-px h-8 bg-gold"></span>
+      </div>
+
       <h1 class="fadeUp font-serif text-6xl md:text-7xl lg:text-[110px] font-light leading-[0.92] mb-6 tracking-tight" style="animation-delay:.25s">
         Krása v<br>
         <span class="italic gold-text">každém</span><br>
