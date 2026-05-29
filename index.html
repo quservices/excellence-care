@@ -388,46 +388,90 @@ body.cat-modal-open{overflow:hidden}
   .brand-logo .brand-line-1{font-size:18px;letter-spacing:.14em}
   .brand-logo .brand-line-2{font-size:13px;letter-spacing:.28em}
 
+  /* base body — bigger default for better legibility on mobile */
+  body{font-size:17px;line-height:1.55}
+
+  /* mobile menu links bigger */
+  .mobile-menu a.mobile-link{font-size:34px!important}
+
   /* hero typography */
-  h1.fadeUp{font-size:clamp(46px,11vw,68px)!important;line-height:.96!important;margin-bottom:18px!important}
+  h1.fadeUp{font-size:clamp(48px,12vw,72px)!important;line-height:.96!important;margin-bottom:20px!important}
   .fadeUp.font-script{font-size:clamp(34px,9vw,44px)!important}
   section{padding-top:64px!important;padding-bottom:64px!important}
   section.relative.min-h-screen{padding-top:108px!important;min-height:auto!important;padding-bottom:48px!important}
 
-  /* hero stats compact spacing on mobile (font sizes handled by inline classes) */
+  /* hero paragraph — větší, čitelnější */
+  section.relative.min-h-screen p.fadeUp{font-size:18px!important;line-height:1.65!important;margin-bottom:32px!important}
+
+  /* hero stats compact spacing on mobile + bigger numbers */
   .hero-stats{margin-top:32px!important;padding-top:22px!important}
+  .hero-stats .font-serif{font-size:32px!important}
 
-  /* section headings */
-  h2.font-serif{font-size:clamp(34px,8.5vw,44px)!important;line-height:1.08!important}
+  /* section headings — větší */
+  h2.font-serif{font-size:clamp(38px,9vw,48px)!important;line-height:1.08!important}
+  h3.font-serif{font-size:28px!important;line-height:1.15!important}
 
-  /* service cards: tighter mobile padding + smaller image + smaller benefits */
+  /* paragraphs — větší font ve všech sekcích */
+  section p{font-size:16.5px;line-height:1.65}
+  section p.text-base{font-size:17px!important;line-height:1.65!important}
+
+  /* O salonu — about cards bigger text */
+  .about-card{padding:32px 24px 28px!important}
+  .about-card h4{font-size:22px!important;line-height:1.25!important;margin-bottom:14px!important}
+  .about-card p{font-size:15.5px!important;line-height:1.65!important}
+  .about-card-num{font-size:32px!important;top:16px!important;right:18px!important}
+  .about-card-icon{width:48px!important;height:48px!important;margin-bottom:18px!important}
+
+  /* category cards (Služby) — bigger title & price */
+  .cat-card-body{padding:22px 22px!important;gap:16px!important}
+  .cat-card-title{font-size:26px!important;line-height:1.15!important}
+  .cat-card-price{font-size:24px!important}
+  .cat-card-img{height:200px!important}
+  .cat-card-num{font-size:38px!important}
+
+  /* category modal — bigger text */
+  .cat-modal-content{padding:28px 22px!important}
+  .cat-modal-content h3{font-size:30px!important;line-height:1.1!important}
+  .cat-modal-content > p{font-size:16px!important;line-height:1.65!important}
+  .variant-btn{padding:18px 18px!important}
+  .variant-btn h5{font-size:19px!important}
+  .variant-btn .variant-desc{font-size:13px!important}
+  .variant-meta .price{font-size:22px!important}
+
+  /* service cards: tighter mobile padding + smaller image + bigger benefits */
   .srv-img-wrap{height:180px!important}
   .srv-num{font-size:38px!important;top:12px!important;right:14px!important}
   .srv-body{padding:22px 20px!important}
-  .srv-card h3{font-size:20px!important}
-  .srv-benefits li{font-size:12.5px}
-  .srv-benefits{gap:8px;margin-bottom:20px}
+  .srv-card h3{font-size:22px!important}
+  .srv-benefits li{font-size:14.5px!important;line-height:1.5!important}
+  .srv-benefits{gap:10px;margin-bottom:22px}
+
+  /* poukaz banner */
+  .rv.mt-20 h3.font-serif{font-size:30px!important;line-height:1.15!important}
+  .rv.mt-20 p{font-size:16px!important;line-height:1.65!important}
 
   /* review cards: smaller decorative quote, opacity reduced — vejde se dovnitř */
   .rev-card{padding:30px 22px 26px!important}
-  .rev-card p.font-serif{font-size:16px!important;line-height:1.6!important}
+  .rev-card p.font-serif{font-size:17px!important;line-height:1.6!important}
   .rev-card::before{font-size:70px!important;top:4px!important;left:14px!important;opacity:.12!important}
 
   /* stats band */
   .stat-tile{padding:22px 12px!important}
-  .stat-tile .font-serif.text-5xl{font-size:30px!important}
+  .stat-tile .font-serif.text-5xl{font-size:34px!important}
 
-  /* contact info card */
-  #kontakt .bg-white,#kontakt .bg-ink3{padding:28px 22px!important}
-  #kontakt h3.font-serif{font-size:22px!important}
+  /* contact info card — bigger text */
+  #kontakt .bg-white,#kontakt .bg-ink3{padding:30px 24px!important}
+  #kontakt h3.font-serif{font-size:26px!important;margin-bottom:24px!important}
+  #kontakt .font-serif.text-xl{font-size:19px!important;line-height:1.3!important}
+  #kontakt .text-base{font-size:16px!important;line-height:1.55!important}
 
   /* map: smaller corner accents, smaller pin, smaller info card */
   .gold-corners::before,.gold-corners::after,
   .gold-corners > .c-tl,.gold-corners > .c-br{width:20px;height:20px}
   .map-pin svg{width:38px;height:38px}
   .map-pulse{width:38px;height:38px}
-  .map-info{top:12px;left:12px;padding:10px 13px;max-width:180px;border-left-width:2px;transition:opacity .25s ease,transform .25s ease}
-  .map-info p.font-serif.text-2xl{font-size:16px!important}
+  .map-info{top:12px;left:12px;padding:11px 14px;max-width:190px;border-left-width:2px;transition:opacity .25s ease,transform .25s ease}
+  .map-info p.font-serif.text-2xl{font-size:17px!important}
   .map-info p.text-\\[10px\\]{font-size:8.5px!important;letter-spacing:.13em!important}
   .map-info .text-\\[9px\\]{font-size:8px!important;letter-spacing:.16em!important}
 
@@ -437,22 +481,26 @@ body.cat-modal-open{overflow:hidden}
   /* hide scroll-zoom hint on touch — useless tip on mobile */
   .map-hint{display:none!important}
 
-  /* map buttons: shorter text, smaller padding, min 44px tap target */
-  .map-btn{padding:12px 6px;font-size:9px;letter-spacing:.12em;gap:5px;min-height:46px}
-  .map-btn svg{width:13px;height:13px}
+  /* map buttons: bigger text, comfortable padding */
+  .map-btn{padding:14px 8px;font-size:11px;letter-spacing:.14em;gap:6px;min-height:48px}
+  .map-btn svg{width:14px;height:14px}
 
-  /* transport info: tighter mobile layout */
-  #kontakt .grid.grid-cols-3.gap-3.text-center{gap:0!important;padding:14px 4px!important}
-  #kontakt .grid.grid-cols-3 p.text-sm{font-size:11px!important;line-height:1.3}
+  /* transport info: bigger text */
+  #kontakt .grid.grid-cols-3.gap-3.text-center{gap:0!important;padding:16px 4px!important}
+  #kontakt .grid.grid-cols-3 p.text-sm{font-size:13.5px!important;line-height:1.4}
   #kontakt .grid.grid-cols-3 p.text-\\[9px\\]{font-size:8.5px!important;margin-bottom:2px!important}
 
   /* tighten map action buttons spacing */
   #kontakt .grid.grid-cols-3.gap-2{gap:6px!important}
 
-  /* footer (padding-top větší kvůli posunutému ornamentu) */
+  /* footer — větší písmo */
   footer{padding-top:120px!important}
-  footer h3.font-serif{font-size:28px!important}
-  footer .font-script.text-4xl{font-size:28px!important}
+  footer h3.font-serif{font-size:30px!important;line-height:1.15!important}
+  footer .font-script.text-4xl{font-size:32px!important}
+  footer p.text-sm{font-size:15.5px!important;line-height:1.6!important}
+  footer ul.text-sm li,
+  footer ul li a,
+  footer ul li span{font-size:15px!important;line-height:1.5!important}
 
   /* marquee speed-up for shorter screens */
   .marquee-track{animation-duration:22s}
@@ -463,9 +511,16 @@ body.cat-modal-open{overflow:hidden}
   .lightbox-nav{width:44px;height:44px;font-size:20px}
   .lightbox-prev{left:8px}.lightbox-next{right:8px}
 
-  /* CTA buttons full width feel */
-  .btn-shimmer{padding-left:28px!important;padding-right:28px!important;letter-spacing:.16em!important}
+  /* CTA buttons — větší písmo pro lepší viditelnost */
+  .btn-shimmer{padding-left:32px!important;padding-right:32px!important;letter-spacing:.16em!important;font-size:13px!important;padding-top:18px!important;padding-bottom:18px!important}
   .cta-pulse{animation-duration:3s}
+
+  /* generic small uppercase links/buttons — větší na mobilu */
+  a.text-xs,button.text-xs{font-size:13px!important}
+
+  /* gallery labels */
+  .gal-label p.font-serif{font-size:16px!important}
+  .gal-label p.text-xs{font-size:11px!important}
 
   /* "about" decoration corners hide on tiny */
   .polaroid + div.absolute{display:none}
@@ -473,19 +528,27 @@ body.cat-modal-open{overflow:hidden}
   /* hero "since 2017" badge smaller */
   .lg\\:col-span-5 .absolute.-bottom-4{display:none}
 
-  /* badges smaller */
-  .badge{font-size:9px;padding:5px 11px;letter-spacing:.18em}
+  /* badges — větší, lépe čitelné */
+  .badge{font-size:11px!important;padding:7px 14px!important;letter-spacing:.2em!important}
 }
 
 /* ultra-small phones */
 @media (max-width:380px){
+  body{font-size:16px}
   .brand-logo .brand-line-1{font-size:16px}
   .brand-logo .brand-line-2{font-size:11px}
-  h1.fadeUp{font-size:clamp(40px,11vw,56px)!important}
-  .hero-stats .font-serif{font-size:24px!important}
+  h1.fadeUp{font-size:clamp(42px,12vw,58px)!important}
+  h2.font-serif{font-size:clamp(32px,9vw,40px)!important}
+  .hero-stats .font-serif{font-size:26px!important}
   .map-frame{height:240px}
-  .map-info{max-width:150px;padding:9px 11px;top:10px;left:10px}
-  .map-info p.font-serif.text-2xl{font-size:14px!important}
+  .map-info{max-width:160px;padding:10px 12px;top:10px;left:10px}
+  .map-info p.font-serif.text-2xl{font-size:15px!important}
+  .cat-card-title{font-size:23px!important}
+  .cat-card-price{font-size:22px!important}
+  .about-card h4{font-size:20px!important}
+  .about-card p{font-size:15px!important}
+  #kontakt .font-serif.text-xl{font-size:17px!important}
+  .btn-shimmer{font-size:12px!important;padding-left:24px!important;padding-right:24px!important}
   .map-info p.text-\\[10px\\]{font-size:8px!important}
   .map-info .flex.items-center.gap-2.mb-3{margin-bottom:6px!important}
   .map-btn span{font-size:8.5px}
