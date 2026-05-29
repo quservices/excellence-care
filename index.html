@@ -57,8 +57,6 @@ body{background:#ffffff;color:#0a0a0a;font-family:'Inter',sans-serif;font-weight
 /* gold text gradient */
 .gold-text{background:linear-gradient(135deg,#d4af37 0%,#b8932f 50%,#8a6c1f 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
 
-/* gold glow */
-.gold-glow{box-shadow:0 10px 40px rgba(184,147,47,.25),0 4px 12px rgba(0,0,0,.06)}
 .soft-shadow{box-shadow:0 20px 60px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04)}
 
 /* shimmer */
@@ -96,8 +94,6 @@ body{background:#ffffff;color:#0a0a0a;font-family:'Inter',sans-serif;font-weight
 
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes orbPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6}50%{transform:translate(-50%,-50%) scale(1.12);opacity:.9}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-.float{animation:float 6s ease-in-out infinite}
 
 /* gallery */
 .gal-item{position:relative;overflow:hidden;cursor:pointer;background:#fff}
@@ -118,46 +114,9 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 .mobile-menu{position:fixed;inset:0;background:rgba(250,247,242,.98);backdrop-filter:blur(20px);z-index:600;display:none;flex-direction:column;align-items:center;justify-content:center;gap:32px}
 .mobile-menu.open{display:flex}
 
-/* service card */
-.srv-card{transition:all .5s cubic-bezier(.22,.61,.36,1);position:relative;overflow:hidden;background:#fff;border:1px solid rgba(184,147,47,.1)}
-.srv-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,#b8932f,transparent);transform:scaleX(0);transform-origin:center;transition:transform .6s ease;z-index:5}
-.srv-card:hover::before{transform:scaleX(1)}
-.srv-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.08),0 8px 16px rgba(184,147,47,.08)}
-.srv-card.srv-featured{background:linear-gradient(180deg,#fff 50%,#f3ede1 100%)}
-
-/* service card image area */
-.srv-img-wrap{position:relative;height:220px;overflow:hidden;background:#ebe4d3;flex-shrink:0}
-.srv-img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.22,.61,.36,1);filter:saturate(1.05)}
-.group:hover .srv-img{transform:scale(1.06)}
-.srv-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.4) 100%);pointer-events:none}
-.srv-num{position:absolute;top:14px;right:18px;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:48px;line-height:1;color:rgba(255,255,255,.55);text-shadow:0 2px 12px rgba(0,0,0,.25);z-index:3}
-
-/* service card body */
-.srv-body{padding:28px 26px;display:flex;flex-direction:column;flex:1}
-@media (min-width:768px){.srv-body{padding:32px 30px}}
-
-/* benefits list */
-.srv-benefits{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
-.srv-benefits li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(10,10,10,.78);line-height:1.45}
-.srv-benefits svg{width:14px;height:14px;color:#b8932f;flex-shrink:0;margin-top:3px;stroke:#b8932f}
-
-/* price footer */
-.srv-price{margin-top:auto;display:flex;align-items:baseline;justify-content:space-between;padding-top:18px;border-top:1px solid rgba(184,147,47,.15)}
-
-/* review */
-.rev-card{position:relative;transition:all .5s ease;background:#fff;border:1px solid rgba(184,147,47,.12)}
-.rev-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.08)}
-.rev-card::before{content:'"';position:absolute;top:-20px;left:24px;font-family:'Cormorant Garamond',serif;font-size:120px;color:#b8932f;line-height:1;opacity:.2}
-
 /* sparkle */
 @keyframes sparkle{0%,100%{opacity:.3;transform:scale(.9)}50%{opacity:1;transform:scale(1.1)}}
 .sparkle{animation:sparkle 3s ease-in-out infinite}
-
-/* feature list bullet */
-.feat-bullet{width:5px;height:5px;background:#b8932f;border-radius:50%;flex-shrink:0;margin-top:8px}
-
-/* number marker */
-.num-mark{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;color:#b8932f;opacity:.25}
 
 /* CTA pulse ring */
 @keyframes pulseRing{0%{box-shadow:0 0 0 0 rgba(184,147,47,.3),0 10px 40px rgba(184,147,47,.25)}70%{box-shadow:0 0 0 18px rgba(184,147,47,0),0 10px 40px rgba(184,147,47,.25)}100%{box-shadow:0 0 0 0 rgba(184,147,47,0),0 10px 40px rgba(184,147,47,.25)}}
@@ -174,80 +133,27 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 .stat-tile{background:#fff;border:1px solid rgba(184,147,47,.12);padding:32px 24px;text-align:center;transition:all .4s ease}
 .stat-tile:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.06)}
 
-/* marquee */
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.marquee-track{display:flex;animation:marquee 30s linear infinite;gap:60px;width:max-content}
-
 /* ═══ BRAND LOGO ═══ */
+.brand-logo{display:inline-flex;text-decoration:none;align-items:flex-start}
 .brand-logo-img{display:block;height:auto;max-width:100%}
 /* Nav logo: vizuálně 110px, ale negativní margin udrží lištu na původní výšce 54px */
 .brand-logo .brand-logo-img{max-height:110px;width:auto;margin:-28px 0}
-.brand-logo-lg .brand-logo-img{max-height:190px;width:auto}
-.brand-logo-xl .brand-logo-img{max-height:240px;width:auto}
-/* Footer logo: smaller + remove the PNG's black background by screen-blending into the dark footer */
-.footer-logo .brand-logo-img{max-height:110px;margin:0;mix-blend-mode:screen}
-@media (max-width:768px){
-  .footer-logo .brand-logo-img{max-height:88px}
-}
 @media (max-width:768px){
   .brand-logo .brand-logo-img{max-height:84px;margin:-20px 0}
 }
-/* Wrapper allows image + text fallback inside */
-.brand-logo{display:inline-flex;flex-direction:column;text-decoration:none;line-height:.95;align-items:flex-start}
-.brand-logo .brand-line{font-family:'Italiana','Cormorant Garamond',serif;font-weight:400;background:linear-gradient(140deg,#f0d488 0%,#d4af37 28%,#b8932f 55%,#8a6c1f 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 1px 0 rgba(184,147,47,.18))}
-.brand-logo .brand-line-1{font-size:24px;letter-spacing:.16em}
-.brand-logo .brand-line-2{font-size:17px;letter-spacing:.32em;align-self:flex-end;margin-top:3px}
-.brand-logo-lg .brand-line-1{font-size:38px;letter-spacing:.14em}
-.brand-logo-lg .brand-line-2{font-size:26px;letter-spacing:.3em;margin-top:5px}
 
-/* legacy support (booking modal etc. may still reference) */
-.logo-lockup{display:inline-flex;align-items:center;gap:12px;text-decoration:none}
-
-/* ═══ SERVICE CATEGORY BLOCKS ═══ */
-.cat-block{margin-bottom:56px}
-@media (min-width:768px){.cat-block{margin-bottom:72px}}
-.cat-header{display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:24px}
-@media (min-width:768px){.cat-header{grid-template-columns:5fr 7fr;gap:36px;align-items:stretch}}
-.cat-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:#f9f8f5}
-.cat-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
-.cat-block:hover .cat-img img{transform:scale(1.04)}
-.cat-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.25) 0%,transparent 55%);pointer-events:none}
-.cat-num{position:absolute;top:18px;left:22px;font-family:'Italiana','Cormorant Garamond',serif;font-size:34px;color:rgba(255,255,255,.9);letter-spacing:.1em;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
-.cat-info{display:flex;flex-direction:column;justify-content:center}
+/* ═══ CATEGORY MODAL — tag + benefits ═══ */
 .cat-tag{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:#b8932f;font-weight:600;margin-bottom:10px}
-.cat-info h3{font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1.05;font-weight:300;margin-bottom:12px;letter-spacing:-.005em;color:#0a0a0a}
-@media (min-width:768px){.cat-info h3{font-size:38px}}
-.cat-info > p{color:rgba(10,10,10,.65);line-height:1.6;font-size:14px;margin-bottom:16px;max-width:560px}
-.cat-benefits{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12px;list-style:none;padding:0;margin:0}
-.cat-benefits li{display:flex;align-items:center;gap:8px;color:rgba(10,10,10,.72)}
-.cat-benefits li::before{content:'';width:5px;height:5px;background:#b8932f;border-radius:50%;flex-shrink:0}
-
-/* detailed benefits — vertical list with checkmarks for content-heavy categories */
 .cat-benefits-detail{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr;gap:8px}
 @media (min-width:768px){.cat-benefits-detail{grid-template-columns:1fr 1fr}}
 .cat-benefits-detail li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(10,10,10,.78);line-height:1.45}
 .cat-benefits-detail svg{width:14px;height:14px;color:#b8932f;flex-shrink:0;margin-top:3px}
-
-/* Service items grid within category */
-.cat-services{display:grid;gap:8px;grid-template-columns:1fr}
-@media (min-width:640px){.cat-services{grid-template-columns:1fr 1fr}}
-@media (min-width:1024px){.cat-services{grid-template-columns:1fr 1fr 1fr}}
-.srv-item{position:relative;padding:18px 22px;background:#fff;border:1px solid rgba(184,147,47,.18);transition:all .3s ease;display:flex;flex-direction:column}
-.srv-item:hover{border-color:rgba(184,147,47,.45);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.05)}
-.srv-item h4{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;color:#0a0a0a;margin:0 0 4px;line-height:1.2}
-.srv-item .srv-desc{font-size:12px;color:rgba(10,10,10,.55);line-height:1.45;margin-bottom:auto}
-.srv-item .srv-item-meta{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:14px;padding-top:10px;border-top:1px solid rgba(184,147,47,.15)}
-.srv-item .srv-item-meta .dur{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(10,10,10,.5)}
-.srv-item .srv-item-meta .price{font-family:'Cormorant Garamond',serif;font-size:19px;background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);-webkit-background-clip:text;background-clip:text;color:transparent}
-.srv-item.featured{background:linear-gradient(135deg,#f9f8f5,#fff);border-color:rgba(184,147,47,.4)}
-.srv-item.featured::after{content:'Nejoblíbenější';position:absolute;top:-9px;right:14px;font-size:8px;letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(135deg,#d4af37,#b8932f);color:#fff;padding:3px 9px;font-weight:600}
 
 /* ═══ ABOUT — 3 SLUŽBY KARTY ═══ */
 .about-card{position:relative;background:#fff;border:1px solid rgba(184,147,47,.15);padding:36px 28px 30px;transition:all .45s cubic-bezier(.22,.61,.36,1);overflow:hidden}
 .about-card:hover{transform:translateY(-4px);border-color:rgba(184,147,47,.4);box-shadow:0 20px 50px rgba(0,0,0,.05),0 8px 16px rgba(184,147,47,.06)}
 .about-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,#b8932f,transparent);transform:scaleX(0);transform-origin:center;transition:transform .6s ease}
 .about-card:hover::before{transform:scaleX(1)}
-.about-card-num{position:absolute;top:18px;right:22px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:34px;font-weight:300;color:rgba(184,147,47,.28);line-height:1}
 .about-card-icon{width:52px;height:52px;border:1px solid rgba(184,147,47,.35);display:flex;align-items:center;justify-content:center;color:#b8932f;margin-bottom:22px}
 .about-card h4{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;line-height:1.2;margin-bottom:14px;color:#0a0a0a;letter-spacing:-.005em}
 @media (min-width:1024px){.about-card h4{font-size:24px}}
@@ -327,21 +233,6 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 /* Body scroll lock when modal open */
 body.cat-modal-open{overflow:hidden}
 
-/* ═══ MAIL CHOOSER POPUP ═══ */
-.mail-chooser{position:fixed;inset:0;z-index:9100;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s ease}
-.mail-chooser[hidden]{display:none}
-.mail-chooser-backdrop{position:absolute;inset:0;background:rgba(10,10,10,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-.mail-chooser-panel{position:relative;background:#fff;max-width:380px;width:100%;padding:32px 28px 28px;animation:scaleIn .3s cubic-bezier(.22,.61,.36,1);box-shadow:0 30px 80px rgba(0,0,0,.25)}
-.mail-chooser-panel h4{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;text-align:center;margin:0 0 6px;color:#0a0a0a;line-height:1.1}
-.mail-chooser-email{text-align:center;font-size:11px;color:#b8932f;letter-spacing:.2em;text-transform:uppercase;margin:0 0 22px;font-weight:600;font-family:'Inter',sans-serif}
-.mail-chooser-options{display:flex;flex-direction:column;gap:7px}
-.mail-chooser-options a,.mail-chooser-options button{display:flex;align-items:center;gap:12px;padding:13px 16px;background:#fafaf6;border:1px solid rgba(184,147,47,.15);text-decoration:none;color:#0a0a0a;font-size:13px;cursor:pointer;transition:all .25s ease;font-family:inherit;width:100%;text-align:left;line-height:1.2}
-.mail-chooser-options a:hover,.mail-chooser-options button:hover{background:#fff;border-color:#b8932f;transform:translateX(3px)}
-.mail-chooser-options .mc-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.mail-chooser-options .mc-icon svg{width:32px;height:32px;border-radius:5px;box-shadow:0 2px 4px rgba(0,0,0,.06)}
-.mail-chooser-close{position:absolute;top:10px;right:10px;width:36px;height:36px;background:rgba(255,255,255,.9);border:1px solid rgba(184,147,47,.2);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;color:#0a0a0a;font-weight:300;transition:all .25s ease}
-.mail-chooser-close:hover{background:#b8932f;color:#fff;border-color:#b8932f;transform:rotate(90deg)}
-
 /* map frame — desktop square, mobile shorter */
 .map-frame{aspect-ratio:1/1}
 @media (max-width:768px){.map-frame{aspect-ratio:auto;height:340px}}
@@ -355,13 +246,6 @@ body.cat-modal-open{overflow:hidden}
 .gold-corners::after{top:-2px;right:-2px;border-top-width:2px;border-right-width:2px}
 .gold-corners > .c-tl{bottom:-2px;left:-2px;border-bottom-width:2px;border-left-width:2px}
 .gold-corners > .c-br{bottom:-2px;right:-2px;border-bottom-width:2px;border-right-width:2px}
-
-/* map pin */
-@keyframes pinDrop{0%{transform:translate(-50%,-120%);opacity:0}60%{transform:translate(-50%,-100%);opacity:1}100%{transform:translate(-50%,-100%);opacity:1}}
-@keyframes pinPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.55}50%{transform:translate(-50%,-50%) scale(1.6);opacity:0}}
-.map-pin{position:absolute;top:50%;left:50%;z-index:10;pointer-events:none;animation:pinDrop .9s cubic-bezier(.34,1.56,.64,1) both;filter:drop-shadow(0 8px 14px rgba(0,0,0,.35))}
-.map-pin svg{width:54px;height:54px;display:block}
-.map-pulse{position:absolute;top:50%;left:50%;width:54px;height:54px;border-radius:50%;background:rgba(184,147,47,.35);animation:pinPulse 2s ease-out infinite;z-index:9;pointer-events:none}
 
 /* map action buttons */
 .map-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 16px;background:#fff;border:1px solid rgba(184,147,47,.25);color:#0a0a0a;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;transition:all .35s ease;cursor:pointer;text-decoration:none}
@@ -385,8 +269,6 @@ body.cat-modal-open{overflow:hidden}
 @media (max-width:768px){
   /* nav: tighter padding, smaller logo */
   nav{padding-left:18px!important;padding-right:18px!important;padding-top:14px!important;padding-bottom:14px!important}
-  .brand-logo .brand-line-1{font-size:18px;letter-spacing:.14em}
-  .brand-logo .brand-line-2{font-size:13px;letter-spacing:.28em}
 
   /* base body — bigger default for better legibility on mobile */
   body{font-size:17px;line-height:1.55}
@@ -468,8 +350,6 @@ body.cat-modal-open{overflow:hidden}
   /* map: smaller corner accents, smaller pin, smaller info card */
   .gold-corners::before,.gold-corners::after,
   .gold-corners > .c-tl,.gold-corners > .c-br{width:20px;height:20px}
-  .map-pin svg{width:38px;height:38px}
-  .map-pulse{width:38px;height:38px}
   .map-info{top:12px;left:12px;padding:11px 14px;max-width:190px;border-left-width:2px;transition:opacity .25s ease,transform .25s ease}
   .map-info p.font-serif.text-2xl{font-size:17px!important}
   .map-info p.text-\\[10px\\]{font-size:8.5px!important;letter-spacing:.13em!important}
@@ -502,9 +382,6 @@ body.cat-modal-open{overflow:hidden}
   footer ul li a,
   footer ul li span{font-size:15px!important;line-height:1.5!important}
 
-  /* marquee speed-up for shorter screens */
-  .marquee-track{animation-duration:22s}
-
   /* lightbox: better controls on small screens */
   .lightbox{padding:16px}
   .lightbox-close{top:12px;right:12px;width:40px;height:40px}
@@ -535,8 +412,6 @@ body.cat-modal-open{overflow:hidden}
 /* ultra-small phones */
 @media (max-width:380px){
   body{font-size:16px}
-  .brand-logo .brand-line-1{font-size:16px}
-  .brand-logo .brand-line-2{font-size:11px}
   h1.fadeUp{font-size:clamp(56px,16vw,78px)!important}
   h2.font-serif{font-size:clamp(32px,9vw,40px)!important}
   .hero-stats .font-serif{font-size:26px!important}
@@ -606,9 +481,6 @@ html,body{overflow-x:hidden;max-width:100vw}
 
 /* ═══════ COUNTER ═══════ */
 .counter{display:inline-block;font-variant-numeric:tabular-nums;font-feature-settings:'tnum'}
-
-/* small dark-text variant for badge inside contact */
-.tag-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(184,147,47,.08);border:1px solid rgba(184,147,47,.2);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#8a6c1f;font-weight:600}
 
 /* ═══ BOOKING MODAL ═══ */
 .b-modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:24px;opacity:0;transition:opacity .3s ease}
@@ -738,9 +610,9 @@ html,body{overflow-x:hidden;max-width:100vw}
       <li><a href="#galerie" class="text-[10px] tracking-[0.22em] uppercase text-ink/70 hover:text-gold transition-colors">Galerie</a></li>
       <li><a href="#kontakt" class="text-[10px] tracking-[0.22em] uppercase text-ink/70 hover:text-gold transition-colors">Kontakt</a></li>
     </ul>
-    <a href="https://www.notino.cz" target="_blank" rel="noopener" class="hidden md:inline-block btn-shimmer text-white text-[10px] font-semibold tracking-[0.2em] uppercase px-7 py-3 hover:opacity-90 transition-opacity">
+    <button type="button" data-book class="hidden md:inline-block btn-shimmer text-white text-[10px] font-semibold tracking-[0.2em] uppercase px-7 py-3 hover:opacity-90 transition-opacity">
       Rezervovat termín
-    </a>
+    </button>
     <div class="nav-right flex items-center gap-2 lg:gap-3">
       <a href="admin.html" id="adminLock" aria-label="Admin – přihlášení" title="Admin">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
@@ -759,7 +631,7 @@ html,body{overflow-x:hidden;max-width:100vw}
   <a href="#sluzby" class="mobile-link font-serif text-3xl text-ink hover:text-gold transition-colors">Služby</a>
   <a href="#galerie" class="mobile-link font-serif text-3xl text-ink hover:text-gold transition-colors">Galerie</a>
   <a href="#kontakt" class="mobile-link font-serif text-3xl text-ink hover:text-gold transition-colors">Kontakt</a>
-  <a href="https://www.notino.cz" target="_blank" rel="noopener" class="mt-8 btn-shimmer text-white text-xs font-semibold tracking-[0.2em] uppercase px-8 py-4">Rezervovat termín</a>
+  <button type="button" data-book class="mt-8 btn-shimmer text-white text-xs font-semibold tracking-[0.2em] uppercase px-8 py-4">Rezervovat termín</button>
 </div>
 
 <!-- ═══════ HERO ═══════ -->
@@ -791,10 +663,10 @@ html,body{overflow-x:hidden;max-width:100vw}
       </p>
 
       <div class="fadeUp flex flex-col sm:flex-row gap-4 items-start sm:items-center" style="animation-delay:.7s">
-        <a href="https://www.notino.cz" target="_blank" rel="noopener" class="btn-shimmer text-white text-xs font-semibold tracking-[0.2em] uppercase px-10 py-5 inline-flex items-center gap-3 group cta-pulse">
+        <button type="button" data-book class="btn-shimmer text-white text-xs font-semibold tracking-[0.2em] uppercase px-10 py-5 inline-flex items-center gap-3 group cta-pulse">
           Rezervovat termín
           <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
+        </button>
         <a href="#sluzby" class="text-ink text-xs tracking-[0.2em] uppercase border-b border-ink/30 pb-1 hover:border-gold hover:text-gold transition-all">
           Prohlédnout služby →
         </a>
@@ -1132,10 +1004,10 @@ html,body{overflow-x:hidden;max-width:100vw}
     </div>
 
     <div class="text-center mt-16 rv">
-      <a href="https://www.notino.cz" target="_blank" rel="noopener" class="btn-shimmer text-white text-xs font-semibold tracking-[0.2em] uppercase px-12 py-5 inline-flex items-center gap-3 group cta-pulse">
+      <button type="button" data-book class="btn-shimmer text-white text-xs font-semibold tracking-[0.2em] uppercase px-12 py-5 inline-flex items-center gap-3 group cta-pulse">
         Rezervovat termín
         <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
+      </button>
     </div>
   </div>
 </section>
@@ -1287,10 +1159,10 @@ html,body{overflow-x:hidden;max-width:100vw}
         </div>
 
         <div class="mt-10 pt-8 border-t border-gold/15">
-          <a href="https://www.notino.cz" target="_blank" rel="noopener" class="btn-shimmer text-white text-xs font-semibold tracking-[0.2em] uppercase px-10 py-5 inline-flex items-center gap-3 group w-full justify-center cta-pulse">
+          <button type="button" data-book class="btn-shimmer text-white text-xs font-semibold tracking-[0.2em] uppercase px-10 py-5 inline-flex items-center gap-3 group w-full justify-center cta-pulse">
             Rezervovat termín
             <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </a>
+          </button>
         </div>
       </div>
 
@@ -1382,10 +1254,10 @@ html,body{overflow-x:hidden;max-width:100vw}
       <h3 class="font-serif text-4xl md:text-5xl font-light mb-3 tracking-tight text-ink">Rezervujte si svůj <span class="italic gold-text">moment</span></h3>
       <p class="text-ink/55 text-sm md:text-base mb-10 max-w-md mx-auto leading-relaxed">Stačí pár vteřin — vybereme spolu termín, který vám sedne.</p>
 
-      <a href="https://www.notino.cz" target="_blank" rel="noopener" class="btn-shimmer text-ink text-xs font-semibold tracking-[0.2em] uppercase px-12 py-5 inline-flex items-center gap-3 group" style="box-shadow:0 14px 36px -10px rgba(184,147,47,.5)">
+      <button type="button" data-book class="btn-shimmer text-ink text-xs font-semibold tracking-[0.2em] uppercase px-12 py-5 inline-flex items-center gap-3 group" style="box-shadow:0 14px 36px -10px rgba(184,147,47,.5)">
         Rezervovat termín
         <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
+      </button>
 
       <div class="absolute -bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-4 w-full max-w-md">
         <span class="flex-1 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent"></span>
@@ -1786,44 +1658,12 @@ document.addEventListener('click', e => {
     }, 280);
     return;
   }
-  /* mailto: odkazy nechame nativni → spusti se postovni klient (Mail, Outlook, Gmail app...) */
-  /* close mail-chooser (X or backdrop) */
-  if (e.target.closest('[data-mail-close]')) {
-    const mc = document.getElementById('mailChooser');
-    if (mc) mc.hidden = true;
-    document.body.classList.remove('cat-modal-open');
-    return;
-  }
-  /* copy email button inside mail-chooser */
-  const copyBtn = e.target.closest('[data-mail-copy]');
-  if (copyBtn) {
-    e.preventDefault();
-    const email = copyBtn.dataset.mailCopy;
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(email).then(() => {
-        if (typeof showToast === 'function') showToast('✓ E-mail zkopírován');
-      }).catch(() => {});
-    }
-    setTimeout(() => {
-      const mc = document.getElementById('mailChooser');
-      if (mc) mc.hidden = true;
-      document.body.classList.remove('cat-modal-open');
-    }, 400);
-  }
 });
 
 /* Close on Escape */
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    const mc = document.getElementById('mailChooser');
-    if (mc && !mc.hidden) {
-      mc.hidden = true;
-      document.body.classList.remove('cat-modal-open');
-      return;
-    }
-    if (document.querySelector('.cat-modal:not([hidden])')) {
-      closeAllCatModals();
-    }
+  if (e.key === 'Escape' && document.querySelector('.cat-modal:not([hidden])')) {
+    closeAllCatModals();
   }
 });
 </script>
@@ -2026,34 +1866,6 @@ document.addEventListener('keydown', e => {
         </button>
       </div>
       <p class="cat-modal-footer">Klikněte na variantu pro okamžitou rezervaci termínu.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ MAIL CHOOSER POPUP (otevírá se po kliknutí na mailto: odkaz) ═══ -->
-<div id="mailChooser" class="mail-chooser" hidden role="dialog" aria-modal="true" aria-labelledby="mc-title">
-  <div class="mail-chooser-backdrop" data-mail-close></div>
-  <div class="mail-chooser-panel">
-    <button type="button" class="mail-chooser-close" data-mail-close aria-label="Zavřít">×</button>
-    <h4 id="mc-title">Otevřít e-mail v…</h4>
-    <p class="mail-chooser-email">exelance.care@seznam.cz</p>
-    <div class="mail-chooser-options">
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=exelance.care@seznam.cz" target="_blank" rel="noopener">
-        <span class="mc-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#EA4335"/><path d="M5 9.5v7.8c0 .4.3.7.7.7H8V12l4 2.8L16 12v6h2.3c.4 0 .7-.3.7-.7V9.5L12 14.2 5 9.5z" fill="#fff"/><path d="M5 9.5l7 4.7 7-4.7v-2c0-.4-.3-.7-.7-.7h-1l-5.3 3.6L6.7 6.8h-1c-.4 0-.7.3-.7.7v2z" fill="#fff" opacity=".85"/></svg></span>
-        Gmail
-      </a>
-      <a href="https://outlook.live.com/owa/?path=/mail/action/compose&to=exelance.care@seznam.cz" target="_blank" rel="noopener">
-        <span class="mc-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#0078D4"/><rect x="5.5" y="9" width="13" height="9" rx="1" fill="#fff"/><path d="M5.5 10.4l6.5 4.6 6.5-4.6" stroke="#0078D4" stroke-width="1.3" stroke-linejoin="round" fill="none"/><circle cx="9" cy="12.5" r="2.2" fill="none" stroke="#0078D4" stroke-width="1.3"/></svg></span>
-        Outlook
-      </a>
-      <a href="https://compose.mail.yahoo.com/?to=exelance.care@seznam.cz" target="_blank" rel="noopener">
-        <span class="mc-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#6001D2"/><text x="12" y="16.5" font-family="Arial Black, Arial, sans-serif" font-size="11" font-weight="900" fill="#fff" text-anchor="middle" letter-spacing="-0.5">Y!</text></svg></span>
-        Yahoo Mail
-      </a>
-      <button type="button" data-mail-copy="exelance.care@seznam.cz">
-        <span class="mc-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#0a0a0a"/><rect x="9" y="8" width="9" height="10" rx="1" fill="none" stroke="#fff" stroke-width="1.4"/><path d="M14 5.5H7a1 1 0 00-1 1V14" stroke="#fff" stroke-width="1.4" fill="none"/></svg></span>
-        Zkopírovat e-mail
-      </button>
     </div>
   </div>
 </div>
@@ -2387,13 +2199,12 @@ backdrop.addEventListener('click', closeBooking);
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeBooking(); });
 document.getElementById('bDone').addEventListener('click', closeBooking);
 
-// Wire all "Rezervovat termín" links
-document.querySelectorAll('a[data-book], a[href*="notino.cz"]').forEach(a => {
-  a.addEventListener('click', e => {
+// Wire all "Rezervovat termín" buttons/links
+document.querySelectorAll('[data-book]').forEach(el => {
+  el.addEventListener('click', e => {
     e.preventDefault();
     openBooking();
   });
-  a.setAttribute('role', 'button');
 });
 window.openBookingModal = openBooking;
 
