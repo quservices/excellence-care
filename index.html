@@ -912,8 +912,8 @@ html,body{overflow-x:hidden;max-width:100vw}
 
     <!-- TOP: image + intro -->
     <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-20 md:mb-24">
-      <!-- Image collage -->
-      <div class="lg:col-span-5 rvl">
+      <!-- Image collage — na mobilu order-2 (pod textem), na desktopu vlevo -->
+      <div class="lg:col-span-5 rvl order-2 lg:order-1">
         <div class="relative max-w-md mx-auto lg:mx-0">
           <div class="polaroid relative bg-white p-3 soft-shadow">
             <img src="https://images.pexels.com/photos/16151060/pexels-photo-16151060.jpeg?w=900&auto=compress" alt="Interiér salonu Exelance Care" class="w-full aspect-[4/5] object-cover" loading="lazy"/>
@@ -927,8 +927,8 @@ html,body{overflow-x:hidden;max-width:100vw}
         </div>
       </div>
 
-      <!-- Content -->
-      <div class="lg:col-span-7 rvr">
+      <!-- Content — na mobilu order-1 (text prvni), na desktopu vpravo -->
+      <div class="lg:col-span-7 rvr order-1 lg:order-2">
         <p class="badge mb-6">
           <span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
           O salonu
