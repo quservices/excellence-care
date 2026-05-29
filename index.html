@@ -1354,14 +1354,15 @@ html,body{overflow-x:hidden;max-width:100vw}
 .footer-logo-clean{text-decoration:none;display:inline-block}
 .footer-logo-clean img{
   display:block;width:auto;height:auto;
-  max-height:230px;max-width:380px;
+  max-height:300px;max-width:480px;
+  filter:contrast(1.22) saturate(1.2) drop-shadow(0 1px 0 rgba(184,147,47,.3));
   transition:opacity .3s ease;
 }
 .footer-logo-clean:hover img{opacity:.85}
 @media (max-width:768px){
   /* Logo: vetsi a vystredene */
   .footer-logo-clean{display:block;text-align:center;margin-left:auto;margin-right:auto;margin-bottom:24px!important}
-  .footer-logo-clean img{margin:0 auto;max-height:200px!important;max-width:88vw!important}
+  .footer-logo-clean img{margin:0 auto;max-height:240px!important;max-width:92vw!important}
   /* Vystredit i text a socialni ikony pod logem */
   footer .md\:col-span-2{text-align:center}
   footer .md\:col-span-2 p{margin-left:auto;margin-right:auto}
