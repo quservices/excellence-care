@@ -374,6 +374,10 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
         <span class="btn-label">Export</span>
       </button>
+      <button class="btn icon" id="changePwBtn" type="button" title="Změnit heslo" aria-label="Změnit heslo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
+        <span class="btn-label">Heslo</span>
+      </button>
       <button class="btn icon danger" id="logoutBtn" type="button" title="Odhlásit" aria-label="Odhlásit">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>
         <span class="btn-label">Odhlásit</span>
@@ -556,6 +560,35 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
   </div>
 </div>
 
+<!-- ═══ Modal: Změna hesla ═══ -->
+<div class="modal-bg" id="pwModalBg">
+  <form class="modal" id="pwForm" autocomplete="off">
+    <div class="modal-head">
+      <div class="modal-title">Změna hesla</div>
+      <button class="x" type="button" id="pwModalClose" aria-label="Zavřít">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <label for="pw_current">Stávající heslo *</label>
+        <input id="pw_current" type="password" autocomplete="current-password" required minlength="6"/>
+      </div>
+      <div class="row">
+        <label for="pw_new">Nové heslo *</label>
+        <input id="pw_new" type="password" autocomplete="new-password" required minlength="6"/>
+      </div>
+      <div class="row">
+        <label for="pw_confirm">Nové heslo znovu *</label>
+        <input id="pw_confirm" type="password" autocomplete="new-password" required minlength="6"/>
+      </div>
+      <p id="pwMsg" style="font-size:13px;margin:6px 2px 0;min-height:1.2em" aria-live="polite"></p>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn" id="pwModalCancel">Zrušit</button>
+      <button type="submit" class="btn primary" id="pwSave">Uložit nové heslo</button>
+    </div>
+  </form>
+</div>
+
 <script type="module">
 /* ═══ FIREBASE KONFIGURACE ═══
    Vlož hodnoty z Firebase Console → Project Settings → General →
@@ -570,7 +603,7 @@ const firebaseConfig = {
 const ADMIN_EMAIL = 'admin@excellencecare.cz';  // interní login email (vytvoř v Auth)
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js';
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, updatePassword, reauthenticateWithCredential, EmailAuthProvider }
   from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js';
 import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, deleteDoc, writeBatch, serverTimestamp, query, orderBy, onSnapshot }
   from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js';
@@ -615,6 +648,59 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
 document.getElementById('logoutBtn').addEventListener('click', async () => {
   try { await signOut(auth); } catch {}
+});
+
+/* ═══ Změna hesla ═══ */
+const pwModalBg = document.getElementById('pwModalBg');
+const pwForm = document.getElementById('pwForm');
+const pwMsg = document.getElementById('pwMsg');
+function openPwModal() {
+  pwForm.reset();
+  pwMsg.textContent = '';
+  pwMsg.style.color = '';
+  pwModalBg.classList.add('open');
+  setTimeout(() => document.getElementById('pw_current').focus(), 50);
+}
+function closePwModal() { pwModalBg.classList.remove('open'); }
+document.getElementById('changePwBtn').addEventListener('click', openPwModal);
+document.getElementById('pwModalClose').addEventListener('click', closePwModal);
+document.getElementById('pwModalCancel').addEventListener('click', closePwModal);
+pwModalBg.addEventListener('click', e => { if (e.target === pwModalBg) closePwModal(); });
+
+pwForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const current = document.getElementById('pw_current').value;
+  const next = document.getElementById('pw_new').value;
+  const confirmPw = document.getElementById('pw_confirm').value;
+  const saveBtn = document.getElementById('pwSave');
+  pwMsg.style.color = '#a04040';
+  if (next.length < 6) { pwMsg.textContent = 'Nové heslo musí mít alespoň 6 znaků.'; return; }
+  if (next !== confirmPw) { pwMsg.textContent = 'Nová hesla se neshodují.'; return; }
+  if (next === current) { pwMsg.textContent = 'Nové heslo se musí lišit od stávajícího.'; return; }
+  const user = auth.currentUser;
+  if (!user) { pwMsg.textContent = 'Nejste přihlášeni.'; return; }
+  saveBtn.disabled = true;
+  try {
+    const cred = EmailAuthProvider.credential(user.email, current);
+    await reauthenticateWithCredential(user, cred);
+    await updatePassword(user, next);
+    pwMsg.style.color = '#3a7a3a';
+    pwMsg.textContent = '✓ Heslo bylo změněno.';
+    setTimeout(closePwModal, 1200);
+  } catch (err) {
+    const code = err && err.code || '';
+    if (code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
+      pwMsg.textContent = 'Stávající heslo není správné.';
+    } else if (code === 'auth/weak-password') {
+      pwMsg.textContent = 'Nové heslo je příliš slabé (min. 6 znaků).';
+    } else if (code === 'auth/too-many-requests') {
+      pwMsg.textContent = 'Příliš mnoho pokusů. Zkuste to později.';
+    } else if (code === 'auth/requires-recent-login') {
+      pwMsg.textContent = 'Z bezpečnostních důvodů se odhlaste a znovu přihlaste.';
+    } else {
+      pwMsg.textContent = 'Změna selhala: ' + (err.message || code);
+    }
+  } finally { saveBtn.disabled = false; }
 });
 
 onAuthStateChanged(auth, (user) => {
