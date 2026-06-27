@@ -6,6 +6,10 @@ service cloud.firestore {
     // Plné rezervace (vč. osobních údajů) -- jen pro admina
     match /reservations/{id} {
       allow create: if
+        request.resource.data.keys().hasOnly([
+          'jmeno', 'telefon', 'email', 'termin', 'sluzba',
+          'duration', 'zprava', 'status', 'createdAt', 'updatedAt'
+        ]) &&
         request.resource.data.jmeno is string &&
         request.resource.data.jmeno.size() >= 2 &&
         request.resource.data.jmeno.size() <= 80 &&

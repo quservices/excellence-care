@@ -29,7 +29,8 @@ V Firebase Console:
 - Password: `661800` (nebo jiné 6+ znakové)
 - Add user
 
-> Email i heslo musí přesně sedět s konstantou `ADMIN_EMAIL` v `admin.html`.
+> Tento e-mail a heslo pak zadáš na přihlašovací obrazovce `admin.html`.
+> (Přihlásí se kterýkoliv účet vytvořený zde v Console — kód se nemění.)
 
 ## 4. Zapni Firestore
 
@@ -56,10 +57,26 @@ Po deployi dostaneš URL ve tvaru `https://excellence-care.web.app` — admin je
 Firebase Console → Authentication → Users → … (kebab menu) → Reset password
 (přijde reset link na email — nebo smaž uživatele a vytvoř nového).
 
-## Přidání dalšího admina
+## Účty: majitelka, správci, zaměstnanci
 
-Stačí v Firebase Console vytvořit dalšího uživatele s libovolným emailem.
-Aby se uměl přihlásit přes login screen, musíš v `admin.html` rozšířit logiku — aktuálně je hardcoded jeden email `admin@excellencecare.cz`.
+Přihlašovací obrazovka se ptá na **e-mail i heslo**, takže se přihlásí kterýkoliv
+účet vytvořený ve Firebase Console — kód už není potřeba měnit.
+
+**Správa účtů (zakládání, hesla, přehled) = Firebase Console → Authentication → Users.**
+Sem má přístup jen majitel Firebase/Google projektu (vy, správci) — ne majitelka salonu.
+Tady děláš úplně všechno:
+
+| Akce | Kde |
+|------|-----|
+| 📋 Přehled, kolik účtů existuje + poslední přihlášení | seznam v **Users** |
+| ➕ Založit účet (majitelce / zaměstnanci) | **Add user** (e-mail + heslo) |
+| 🔑 Změnit / resetovat heslo cizímu účtu | u účtu **⋮ → Reset password** (reset link), nebo smaž + vytvoř znovu |
+| 🗑️ Zrušit přístup | u účtu **⋮ → Delete account** |
+
+> ⚠️ Všechny přihlášené účty mají v panelu zatím **stejná práva** (správa rezervací).
+> „Super-admin" úroveň máš automaticky tím, že vlastníš Firebase projekt (Console).
+> Pokud bys někdy chtěl rozlišovat práva i uvnitř panelu, je potřeba doplnit role
+> (Cloud Functions + custom claims).
 
 ## Lokální testování
 
