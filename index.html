@@ -231,8 +231,6 @@ nav.stuck{background:rgba(250,247,242,.85);backdrop-filter:blur(20px) saturate(1
 .variant-btn .book-arrow svg{width:14px;height:14px}
 
 .cat-modal-footer{margin-top:24px;padding-top:20px;border-top:1px solid rgba(184,147,47,.15);font-size:12px;color:rgba(10,10,10,.55);line-height:1.5}
-.fb-video-wrap{position:relative;width:100%;max-width:325px;margin:0 auto 8px;aspect-ratio:9/16;border-radius:14px;overflow:hidden;box-shadow:0 18px 40px -20px rgba(0,0,0,.35);background:#000}
-.fb-video-wrap iframe{position:absolute;inset:0;width:100%;height:100%}
 
 /* Body scroll lock when modal open */
 body.cat-modal-open{overflow:hidden}
@@ -1755,15 +1753,6 @@ document.addEventListener('keydown', e => {
       <h3 id="cm-lipo-title">Neinvazivní liposukce</h3>
       <p>Ultrazvuková kavitace v kombinaci s radiofrekvencí. Cílená redukce tukových buněk bez skalpelu, bez bolesti a bez rekonvalescence — vrátíte se ihned do běžného života.</p>
 
-      <h4>Podívejte se na video</h4>
-      <div class="fb-video-wrap">
-        <iframe
-          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1128933756057700&show_text=false&t=0"
-          style="border:none;overflow:hidden" scrolling="no" frameborder="0"
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          allowfullscreen="true" title="Neinvazivní liposukce — video"></iframe>
-      </div>
-
       <h4>Co to umí</h4>
       <ul class="cat-benefits-detail">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span>Redukce tuku bez chirurgického zákroku</span></li>
@@ -1996,6 +1985,9 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+// Escapuj uživatelský vstup před vložením do innerHTML (ochrana proti XSS)
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 // duration v minutách — řazené podle kategorií
 const SERVICES = [
@@ -2317,11 +2309,11 @@ formView.addEventListener('submit', async (e) => {
     const summary = document.getElementById('bSuccessSummary');
     const dt = new Date(data.termin).toLocaleString('cs-CZ', { dateStyle:'long', timeStyle:'short' });
     summary.innerHTML = `
-      <div><span>Služba</span><strong>${data.sluzba}</strong></div>
-      <div><span>Termín</span><strong>${dt}</strong></div>
-      <div><span>Trvání</span><strong>${data.duration} min</strong></div>
-      <div><span>Jméno</span><strong>${data.jmeno}</strong></div>
-      <div><span>Telefon</span><strong>${data.telefon}</strong></div>`;
+      <div><span>Služba</span><strong>${esc(data.sluzba)}</strong></div>
+      <div><span>Termín</span><strong>${esc(dt)}</strong></div>
+      <div><span>Trvání</span><strong>${esc(data.duration)} min</strong></div>
+      <div><span>Jméno</span><strong>${esc(data.jmeno)}</strong></div>
+      <div><span>Telefon</span><strong>${esc(data.telefon)}</strong></div>`;
     formView.reset();
   } catch (err) {
     console.error(err);
