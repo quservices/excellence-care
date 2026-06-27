@@ -32,8 +32,9 @@ input,select,textarea{font-family:inherit}
 .login-card h1{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;text-align:center;margin-bottom:6px}
 .login-card .sub{text-align:center;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#b8932f;margin-bottom:32px}
 .login-card label{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#b8932f;margin-bottom:8px}
-.login-card input[type=password]{display:block;width:100%;padding:14px 16px;background:#faf7f2;border:1px solid rgba(184,147,47,.25);font-size:14px;outline:none;transition:all .25s}
-.login-card input[type=password]:focus{border-color:#b8932f;background:#fff;box-shadow:0 0 0 3px rgba(184,147,47,.12)}
+.login-card input{display:block;width:100%;padding:14px 16px;background:#faf7f2;border:1px solid rgba(184,147,47,.25);font-size:14px;color:#0a0a0a;outline:none;transition:all .25s;margin-bottom:18px}
+.login-card input:last-of-type{margin-bottom:0}
+.login-card input:focus{border-color:#b8932f;background:#fff;box-shadow:0 0 0 3px rgba(184,147,47,.12)}
 .login-card button{display:block;width:100%;margin-top:20px;padding:14px;background:linear-gradient(135deg,#d4af37,#b8932f,#8a6c1f);color:#fff;border:none;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:opacity .25s}
 .login-card button:hover{opacity:.9}
 .login-card .err{color:#a04040;font-size:12px;text-align:center;margin-top:12px;min-height:1em}
@@ -278,6 +279,9 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
 }
 
 @media(max-width:768px){
+  .login-wrap{padding:28px 16px}
+  .login-card{padding:36px 24px}
+  .login-card h1{font-size:28px}
   main{padding:16px 14px}
   header.bar{padding:12px 14px;gap:8px}
   header.bar h1{font-size:18px;line-height:1.15}
