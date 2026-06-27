@@ -345,6 +345,8 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
   <form class="login-card" id="loginForm">
     <h1><span class="italic gold">Excelence</span> Care</h1>
     <p class="sub">Admin Panel</p>
+    <label for="email">E-mail</label>
+    <input type="email" id="email" required autocomplete="username" autocapitalize="none" spellcheck="false"/>
     <label for="pw">Heslo</label>
     <input type="password" id="pw" required autocomplete="current-password"/>
     <button type="submit">Přihlásit</button>
@@ -600,7 +602,8 @@ const firebaseConfig = {
   authDomain: "excellence-care-cz.firebaseapp.com",
   projectId: "excellence-care-cz",
 };
-const ADMIN_EMAIL = 'admin@excellencecare.cz';  // interní login email (vytvoř v Auth)
+// Přihlásit se může kterýkoliv účet vytvořený ve Firebase Console (Authentication → Users).
+// Účty zakládáš/spravuješ ve Firebase Console — viz FIREBASE_SETUP.md.
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js';
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, updatePassword, reauthenticateWithCredential, EmailAuthProvider }
@@ -620,20 +623,23 @@ const loginErr  = document.getElementById('loginErr');
 
 const hideBoot = () => bootView && bootView.classList.add('hidden');
 const showAdmin = () => { hideBoot(); loginView.classList.add('hidden'); adminView.classList.remove('hidden'); loadData(); };
-const showLogin = () => { hideBoot(); if (typeof unsubscribeLive === 'function') unsubscribeLive(); adminView.classList.add('hidden'); loginView.classList.remove('hidden'); const pw = document.getElementById('pw'); pw.value=''; pw.focus(); };
+const showLogin = () => { hideBoot(); if (typeof unsubscribeLive === 'function') unsubscribeLive(); adminView.classList.add('hidden'); loginView.classList.remove('hidden'); const email = document.getElementById('email'); const pw = document.getElementById('pw'); pw.value=''; (email.value ? pw : email).focus(); };
 
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
+  const email = document.getElementById('email').value.trim();
   const pw = document.getElementById('pw').value;
   const btn = e.target.querySelector('button[type=submit]');
   btn.disabled = true; loginErr.textContent = '';
   try {
-    await signInWithEmailAndPassword(auth, ADMIN_EMAIL, pw);
+    await signInWithEmailAndPassword(auth, email, pw);
     // onAuthStateChanged sám zobrazí admin
   } catch (err) {
     const code = err && err.code || '';
     if (code === 'auth/wrong-password' || code === 'auth/invalid-credential' || code === 'auth/user-not-found') {
-      loginErr.textContent = 'Nesprávné heslo.';
+      loginErr.textContent = 'Nesprávný e-mail nebo heslo.';
+    } else if (code === 'auth/invalid-email' || code === 'auth/missing-email') {
+      loginErr.textContent = 'Zadejte platný e-mail.';
     } else if (code === 'auth/too-many-requests') {
       loginErr.textContent = 'Příliš mnoho pokusů. Zkuste to později.';
     } else if (code === 'auth/network-request-failed') {
