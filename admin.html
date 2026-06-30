@@ -349,8 +349,8 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
   <form class="login-card" id="loginForm">
     <h1><span class="italic gold">Excelence</span> Care</h1>
     <p class="sub">Admin Panel</p>
-    <label for="email">E-mail</label>
-    <input type="email" id="email" required autocomplete="username" autocapitalize="none" spellcheck="false"/>
+    <label for="email">Přihlašovací jméno</label>
+    <input type="text" id="email" required autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="admin.exelance"/>
     <label for="pw">Heslo</label>
     <input type="password" id="pw" required autocomplete="current-password"/>
     <button type="submit">Přihlásit</button>
@@ -638,6 +638,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db   = getFirestore(app);
 const RES_COL = 'reservations';
+// Přihlašovací jméno (např. "admin.exelance") se pro Firebase automaticky doplní na <jmeno>@exelance.cz.
+// Ve Firebase Console se proto účet zakládá s e-mailem admin.exelance@exelance.cz.
+const LOGIN_DOMAIN = 'exelance.cz';
 
 const bootView  = document.getElementById('bootView');
 const loginView = document.getElementById('loginView');
@@ -650,7 +653,9 @@ const showLogin = () => { hideBoot(); if (typeof unsubscribeLive === 'function')
 
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const email = document.getElementById('email').value.trim();
+  const rawName = document.getElementById('email').value.trim();
+  // Přihlašovací jméno bez zavináče se doplní na <jmeno>@exelance.cz (Firebase vyžaduje formát e-mailu).
+  const email = rawName.includes('@') ? rawName : rawName + '@' + LOGIN_DOMAIN;
   const pw = document.getElementById('pw').value;
   const btn = e.target.querySelector('button[type=submit]');
   btn.disabled = true; loginErr.textContent = '';
@@ -660,9 +665,9 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   } catch (err) {
     const code = err && err.code || '';
     if (code === 'auth/wrong-password' || code === 'auth/invalid-credential' || code === 'auth/user-not-found') {
-      loginErr.textContent = 'Nesprávný e-mail nebo heslo.';
+      loginErr.textContent = 'Nesprávné jméno nebo heslo.';
     } else if (code === 'auth/invalid-email' || code === 'auth/missing-email') {
-      loginErr.textContent = 'Zadejte platný e-mail.';
+      loginErr.textContent = 'Zadejte platné přihlašovací jméno.';
     } else if (code === 'auth/too-many-requests') {
       loginErr.textContent = 'Příliš mnoho pokusů. Zkuste to později.';
     } else if (code === 'auth/network-request-failed') {
