@@ -24,17 +24,17 @@ V Firebase Console:
 
 ### Vytvoř admin uživatele
 
-Přihlašování běží přes **přihlašovací jméno** (ne přes e-mail). Jméno `admin.exelance`
-si kód v `admin.html` automaticky doplní na `admin.exelance@exelance.cz`
+Přihlašování běží přes **přihlašovací jméno** (ne přes e-mail). Jméno `admin`
+si kód v `admin.html` automaticky doplní na `admin@exelance.cz`
 (Firebase technicky vyžaduje formát e-mailu).
 
 - Záložka **Users → Add user**
-- Email: `admin.exelance@exelance.cz`
+- Email: `admin@exelance.cz`
 - Password: `661800` (klidně silnější — min. 6 znaků)
 - Add user
 
 > Na přihlašovací obrazovce `admin.html` pak zadáváš jen:
-> **Přihlašovací jméno:** `admin.exelance`  ·  **Heslo:** `661800`
+> **Přihlašovací jméno:** `admin`  ·  **Heslo:** `661800`
 > (Přihlásí se kterýkoliv účet vytvořený zde v Console — kód se nemění.)
 
 ## 4. Zapni Firestore

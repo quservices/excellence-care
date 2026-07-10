@@ -350,7 +350,7 @@ main{flex:1;padding:24px 28px;max-width:1200px;margin:0 auto;width:100%}
     <h1><span class="italic gold">Excelence</span> Care</h1>
     <p class="sub">Admin Panel</p>
     <label for="email">Přihlašovací jméno</label>
-    <input type="text" id="email" required autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="admin.exelance"/>
+    <input type="text" id="email" required autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="admin"/>
     <label for="pw">Heslo</label>
     <input type="password" id="pw" required autocomplete="current-password"/>
     <button type="submit">Přihlásit</button>
@@ -638,8 +638,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db   = getFirestore(app);
 const RES_COL = 'reservations';
-// Přihlašovací jméno (např. "admin.exelance") se pro Firebase automaticky doplní na <jmeno>@exelance.cz.
-// Ve Firebase Console se proto účet zakládá s e-mailem admin.exelance@exelance.cz.
+// Přihlašovací jméno (např. "admin") se pro Firebase automaticky doplní na <jmeno>@exelance.cz.
+// Ve Firebase Console se proto účet zakládá s e-mailem admin@exelance.cz.
 const LOGIN_DOMAIN = 'exelance.cz';
 
 const bootView  = document.getElementById('bootView');
