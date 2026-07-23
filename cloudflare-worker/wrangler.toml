@@ -1,0 +1,16 @@
+name = "exelance-care-mailer"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# Veřejná URL na *.workers.dev (zdarma, Free tier)
+workers_dev = true
+
+# Šablony importované jako TEXT (bundle to vloží do worker payloadu)
+[[rules]]
+type = "Text"
+globs = ["**/*.html"]
+fallthrough = true
+
+# Žádné placené features — držíme se Free planu
+[observability]
+enabled = true
